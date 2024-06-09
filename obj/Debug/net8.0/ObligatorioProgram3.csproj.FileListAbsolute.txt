@@ -250,3 +250,4 @@ C:\Users\menge\Documents\ANALISTA PROGRAMADOR\3er semestre\Programacion 3\!Oblig
 C:\Users\menge\Documents\ANALISTA PROGRAMADOR\3er semestre\Programacion 3\!Obligatorio\ObligatorioProgram3\ObligatorioProgram3\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\menge\Documents\ANALISTA PROGRAMADOR\3er semestre\Programacion 3\!Obligatorio\ObligatorioProgram3\ObligatorioProgram3\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\menge\Documents\ANALISTA PROGRAMADOR\3er semestre\Programacion 3\!Obligatorio\ObligatorioProgram3\ObligatorioProgram3\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\menge\Documents\ANALISTA PROGRAMADOR\3er semestre\Programacion 3\!Obligatorio\ObligatorioProgram3\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.sourcelink.json

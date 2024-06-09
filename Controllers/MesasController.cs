@@ -47,7 +47,7 @@ namespace ObligatorioProgram3.Controllers
         // GET: Mesas/Create
         public IActionResult Create()
         {
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id");
+            ViewBag.Idrestaurante = new SelectList(_context.Restaurantes, "Id", "Nombre");
             return View();
         }
 
@@ -60,11 +60,21 @@ namespace ObligatorioProgram3.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(mesa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //Controla si ya existe mesa con el mismo numero de mesa e ID resto
+                var existeMesa = await _context.Mesas
+                    .AnyAsync(m => m.NumeroMesa == mesa.NumeroMesa && m.Idrestaurante == mesa.Idrestaurante);
+                if (existeMesa)
+                {
+                    ModelState.AddModelError(string.Empty, "Ya existe una mesa con este número en el restaurante seleccionado.");
+                }
+                else
+                {
+                    _context.Add(mesa);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", mesa.Idrestaurante);
+            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Nombre", mesa.Idrestaurante);
             return View(mesa);
         }
 
@@ -81,7 +91,7 @@ namespace ObligatorioProgram3.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", mesa.Idrestaurante);
+            ViewBag.Idrestaurante = new SelectList(_context.Restaurantes, "Id", "Nombre", mesa.Idrestaurante);
             return View(mesa);
         }
 
@@ -99,26 +109,38 @@ namespace ObligatorioProgram3.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                //verifica si ya existe una mesa con el mismo numero y restaurant a excepción de la actual
+                var existeMesa = await _context.Mesas.
+                    AnyAsync(m => m.NumeroMesa == mesa.NumeroMesa && m.Idrestaurante == mesa.Idrestaurante && m.Id != mesa.Id);
+                if(existeMesa)
                 {
-                    _context.Update(mesa);
-                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError(string.Empty, "Ya existe una mesa con este número en el restaurante seleccionado.");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!MesaExists(mesa.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(mesa);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!MesaExists(mesa.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", mesa.Idrestaurante);
+            ViewBag.Idrestaurante = new SelectList(_context.Restaurantes, "Id", "Nombre", mesa.Idrestaurante);
             return View(mesa);
+
         }
 
         // GET: Mesas/Delete/5
