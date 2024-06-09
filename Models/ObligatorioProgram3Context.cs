@@ -46,7 +46,7 @@ public partial class ObligatorioProgram3Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
     //LEO
-    => optionsBuilder.UseSqlServer("Data Source=LAPTOP-83A9Q1R9;Initial Catalog=ObligatorioProgram3;Integrated Security=True;TrustServerCertificate=True");
+    //=> optionsBuilder.UseSqlServer("Data Source=LAPTOP-83A9Q1R9;Initial Catalog=ObligatorioProgram3;Integrated Security=True;TrustServerCertificate=True");
     //FRAN
     //=> optionsBuilder.UseSqlServer("Data Source=DESKTOP-LTBG5HI;Initial Catalog=ObligatorioProgram3;Integrated Security=True;TrustServerCertificate=True");
     //ANGEL

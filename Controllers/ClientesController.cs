@@ -33,7 +33,7 @@ namespace ObligatorioProgram3.Controllers
             }
 
             var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -57,9 +57,19 @@ namespace ObligatorioProgram3.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var existeCliente = await _context.Clientes
+                    .AnyAsync(c => c.Email == cliente.Email);
+                if(existeCliente)
+                {
+                    ModelState.AddModelError(string.Empty, "Ya existe un cliente registrado con este email.");
+                }
+                else
+                {
+                    _context.Add(cliente);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             return View(cliente);
         }
@@ -94,23 +104,32 @@ namespace ObligatorioProgram3.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var existeCliente = await _context.Clientes
+                    .AnyAsync(c => c.Email == cliente.Email && c.Id != cliente.Id);
+                if( existeCliente )
                 {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError(string.Empty, "Ya existe un cliente registrado con este email.");
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ClienteExists(cliente.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(cliente);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ClienteExists(cliente.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(cliente);
         }
@@ -151,6 +170,10 @@ namespace ObligatorioProgram3.Controllers
         private bool ClienteExists(int id)
         {
             return _context.Clientes.Any(e => e.Id == id);
+        }
+        private bool ClienteExists2(string email)
+        {
+            return _context.Clientes.Any(e => e.Email == email);
         }
     }
 }

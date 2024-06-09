@@ -15,7 +15,7 @@ builder.Services.AddDbContext<ObligatorioProgram3Context>(options =>
 //options.UseSqlServer("Data Source=DESKTOP-LTBG5HI;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
 
 //LEO
-options.UseSqlServer("Data Source=LAPTOP-83A9Q1R9;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
+//options.UseSqlServer("Data Source=LAPTOP-83A9Q1R9;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
