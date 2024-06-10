@@ -6,10 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-builder.Services.AddDbContext<ObligatorioProgram3Context>(options =>
 //ANGEL
-//options.UseSqlServer("Data Source=ANGELMACHADO;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
+builder.Services.AddDbContext<ObligatorioProgram3Context>(options =>
+options.UseSqlServer("Data Source=ANGELMACHADO;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
 
 //FRAN
 //options.UseSqlServer("Data Source=DESKTOP-LTBG5HI;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));

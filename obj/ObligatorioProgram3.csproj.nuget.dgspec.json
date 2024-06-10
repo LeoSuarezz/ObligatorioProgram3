@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\menge\\Documents\\ANALISTA PROGRAMADOR\\3er semestre\\Programacion 3\\!Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3\\ObligatorioProgram3.csproj": {}
+    "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\menge\\Documents\\ANALISTA PROGRAMADOR\\3er semestre\\Programacion 3\\!Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3\\ObligatorioProgram3.csproj": {
+    "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\menge\\Documents\\ANALISTA PROGRAMADOR\\3er semestre\\Programacion 3\\!Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
+        "projectUniqueName": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
         "projectName": "ObligatorioProgram3",
-        "projectPath": "C:\\Users\\menge\\Documents\\ANALISTA PROGRAMADOR\\3er semestre\\Programacion 3\\!Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
-        "packagesPath": "C:\\Users\\menge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\menge\\Documents\\ANALISTA PROGRAMADOR\\3er semestre\\Programacion 3\\!Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3\\obj\\",
+        "projectPath": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
+        "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\menge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\angel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
