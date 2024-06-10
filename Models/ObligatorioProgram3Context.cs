@@ -50,7 +50,7 @@ public partial class ObligatorioProgram3Context : DbContext
     //FRAN
     //=> optionsBuilder.UseSqlServer("Data Source=DESKTOP-LTBG5HI;Initial Catalog=ObligatorioProgram3;Integrated Security=True;TrustServerCertificate=True");
     //ANGEL
-    //=> optionsBuilder.UseSqlServer("Data Source=ANGELMACHADO;Initial Catalog=ObligatorioProgram3;Integrated Security=True;TrustServerCertificate=True");
+    => optionsBuilder.UseSqlServer("Data Source=ANGELMACHADO;Initial Catalog=ObligatorioProgram3;Integrated Security=True;TrustServerCertificate=True");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cliente>(entity =>
