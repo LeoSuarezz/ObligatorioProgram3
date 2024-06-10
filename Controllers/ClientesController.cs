@@ -171,9 +171,6 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Clientes.Any(e => e.Id == id);
         }
-        private bool ClienteExists2(string email)
-        {
-            return _context.Clientes.Any(e => e.Email == email);
-        }
+        
     }
 }

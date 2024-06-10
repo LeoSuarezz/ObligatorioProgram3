@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
+using ObligatorioProgram3.Recursos;
 
 namespace ObligatorioProgram3.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -60,6 +63,8 @@ namespace ObligatorioProgram3.Controllers
         {
             if (ModelState.IsValid)
             {
+                //usuario.Contraseña = Utilidades.encriptarClave(usuario.Contraseña);
+                //para q esto funcione habria q cambiar el largo q admite la contraseña en la bd
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -159,5 +164,6 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Usuarios.Any(e => e.Id == id);
         }
+
     }
 }
