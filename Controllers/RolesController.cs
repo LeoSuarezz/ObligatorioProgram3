@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +10,12 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    public class RolsController : Controller
+    [Authorize]
+    public class RolesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
 
-        public RolsController(ObligatorioProgram3Context context)
+        public RolesController(ObligatorioProgram3Context context)
         {
             _context = context;
         }
@@ -24,6 +26,8 @@ namespace ObligatorioProgram3.Controllers
             return View(await _context.Rols.ToListAsync());
         }
 
+
+       
         // GET: Rols/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -33,6 +37,7 @@ namespace ObligatorioProgram3.Controllers
             }
 
             var rol = await _context.Rols
+                .Include(r => r.Permisos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (rol == null)
             {

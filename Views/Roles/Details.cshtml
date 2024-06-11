@@ -17,6 +17,15 @@
             @Html.DisplayFor(model => model.NombreRol)
         </dd>
     </dl>
+    <div>
+        <h4>Permisos</h4>
+        <ul>
+            @foreach (var permiso in Model.Permisos)
+            {
+                <li>@permiso.Nombre</li>
+            }
+        </ul>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

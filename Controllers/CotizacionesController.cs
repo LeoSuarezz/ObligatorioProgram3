@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,23 +10,23 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    public class PermisoesController : Controller
+    [Authorize]
+    public class CotizacionesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
 
-        public PermisoesController(ObligatorioProgram3Context context)
+        public CotizacionesController(ObligatorioProgram3Context context)
         {
             _context = context;
         }
 
-        // GET: Permisoes
+        // GET: Cotizacions
         public async Task<IActionResult> Index()
         {
-            var obligatorioProgram3Context = _context.Permisos.Include(p => p.IdrolNavigation);
-            return View(await obligatorioProgram3Context.ToListAsync());
+            return View(await _context.Cotizacions.ToListAsync());
         }
 
-        // GET: Permisoes/Details/5
+        // GET: Cotizacions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +34,39 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var permiso = await _context.Permisos
-                .Include(p => p.IdrolNavigation)
+            var cotizacion = await _context.Cotizacions
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (permiso == null)
+            if (cotizacion == null)
             {
                 return NotFound();
             }
 
-            return View(permiso);
+            return View(cotizacion);
         }
 
-        // GET: Permisoes/Create
+        // GET: Cotizacions/Create
         public IActionResult Create()
         {
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id");
             return View();
         }
 
-        // POST: Permisoes/Create
+        // POST: Cotizacions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Idrol,Nombre")] Permiso permiso)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,Moneda,Monto")] Cotizacion cotizacion)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(permiso);
+                _context.Add(cotizacion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", permiso.Idrol);
-            return View(permiso);
+            return View(cotizacion);
         }
 
-        // GET: Permisoes/Edit/5
+        // GET: Cotizacions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +74,22 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var permiso = await _context.Permisos.FindAsync(id);
-            if (permiso == null)
+            var cotizacion = await _context.Cotizacions.FindAsync(id);
+            if (cotizacion == null)
             {
                 return NotFound();
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", permiso.Idrol);
-            return View(permiso);
+            return View(cotizacion);
         }
 
-        // POST: Permisoes/Edit/5
+        // POST: Cotizacions/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Idrol,Nombre")] Permiso permiso)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Moneda,Monto")] Cotizacion cotizacion)
         {
-            if (id != permiso.Id)
+            if (id != cotizacion.Id)
             {
                 return NotFound();
             }
@@ -101,12 +98,12 @@ namespace ObligatorioProgram3.Controllers
             {
                 try
                 {
-                    _context.Update(permiso);
+                    _context.Update(cotizacion);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PermisoExists(permiso.Id))
+                    if (!CotizacionExists(cotizacion.Id))
                     {
                         return NotFound();
                     }
@@ -117,11 +114,10 @@ namespace ObligatorioProgram3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", permiso.Idrol);
-            return View(permiso);
+            return View(cotizacion);
         }
 
-        // GET: Permisoes/Delete/5
+        // GET: Cotizacions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,35 +125,34 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var permiso = await _context.Permisos
-                .Include(p => p.IdrolNavigation)
+            var cotizacion = await _context.Cotizacions
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (permiso == null)
+            if (cotizacion == null)
             {
                 return NotFound();
             }
 
-            return View(permiso);
+            return View(cotizacion);
         }
 
-        // POST: Permisoes/Delete/5
+        // POST: Cotizacions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var permiso = await _context.Permisos.FindAsync(id);
-            if (permiso != null)
+            var cotizacion = await _context.Cotizacions.FindAsync(id);
+            if (cotizacion != null)
             {
-                _context.Permisos.Remove(permiso);
+                _context.Cotizacions.Remove(cotizacion);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PermisoExists(int id)
+        private bool CotizacionExists(int id)
         {
-            return _context.Permisos.Any(e => e.Id == id);
+            return _context.Cotizacions.Any(e => e.Id == id);
         }
     }
 }
