@@ -23,6 +23,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Inicio/IniciarSesion";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.AccessDeniedPath = "/Home/Index"; // ruta para acceso denegado
+
     });
 
 //options.UseSqlServer("Data Source=ANGELMACHADO;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
@@ -42,6 +44,15 @@ builder.Services.AddControllersWithViews(options =>
             Location=ResponseCacheLocation.None,
         }
         );
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireClaim("IdRol", "1"));
+    // añadimos un servicio de autorizacion
+    // creamos el filtro adminOnly y llamamos a la claim diciendole q queremos el idrol 1 
+    // porque ya sabemos que 1 es admin
 });
 
 var app = builder.Build();

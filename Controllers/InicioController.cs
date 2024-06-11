@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ObligatorioProgram3.Controllers
 {
-    
+
     public class InicioController : Controller
     {
 
@@ -27,6 +27,7 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> IniciarSesion(string email, string contrasena)
         {
             Usuario usuario_encontrado = await _usarioServicio.GetUsuario(email, contrasena);
@@ -39,10 +40,13 @@ namespace ObligatorioProgram3.Controllers
 
             List<Claim> claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, usuario_encontrado.Nombre)
+                new Claim(ClaimTypes.Name, usuario_encontrado.Nombre),
+                new Claim("IdRol", usuario_encontrado.Idrol.ToString() ?? "0") 
+                // manejar el caso de rol nulo
+                // creamos claim para obtener el idrol del objeto user que esta logeado
             };
 
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             AuthenticationProperties properties = new AuthenticationProperties()
             {
                 AllowRefresh = true,
@@ -52,9 +56,10 @@ namespace ObligatorioProgram3.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 properties
-                );
+            );
 
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

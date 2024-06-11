@@ -1,14 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\",
+  "WorkspaceRootPath": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\clientescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\net8.0\\ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,34 +30,98 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientesController.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\ClientesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
+              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\ClientesController.cs",
+              "RelativeToolTip": "Controllers\\ClientesController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-11T19:34:49.595Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-11T19:34:17.427Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAAAAAAA",
+              "Title": "InicioController.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\InicioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InicioController.cs",
+              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\InicioController.cs",
+              "RelativeToolTip": "Controllers\\InicioController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-09T20:44:29.974Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-06-11T19:30:42.357Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ClientesController.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\ClientesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClientesController.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\ClientesController.cs",
-              "RelativeToolTip": "Controllers\\ClientesController.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAkwEUAAAA7AAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T01:33:27.82Z",
+              "WhenOpened": "2024-06-11T19:25:40.797Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs",
+              "RelativeDocumentMoniker": "obj\\Debug\\net8.0\\ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs",
+              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs",
+              "RelativeToolTip": "obj\\Debug\\net8.0\\ObligatorioProgram3.AssemblyInfo-FranciscoMachado.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-11T19:21:47.489Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Bookmark",
