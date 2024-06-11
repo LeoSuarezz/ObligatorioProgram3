@@ -10,7 +10,7 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "AdminOnly")]//aplica la claim policy AdminOnly
     public class ClientesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
