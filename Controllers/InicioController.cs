@@ -6,10 +6,12 @@ using ObligatorioProgram3.Servicios.Contrato;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace ObligatorioProgram3.Controllers
 {
+    
     public class InicioController : Controller
     {
 
@@ -24,7 +26,6 @@ namespace ObligatorioProgram3.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string email, string contrasena)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,22 +10,24 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    public class CotizacionsController : Controller
+    [Authorize]
+    public class ReseñasController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
 
-        public CotizacionsController(ObligatorioProgram3Context context)
+        public ReseñasController(ObligatorioProgram3Context context)
         {
             _context = context;
         }
 
-        // GET: Cotizacions
+        // GET: Reseña
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cotizacions.ToListAsync());
+            var obligatorioProgram3Context = _context.Reseñas.Include(r => r.IdclienteNavigation).Include(r => r.IdrestauranteNavigation);
+            return View(await obligatorioProgram3Context.ToListAsync());
         }
 
-        // GET: Cotizacions/Details/5
+        // GET: Reseña/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +35,45 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var cotizacion = await _context.Cotizacions
+            var reseña = await _context.Reseñas
+                .Include(r => r.IdclienteNavigation)
+                .Include(r => r.IdrestauranteNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cotizacion == null)
+            if (reseña == null)
             {
                 return NotFound();
             }
 
-            return View(cotizacion);
+            return View(reseña);
         }
 
-        // GET: Cotizacions/Create
+        // GET: Reseña/Create
         public IActionResult Create()
         {
+            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id");
+            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id");
             return View();
         }
 
-        // POST: Cotizacions/Create
+        // POST: Reseña/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,Moneda,Monto")] Cotizacion cotizacion)
+        public async Task<IActionResult> Create([Bind("Id,Puntaje,Comentario,FechaReseña,Idcliente,Idrestaurante")] Reseña reseña)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cotizacion);
+                _context.Add(reseña);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cotizacion);
+            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reseña.Idcliente);
+            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", reseña.Idrestaurante);
+            return View(reseña);
         }
 
-        // GET: Cotizacions/Edit/5
+        // GET: Reseña/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +81,24 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var cotizacion = await _context.Cotizacions.FindAsync(id);
-            if (cotizacion == null)
+            var reseña = await _context.Reseñas.FindAsync(id);
+            if (reseña == null)
             {
                 return NotFound();
             }
-            return View(cotizacion);
+            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reseña.Idcliente);
+            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", reseña.Idrestaurante);
+            return View(reseña);
         }
 
-        // POST: Cotizacions/Edit/5
+        // POST: Reseña/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Moneda,Monto")] Cotizacion cotizacion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Puntaje,Comentario,FechaReseña,Idcliente,Idrestaurante")] Reseña reseña)
         {
-            if (id != cotizacion.Id)
+            if (id != reseña.Id)
             {
                 return NotFound();
             }
@@ -96,12 +107,12 @@ namespace ObligatorioProgram3.Controllers
             {
                 try
                 {
-                    _context.Update(cotizacion);
+                    _context.Update(reseña);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CotizacionExists(cotizacion.Id))
+                    if (!ReseñaExists(reseña.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +123,12 @@ namespace ObligatorioProgram3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cotizacion);
+            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reseña.Idcliente);
+            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", reseña.Idrestaurante);
+            return View(reseña);
         }
 
-        // GET: Cotizacions/Delete/5
+        // GET: Reseña/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +136,36 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var cotizacion = await _context.Cotizacions
+            var reseña = await _context.Reseñas
+                .Include(r => r.IdclienteNavigation)
+                .Include(r => r.IdrestauranteNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cotizacion == null)
+            if (reseña == null)
             {
                 return NotFound();
             }
 
-            return View(cotizacion);
+            return View(reseña);
         }
 
-        // POST: Cotizacions/Delete/5
+        // POST: Reseña/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cotizacion = await _context.Cotizacions.FindAsync(id);
-            if (cotizacion != null)
+            var reseña = await _context.Reseñas.FindAsync(id);
+            if (reseña != null)
             {
-                _context.Cotizacions.Remove(cotizacion);
+                _context.Reseñas.Remove(reseña);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CotizacionExists(int id)
+        private bool ReseñaExists(int id)
         {
-            return _context.Cotizacions.Any(e => e.Id == id);
+            return _context.Reseñas.Any(e => e.Id == id);
         }
     }
 }
