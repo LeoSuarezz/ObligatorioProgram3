@@ -12,6 +12,7 @@ using ObligatorioProgram3.Recursos;
 namespace ObligatorioProgram3.Controllers
 {
     [Authorize]
+
     public class UsuariosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -22,6 +23,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // GET: Usuarios
+
         public async Task<IActionResult> Index()
         {
             var obligatorioProgram3Context = _context.Usuarios.Include(u => u.IdrolNavigation);

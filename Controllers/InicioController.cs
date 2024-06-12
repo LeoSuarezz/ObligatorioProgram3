@@ -15,11 +15,11 @@ namespace ObligatorioProgram3.Controllers
     public class InicioController : Controller
     {
 
-        private readonly IUsuarioServicio _usarioServicio;
+        private readonly IUsuarioServicio _usuarioServicio;
 
-        public InicioController(IUsuarioServicio usarioServicio)
+        public InicioController(IUsuarioServicio usuarioServicio)
         {
-            _usarioServicio = usarioServicio;
+            _usuarioServicio = usuarioServicio;
         }
 
         public IActionResult IniciarSesion()
@@ -27,10 +27,9 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
         [HttpPost]
-        [HttpPost]
         public async Task<IActionResult> IniciarSesion(string email, string contrasena)
         {
-            Usuario usuario_encontrado = await _usarioServicio.GetUsuario(email, contrasena);
+            Usuario usuario_encontrado = await _usuarioServicio.GetUsuario(email, contrasena);
 
             if (usuario_encontrado == null)
             {
