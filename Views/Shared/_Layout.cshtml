@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,134 +9,45 @@
     <link rel="stylesheet" href="~/ObligatorioProgram3.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- _Layout.cshtml -->
-    
-    
+
+
 
 
 </head>
-<body>
-    <header><!--
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Al Mal Tiempo, Buena Cara</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">  
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Mesas" asp-action="Index">Mesas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Reservas" asp-action="Index">Reservas</a>
-                        </li>
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Permisos" asp-action="Index">Permisos</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="CerrarSesion">Cerrar Sesion</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        -->
-        <!-- _Layout.cshtml -->
+<body>
+    <header>
         <div class="d-flex" id="wrapper">
-            <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
                 <div class="sidebar-heading">Al mal tiempo, buena cara </div>
                 <div class="list-group list-group-flush">
-                    <a style="color:black" href="#usersSubmenu" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false">Usuarios</a>
-                    <ul class="collapse list-unstyled" id="usersSubmenu">
-                        <li>
-                            <a style="color:black" href="@Url.Action("Index", "Usuarios")" class="list-group-item list-group-item-action bg-light">---ver usuarios</a>
-                        </li>
-                        <li>
-                            <a style="color:black" href="@Url.Action("Create", "Usuarios")" class="list-group-item list-group-item-action bg-light">---crear usuario</a>
-                        </li>
-                    </ul>
+                    <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-light">Usuarios</a>
 
+                    <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
 
-                    <a style="color:black" href="#reservasSubmenu" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false">Reservas</a>
-                    <ul class="collapse list-unstyled" id="reservasSubmenu">
-                        <li>
-                            <a style ="color:black" href="@Url.Action("Index", "Reservas")" class="list-group-item list-group-item-action bg-light">---ver reservas</a>
-                        </li>
-                        <li>
-                            <a style="color:black" href="@Url.Action("Create", "Reservas")" class="list-group-item list-group-item-action bg-light">---crear reservas</a>
-                        </li>
-                    </ul>
+                    <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
 
-                    <a style="color:black" href="#mesasSubmenu" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false">Mesas</a>
+                    <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
 
-                      <ul class="collapse list-unstyled" id="mesasSubmenu">
-                        <li>
-                            <a style ="color:black" href="@Url.Action("Index", "Mesas")" class="list-group-item list-group-item-action bg-light">---ver mesas</a>
-                        </li>
-                        <li>
-                            <a style="color:black" href="@Url.Action("Create", "Mesas")" class="list-group-item list-group-item-action bg-light">---crear mesas</a>
-                        </li>
-                    </ul>
+                    <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
 
-                    <a style="color:black" href="#rolesSubmenu" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false">Roles</a>
-                    <ul class="collapse list-unstyled" id="messagesSubmenu">
-                        <li>
-                            <a style="color:black" href="@Url.Action("Index", "Roles")" class="list-group-item list-group-item-action bg-light">---ver roles</a>
-                        </li>
-                        <li>
-                            <a style="color:black" href="@Url.Action("Create", "Roles")" class="list-group-item list-group-item-action bg-light">---crear roles</a>
-                        </li>
-                    </ul>
+                    <a style="color:black" href='@Url.Action("Index", "Ordenes")' class="list-group-item list-group-item-action bg-light">Ordenes</a>
 
-                    <a style="color:black" href="#permisosSubmenu" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false">Permisos</a>
-                    <ul class="collapse list-unstyled" id="permisosSubmenu">
-                        <li>
-                            <a style="color:black" href="@Url.Action("Index", "Permisos")" class="list-group-item list-group-item-action bg-light">---ver permisos</a>
-                        </li>
-                        <li>
-                            <a style="color:black" href="@Url.Action("Create", "Permisos")" class="list-group-item list-group-item-action bg-light">---crear permisos</a>
-                        </li>
-                    </ul>
-
-                    <a style="color:black" href="#ordenesSubmenu" class="list-group-item list-group-item-action bg-light" data-toggle="collapse" aria-expanded="false">Ordenes</a>
-                    <ul class="collapse list-unstyled" id="ordenesSubmenu">
-                        <li>
-                            <a style="color:black" href="@Url.Action("Index", "Ordenes")" class="list-group-item list-group-item-action bg-light">---ver ordenes</a>
-                        </li>
-                        <li>
-                            <a style="color:black" href="@Url.Action("Create", "Ordenes")" class="list-group-item list-group-item-action bg-light">---crear ordenes</a>
-                        </li>
-                    </ul>
-                    <a style="color:black" href="@Url.Action("IniciarSesion", "Inicio")" class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
-                    <!-- Add more items as needed -->
+                    <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
                 </div>
             </div>
-            <!-- /#sidebar-wrapper -->
-            <!-- Page Content -->
+
             <div id="page-content-wrapper">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <button class="btn btn-dark" id="menu-toggle" >  </button>
+                    <button class="btn btn-dark" id="menu-toggle"> </button>
                 </nav>
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
         </div>
-
-
     </header>
+
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -149,7 +61,7 @@
         </div>
     </footer>
 
-   
+
     <div class="d-flex" id="wrapper">
         @RenderBody()
     </div>
@@ -165,6 +77,6 @@
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
+
 </html>
