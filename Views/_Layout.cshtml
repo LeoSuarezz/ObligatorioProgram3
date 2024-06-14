@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/ObligatorioProgram3.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    
+
+
+</head>
+
+<body>
+    <header>
+        <div class="d-flex" id="wrapper">
+            <div class="bg-light border-right" id="sidebar-wrapper">
+                <div class="sidebar-heading">Al mal tiempo, buena cara </div>
+                <div class="list-group list-group-flush">
+                    <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-light">Usuarios</a>
+
+                    <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
+
+                    <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
+
+                    <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
+
+                    <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
+
+                    <a style="color:black" href='@Url.Action("Index", "Ordenes")' class="list-group-item list-group-item-action bg-light">Ordenes</a>
+
+                    <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
+                </div>
+            </div>
+
+            <div id="page-content-wrapper">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <button class="btn btn-dark" id="menu-toggle"> </button>
+                </nav>
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - ObligatorioProgram3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+   
+    <div class="d-flex" id="wrapper">
+       @RenderBody()
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required:false)
+</body>  
+
+</html>

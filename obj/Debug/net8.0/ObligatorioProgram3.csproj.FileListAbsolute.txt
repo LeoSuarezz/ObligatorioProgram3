@@ -1032,3 +1032,4 @@ C:\Users\Francisco\OneDrive\Escritorio\Analista Programador\Semestre 3\Programac
 C:\Users\Francisco\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.pdb
 C:\Users\Francisco\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.genruntimeconfig.cache
 C:\Users\Francisco\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\obj\Debug\net8.0\ref\ObligatorioProgram3.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Views\appsettings.json
