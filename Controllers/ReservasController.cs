@@ -55,9 +55,7 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
 
-        // POST: Reservas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Idcliente,Idmesa,FechaReserva,Estado")] Reserva reserva)
@@ -68,9 +66,18 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reserva.Idcliente);
-            ViewData["Idmesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.Idmesa);
-            return View(reserva);
+            ViewBag.Idcliente = new SelectList(_context.Clientes, "Id", "Id", reserva.Idcliente);
+            ViewBag.Idmesa = new SelectList(_context.Mesas, "Id", "Id", reserva.Idmesa);
+            return PartialView("CreatePartialView", reserva);
+        }
+        public IActionResult CreatePartial()
+        {
+            var Idcliente = _context.Reservas.Select(c =>c.Idcliente ).ToList();
+            ViewBag.Idcliente = new SelectList(Idcliente);
+            var idmesa = _context.Reservas.Select(c => c.Idmesa).ToList();
+            ViewBag.Idmesa = new SelectList(idmesa);
+
+            return PartialView("CreatePartialView");
         }
 
         // GET: Reservas/Edit/5

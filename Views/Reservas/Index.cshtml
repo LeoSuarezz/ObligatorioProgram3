@@ -1,53 +1,82 @@
 ﻿@model IEnumerable<ObligatorioProgram3.Models.Reserva>
-
 @{
     ViewData["Title"] = "Index";
 }
+<div class="container-fluid">
+    <h2>Reservas</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id mesa</th>
+                <th>Id cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
 
-<h1>Listado de Reservas</h1>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reserva in Model)
+            {
+                <tr>
+                    <td>@reserva.Idmesa</td>
+                    <td>@reserva.Idcliente</td>
+                    <td>@reserva.FechaReserva</td>
+                    <td>@reserva.Estado</td>
 
-<p>
-    <a asp-action="Create">Agregar nueva</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaReserva)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdclienteNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdmesaNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaReserva)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdclienteNavigation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdmesaNavigation.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
-        </tr>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-dark" id="abrirModalReserva">
+        + nueva reserva
+    </button>
+</div>
+
+<div class="modal fade" id="crearModalReserva" tabindex="-1" role="dialog" aria-labelledby="crearReservaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="createReservaModalContent">
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#abrirModalReserva').click(function () {
+                $.ajax({
+                    url: '@Url.Action("CreatePartial", "Reservas")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#createReservaModalContent').html(data);
+                        $('#crearModalReserva').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        // Manejar el error si es necesario
+                    }
+                });
+            });
+
+            // La siguiente línea estaba cerrando el $(document).ready() de forma incorrecta
+            $('#createReservaModalContent').on('submit', '#createReservaForm', function (e) {
+                e.preventDefault(); // Evitar el envío normal del formulario
+
+                // Enviar el formulario mediante AJAX
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $('#crearModalReserva').modal('hide'); // Cerrar el modal
+                        location.reload(); // Recargar la página para actualizar la lista de reservas
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        // Manejar el error si es necesario
+                    }
+                });
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>

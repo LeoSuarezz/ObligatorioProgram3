@@ -222,6 +222,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Francisco/OneDrive/Escritorio/Analista Programador/Semestre 3/Programacion 3/ObligatorioProgram3/Views/Reservas/CreatePartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXNcQ3JlYXRlUGFydGlhbFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Francisco/OneDrive/Escritorio/Analista Programador/Semestre 3/Programacion 3/ObligatorioProgram3/Views/Reservas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -324,6 +328,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Francisco/OneDrive/Escritorio/Analista Programador/Semestre 3/Programacion 3/ObligatorioProgram3/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Francisco/OneDrive/Escritorio/Analista Programador/Semestre 3/Programacion 3/ObligatorioProgram3/Views/Usuarios/_CreatePartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcX0NyZWF0ZVBhcnRpYWxWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Francisco/OneDrive/Escritorio/Analista Programador/Semestre 3/Programacion 3/ObligatorioProgram3/Views/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Francisco/OneDrive/Escritorio/Analista Programador/Semestre 3/Programacion 3/ObligatorioProgram3/Views/_ViewImports.cshtml]

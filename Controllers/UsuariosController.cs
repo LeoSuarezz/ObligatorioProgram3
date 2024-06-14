@@ -54,9 +54,7 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Idrol,Nombre,Apellido,Email,Contraseña")] Usuario usuario)
@@ -65,12 +63,22 @@ namespace ObligatorioProgram3.Controllers
             {
                 //usuario.Contraseña = Utilidades.encriptarClave(usuario.Contraseña);
                 //para q esto funcione habria q cambiar el largo q admite la contraseña en la bd
+
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
-            return View(usuario);
+            /*
+            var roles = _context.Rols.Select(r => r.NombreRol).ToList();
+            ViewBag.Idrol = new SelectList(roles); 
+            */
+            var roles = _context.Rols.Select(r => new SelectListItem
+            {
+                Value = r.Id.ToString(),
+                Text = r.NombreRol
+            }).ToList();
+            ViewBag.Idrol = new SelectList(roles, "Value", "Text", usuario.Idrol);
+            return PartialView("_CreatePartialView", usuario);
         }
 
         // GET: Usuarios/Edit/5
@@ -163,6 +171,19 @@ namespace ObligatorioProgram3.Controllers
         private bool UsuarioExists(int id)
         {
             return _context.Usuarios.Any(e => e.Id == id);
+        }
+        public IActionResult CreatePartial()
+        {
+            var roles = _context.Rols
+            .Select(r => new SelectListItem{
+                Value = r.Id.ToString(),    // Asignar el ID del rol como Value
+                Text = r.NombreRol           // Asignar el nombre del rol como Text
+             })
+     .ToList();
+
+            ViewBag.Idrol = new SelectList(roles, "Value", "Text");
+
+            return PartialView("_CreatePartialView");
         }
 
     }
