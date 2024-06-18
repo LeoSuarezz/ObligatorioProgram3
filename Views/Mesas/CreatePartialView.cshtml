@@ -1,0 +1,46 @@
+﻿@model ObligatorioProgram3.Models.Mesa
+
+<div class="modal-header">
+    <h5 class="modal-title" id="crearMesaModalLabel">Añadir Mesa</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="crearMesaForm" asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="NumeroMesa" class="control-label"></label>
+            <input type="number" asp-for="NumeroMesa" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Capacidad" class="control-label"></label>
+            <input type="number" asp-for="Capacidad" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Estado" class="control-label"></label>
+            <select asp-for="Estado" class="form-control">
+                <option value="Reservada">Reservada</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Ocupada">Ocupada</option>
+            </select>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Idrestaurante" class="control-label">Restaurante</label>
+            <select asp-for="Idrestaurante" class="form-control" asp-items="ViewBag.IdRestaurante"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Crear" class="btn btn-dark" />
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

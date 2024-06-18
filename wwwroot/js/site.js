@@ -1,4 +1,17 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// site.js
+function toggleMenu(menuId) {
+    var menu = document.getElementById(menuId);
+    var menus = document.getElementsByClassName('submenu');
 
-// Write your JavaScript code.
+    for (var i = 0; i < menus.length; i++) {
+        if (menus[i].id !== menuId) {
+            menus[i].style.display = 'none';
+        }
+    }
+
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}

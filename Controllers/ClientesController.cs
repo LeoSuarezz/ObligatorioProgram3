@@ -10,7 +10,7 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]//aplica la claim policy AdminOnly
+    //[Authorize(Policy = "AdminOnly")]//aplica la claim policy AdminOnly
     public class ClientesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -75,6 +75,14 @@ namespace ObligatorioProgram3.Controllers
             }
             return View(cliente);
         }
+
+        public IActionResult CreatePartial()
+        {
+          
+
+            return PartialView("CreatePartialView");
+        }
+
 
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)

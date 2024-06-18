@@ -2,8 +2,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+<h2>Usuarios</h2>
+
 <div class="container-fluid">
-    <h2>Usuarios</h2>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,7 +13,8 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Email</th>
-              
+                <th>Acciones</th>
+
             </tr>
         </thead>
         <tbody>
@@ -22,7 +25,12 @@
                     <td>@usuario.Nombre</td>
                     <td>@usuario.Apellido</td>
                     <td>@usuario.Email</td>
-                 
+
+                    <td>
+                        <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@usuario.Id">Editar</a>
+                        <a asp-action="Details" class="btn btn-light" asp-route-id="@usuario.Id">Detalle</a>
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@usuario.Id">Eliminar</a>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -34,11 +42,10 @@
 
 <div class="modal fade" id="crearUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="crearUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" id="createUserModalContent">
+        <div class="modal-content" id="crearModelUsuarioContent">
         </div>
     </div>
 </div>
-
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -49,30 +56,33 @@
                     url: '@Url.Action("CreatePartial", "Usuarios")',
                     type: 'GET',
                     success: function (data) {
-                        $('#createUserModalContent').html(data);
+                        $('#crearModelUsuarioContent').html(data);
                         $('#crearUsuarioModal').modal('show');
                     }
                 });
             });
 
-            // Manejar el submit del formulario dentro del modal
-            $('#createUserModalContent').on('submit', '#createUsuarioForm', function (e) {
-                e.preventDefault(); // Evitar el envío normal del formulario
+            $('#crearModelUsuarioContent').on('submit', '#crearUsuarioForm', function (e) {
+                e.preventDefault();
 
                 $.ajax({
                     url: $(this).attr('action'),
                     type: $(this).attr('method'),
                     data: $(this).serialize(),
                     success: function (data) {
-                        $('#crearUsuarioModal').modal('hide'); // Cerrar el modal
-                        location.reload(); // Recargar la página para actualizar la lista de usuarios
+                        if ($(data).find('form').length) {
+                            $('#crearModelUsuarioContent').html(data);
+                        } else {
+                            $('#crearUsuarioModal').modal('hide');
+                            location.reload();
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        // Manejar el error si es necesario
                     }
                 });
             });
         });
     </script>
 }
+

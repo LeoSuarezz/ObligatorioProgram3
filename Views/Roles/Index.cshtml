@@ -1,35 +1,101 @@
 ﻿@model IEnumerable<ObligatorioProgram3.Models.Rol>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Roles";
 }
 
-<h1>Index</h1>
+<h2>Roles</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreRol)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreRol)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre del Rol</th>
+                <th>Permisos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rol in Model)
+            {
+                <tr>
+                    <td>@rol.Id</td>
+                    <td>@rol.NombreRol</td>
+                    <td>
+                        @if (rol.Permisos != null && rol.Permisos.Any())
+                        {
+                            <ul>
+                                @foreach (var permiso in rol.Permisos)
+                                {
+                                    <li>@permiso.Nombre</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No permissions assigned</p>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@rol.Id">Editar</a>
+                        <a asp-action="Details" asp-route-id="@rol.Id">Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@rol.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-dark" id="abrirModalRol">
+        + nuevo rol
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="crearRolModal" tabindex="-1" role="dialog" aria-labelledby="crearRolModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="crearRolModalContent"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#abrirModalRol').click(function () {
+                $.ajax({
+                    url: '@Url.Action("CreatePartial", "Roles")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#crearRolModalContent').html(data);
+                        $('#crearRolModal').modal('show');
+                    }
+                });
+            });
+
+            $('#crearRolModalContent').on('submit', '#crearRolForm', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if ($(data).find('form').length) {
+                            $('#crearRolModalContent').html(data);
+                        } else {
+                            $('#crearRolModal').modal('hide');
+                            location.reload();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>

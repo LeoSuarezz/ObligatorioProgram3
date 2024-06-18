@@ -21,13 +21,26 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // GET: Rols
+        /*
         public async Task<IActionResult> Index()
         {
             return View(await _context.Rols.ToListAsync());
         }
+        */
+
+        public async Task<IActionResult> Index()
+        {
+            var roles = await _context.Rols
+                                      .Include(r => r.Permisos)
+                                      .ToListAsync();
+            return View(roles);
+        }
 
 
-       
+
+
+
+
         // GET: Rols/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -52,10 +65,8 @@ namespace ObligatorioProgram3.Controllers
         {
             return View();
         }
-
+        /*
         // POST: Rols/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol)
@@ -68,6 +79,52 @@ namespace ObligatorioProgram3.Controllers
             }
             return View(rol);
         }
+        */
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol, int[] selectedPermisos)
+        {
+            if (ModelState.IsValid)
+            {
+                if (selectedPermisos != null)
+                {
+                    rol.Permisos = new List<Permiso>();
+                    foreach (var permisoId in selectedPermisos)
+                    {
+                        var permiso = await _context.Permisos.FindAsync(permisoId);
+                        if (permiso != null)
+                        {
+                            rol.Permisos.Add(permiso);
+                        }
+                    }
+                }
+
+                _context.Add(rol);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            var permisos = _context.Permisos.ToList();
+            ViewBag.Permisos = new SelectList(_context.Rols, "Id", "Nombre",rol.Permisos);
+            return View(rol);
+        }
+    
+        public IActionResult CreatePartial()
+        {
+        
+            var permisos = _context.Permisos
+           .Select(r => new SelectListItem
+           {
+               Value = r.Id.ToString(), 
+               Text = r.Nombre           
+           })
+           .ToList();
+            ViewBag.Permisos = new SelectList(permisos, "Value", "Text");
+            return PartialView("CreatePartialView");
+        }
+
+
 
         // GET: Rols/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -86,8 +143,6 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Rols/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol")] Rol rol)

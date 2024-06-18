@@ -2,15 +2,18 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+<h2>Reservas</h2>
 <div class="container-fluid">
-    <h2>Reservas</h2>
+   
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id mesa</th>
-                <th>Id cliente</th>
+                <th>Mesa</th>
+                <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Acciones</th>
 
             </tr>
         </thead>
@@ -18,12 +21,18 @@
             @foreach (var reserva in Model)
             {
                 <tr>
-                    <td>@reserva.Idmesa</td>
-                    <td>@reserva.Idcliente</td>
+                    <td>@reserva.IdmesaNavigation.NumeroMesa</td>
+                    <td>@reserva.IdclienteNavigation.Nombre</td>
                     <td>@reserva.FechaReserva</td>
                     <td>@reserva.Estado</td>
 
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@reserva.Id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@reserva.Id">Detalle</a> |
+                        <a asp-action="Delete" asp-route-id="@reserva.Id">Eliminar</a>
+                    </td>
                 </tr>
+          
             }
         </tbody>
     </table>
@@ -58,7 +67,6 @@
                 });
             });
 
-            // La siguiente línea estaba cerrando el $(document).ready() de forma incorrecta
             $('#createReservaModalContent').on('submit', '#createReservaForm', function (e) {
                 e.preventDefault(); // Evitar el envío normal del formulario
 
