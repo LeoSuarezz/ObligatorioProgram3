@@ -18,8 +18,10 @@
 <body>
     <header>
         <div class="d-flex" id="wrapper">
-            <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">Al mal tiempo, buena cara </div>
+            @if (User.Identity.IsAuthenticated && !(bool)ViewData["HideSidebar"])
+            {
+                <div class="bg-light border-right" id="sidebar-wrapper">
+                    <div class="sidebar-heading">Al mal tiempo, buena cara </div>
                 <div class="list-group list-group-flush">
                     <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-light">Usuarios</a>
 
@@ -36,11 +38,15 @@
                     <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
                 </div>
             </div>
+            }
 
             <div id="page-content-wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <button class="btn btn-dark" id="menu-toggle"> </button>
-                </nav>
+                    </nav>
+                }
                 <div class="container-fluid">
                     @RenderBody()
                 </div>
