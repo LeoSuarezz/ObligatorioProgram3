@@ -8136,19 +8136,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\menge\\.nuget\\packages\\": {}
+    "C:\\Users\\Francisco\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\menge\\Source\\Repos\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
+      "projectUniqueName": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
       "projectName": "ObligatorioProgram3",
-      "projectPath": "C:\\Users\\menge\\Source\\Repos\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
-      "packagesPath": "C:\\Users\\menge\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\menge\\Source\\Repos\\ObligatorioProgram3\\obj\\",
+      "projectPath": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\ObligatorioProgram3.csproj",
+      "packagesPath": "C:\\Users\\Francisco\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\menge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Francisco\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

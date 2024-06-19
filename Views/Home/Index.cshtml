@@ -1,4 +1,4 @@
-﻿@* @{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,86 +6,4 @@
     <h1 class="display-4">Welcome @ViewData["nombreUsuario"]</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
- *@
 
-@model IEnumerable<ObligatorioProgram3.Models.Menu>
-
-@{
-    ViewData["Title"] = "Bienvenido";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<div class="container mt-5">
-    <h2>Bienvenido a Nuestro Restaurante</h2>
-    <p>Disfruta de nuestros deliciosos platos y deja tu reseña.</p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#menuModal">
-        Ver el Menú
-    </button>
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#reviewModal">
-        Dejar una Reseña
-    </button>
-    <a href="@Url.Action("IniciarSesion", "Inicio")" class="btn btn-success">Iniciar Sesión</a>
-</div>
-
-<!-- Menu Modal -->
-<div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="menuModalLabel">Menú</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    @foreach (var item in Model)
-                    {
-                        <li>
-                            <strong>@item.NombrePlato</strong> - @item.Precio.ToString("C")
-                            <p>@item.Descripcion</p>
-                            @if (!string.IsNullOrEmpty(item.RutaImagen))
-                            {
-                                <img src="@item.RutaImagen" alt="@item.NombrePlato" style="width: 100px; height: auto;" />
-                            }
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Review Modal -->
-<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="reviewModalLabel">Dejar una Reseña</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form asp-action="LeaveReview" method="post">
-                    <div class="form-group">
-                        <label for="Puntaje">Puntaje</label>
-                        <input type="number" class="form-control" id="Puntaje" name="Puntaje" min="1" max="5" />
-                    </div>
-                    <div class="form-group">
-                        <label for="Comentario">Comentario</label>
-                        <textarea class="form-control" id="Comentario" name="Comentario"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-}
