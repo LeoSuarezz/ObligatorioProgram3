@@ -1,4 +1,8 @@
 ﻿/* Custom styles for this template */
+
+h2{
+    padding:15px;
+}
 #wrapper {
     overflow-x: hidden;
 }
@@ -44,18 +48,4 @@
     }
 }
 
-body.dark-mode {
-  
-}
-
-    body.dark-mode #sidebar-wrapper {
-        background-color: var(--sidebar-background-dark);
-    }
-
-    body.dark-mode .navbar {
-        background-color: var(--navbar-background-dark);
-    }
-
-    body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
-        background-color: var(--table-row-background-dark);
-    }
+/* site.css */

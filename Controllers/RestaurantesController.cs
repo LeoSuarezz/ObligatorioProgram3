@@ -66,6 +66,15 @@ namespace ObligatorioProgram3.Controllers
             return View(restaurante);
         }
 
+
+        public IActionResult CreatePartial()
+        {
+        
+
+            return PartialView("CreatePartialView");
+        }
+
+
         // GET: Restaurantes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

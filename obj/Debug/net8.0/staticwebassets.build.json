@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iUg43aqpEtILMPL5702ZfEi1w7SFDpydPW8SdUlS3gc=",
+  "Hash": "JqQwxzkvYvBSEIzHVqFOEXfJ8nNWUfdXkQnr85uE1XI=",
   "Source": "ObligatorioProgram3",
   "BasePath": "_content/ObligatorioProgram3",
   "Mode": "Default",
@@ -74,25 +74,6 @@
       "OriginalItemSpec": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\scopedcss\\bundle\\ObligatorioProgram3.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ObligatorioProgram3.bundle.scp.css",
-      "SourceId": "ObligatorioProgram3",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/ObligatorioProgram3",
-      "RelativePath": "ObligatorioProgram3.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ObligatorioProgram3.bundle.scp.css"
-    },
-    {
       "Identity": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\css\\site.css",
       "SourceId": "ObligatorioProgram3",
       "SourceType": "Discovered",
@@ -129,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
+      "SourceId": "ObligatorioProgram3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\",
+      "BasePath": "_content/ObligatorioProgram3",
+      "RelativePath": "imagenes/iconoDB.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\iconoDB.png"
     },
     {
       "Identity": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\js\\site.js",

@@ -1,16 +1,16 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ObligatorioProgram3.bundle.scp.css",
-      "PackagePath": "staticwebassets\\ObligatorioProgram3.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
+      "PackagePath": "staticwebassets\\imagenes\\iconoDB.png"
     },
     {
       "Id": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\js\\site.js",

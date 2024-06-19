@@ -66,9 +66,32 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", permiso.Idrol);
-            return View(permiso);
+            var roles = _context.Rols.Select(r => new SelectListItem
+            {
+                Value = r.Id.ToString(),
+                Text = r.NombreRol
+            }).ToList();
+            ViewBag.Idrol = new SelectList(roles, "Value", "Text", permiso.Idrol);
+            return PartialView("CreatePartialView", permiso);
         }
+
+
+
+        public IActionResult CreatePartial()
+        {
+            var roles = _context.Rols
+            .Select(r => new SelectListItem
+            {
+                Value = r.Id.ToString(),    // Asignar el ID del rol como Value
+                Text = r.NombreRol           // Asignar el nombre del rol como Text
+            })
+            .ToList();
+
+            ViewBag.Idrol = new SelectList(roles, "Value", "Text");
+
+            return PartialView("CreatePartialView");
+        }
+
 
         // GET: Permisoes/Edit/5
         public async Task<IActionResult> Edit(int? id)

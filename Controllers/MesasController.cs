@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -76,8 +77,10 @@ namespace ObligatorioProgram3.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Nombre", mesa.Idrestaurante);
-            return View(mesa);
+            ViewBag.IdRestaurante = new SelectList(_context.Restaurantes, "Id", "Nombre", mesa.Idrestaurante);
+
+            return PartialView("CreatePartialView", mesa);
+
         }
 
         // GET: Mesas/Edit/5
@@ -114,7 +117,7 @@ namespace ObligatorioProgram3.Controllers
                 //verifica si ya existe una mesa con el mismo numero y restaurant a excepción de la actual
                 var existeMesa = await _context.Mesas.
                     AnyAsync(m => m.NumeroMesa == mesa.NumeroMesa && m.Idrestaurante == mesa.Idrestaurante && m.Id != mesa.Id);
-                if(existeMesa)
+                if (existeMesa)
                 {
                     ModelState.AddModelError(string.Empty, "Ya existe una mesa con este número en el restaurante seleccionado.");
                 }
@@ -138,7 +141,7 @@ namespace ObligatorioProgram3.Controllers
                     }
                     return RedirectToAction(nameof(Index));
                 }
-                
+
             }
             ViewBag.Idrestaurante = new SelectList(_context.Restaurantes, "Id", "Nombre", mesa.Idrestaurante);
             return View(mesa);
@@ -183,5 +186,14 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Mesas.Any(e => e.Id == id);
         }
+        public IActionResult CreatePartial()
+        {
+            var restaurantes = _context.Restaurantes.Select(r => new { r.Id, r.Nombre }).ToList();
+            ViewBag.IdRestaurante = new SelectList(restaurantes, "Id", "Nombre");
+
+            return PartialView("CreatePartialView", new Mesa());
+        }
+
+
     }
 }

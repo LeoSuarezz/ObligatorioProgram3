@@ -68,10 +68,7 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            /*
-            var roles = _context.Rols.Select(r => r.NombreRol).ToList();
-            ViewBag.Idrol = new SelectList(roles); 
-            */
+        
             var roles = _context.Rols.Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),
@@ -80,6 +77,22 @@ namespace ObligatorioProgram3.Controllers
             ViewBag.Idrol = new SelectList(roles, "Value", "Text", usuario.Idrol);
             return PartialView("_CreatePartialView", usuario);
         }
+
+        public IActionResult CreatePartial()
+        {
+            var roles = _context.Rols
+            .Select(r => new SelectListItem
+            {
+                Value = r.Id.ToString(),    // Asignar el ID del rol como Value
+                Text = r.NombreRol           // Asignar el nombre del rol como Text
+            })
+            .ToList();
+
+            ViewBag.Idrol = new SelectList(roles, "Value", "Text");
+
+            return PartialView("_CreatePartialView");
+        }
+
 
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -98,9 +111,6 @@ namespace ObligatorioProgram3.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Idrol,Nombre,Apellido,Email,Contraseña")] Usuario usuario)
@@ -133,7 +143,7 @@ namespace ObligatorioProgram3.Controllers
             ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
             return View(usuario);
         }
-
+  
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -172,19 +182,9 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Usuarios.Any(e => e.Id == id);
         }
-        public IActionResult CreatePartial()
-        {
-            var roles = _context.Rols
-            .Select(r => new SelectListItem{
-                Value = r.Id.ToString(),    // Asignar el ID del rol como Value
-                Text = r.NombreRol           // Asignar el nombre del rol como Text
-             })
-     .ToList();
 
-            ViewBag.Idrol = new SelectList(roles, "Value", "Text");
 
-            return PartialView("_CreatePartialView");
-        }
-
+     
+      
     }
 }

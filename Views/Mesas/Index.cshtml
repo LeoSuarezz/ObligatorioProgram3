@@ -1,53 +1,94 @@
 ﻿@model IEnumerable<ObligatorioProgram3.Models.Mesa>
-
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Mesas</h1>
+<h2>Mesas</h2>
 
-<p>
-    <a asp-action="Create">Crear nueva mesa</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Numero de mesa
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capacidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                Restaurante
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroMesa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdrestauranteNavigation.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
-        </tr>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Capacidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th>Restaurante</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mesa in Model)
+            {
+                <tr>
+                    <td>@mesa.NumeroMesa</td>
+                    <td>@mesa.Capacidad</td>
+                    <td>@mesa.Estado</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mesa.IdrestauranteNavigation.Nombre)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@mesa.Id">Editar</a>
+                        <a asp-action="Details" asp-route-id="@mesa.Id">Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@mesa.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-dark" id="abrirModalMesa">
+        + nueva mesa
+    </button>
+</div>
+
+<div class="modal fade" id="crearMesaModal" tabindex="-1" role="dialog" aria-labelledby="crearMesaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="crearMesaModalContent">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#abrirModalMesa').click(function () {
+                $.ajax({
+                    url: '@Url.Action("CreatePartial", "Mesas")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#crearMesaModalContent').html(data);
+                        $('#crearMesaModal').modal('show');
+                    }
+                });
+            });
+
+            $('#crearMesaModalContent').on('submit', '#crearMesaForm', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if ($(data).find('form').length) {
+                            $('#crearMesaModalContent').html(data);
+                        } else {
+                            $('#crearMesaModal').modal('hide');
+                            location.reload();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>
+

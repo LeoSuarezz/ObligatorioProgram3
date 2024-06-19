@@ -1,53 +1,89 @@
 ﻿@model IEnumerable<ObligatorioProgram3.Models.Cliente>
-
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Clientes</h1>
+<h2>Clientes</h2>
 
-<p>
-    <a asp-action="Create">Crear nuevo Cliente</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                Tipo de Cliente
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCliente)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
-        </tr>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+
+                    <td>@cliente.Nombre</td>
+                    <td>@cliente.Apellido</td>
+                    <td>@cliente.Email</td>
+                    <td>@cliente.TipoCliente</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@cliente.Id">Editar</a>
+                        <a asp-action="Details" asp-route-id="@cliente.Id">Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@cliente.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-dark" id="abrirModalCliente">
+        + nuevo cliente
+    </button>
+</div>
+
+<div class="modal fade" id="crearClienteModal" tabindex="-1" role="dialog" aria-labelledby="crearClienteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="crearClienteModalContent">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#abrirModalCliente').click(function () {
+                $.ajax({
+                    url: '@Url.Action("CreatePartial", "Clientes")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#crearClienteModalContent').html(data);
+                        $('#crearClienteModal').modal('show');
+                    }
+                });
+            });
+
+            // Manejar el submit del formulario dentro del modal
+            $('#crearClienteModalContent').on('submit', '#crearClienteForm', function (e) {
+                e.preventDefault(); // Evitar el envío normal del formulario
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $('#crearClienteModal').modal('hide'); // Cerrar el modal
+                        location.reload(); // Recargar la página para actualizar la lista de usuarios
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        // Manejar el error si es necesario
+                    }
+                });
+            });
+        });
+    </script>
+
+
 }
-    </tbody>
-</table>

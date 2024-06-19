@@ -55,7 +55,7 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Idcliente,Idmesa,FechaReserva,Estado")] Reserva reserva)
@@ -66,19 +66,34 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Idcliente = new SelectList(_context.Clientes, "Id", "Id", reserva.Idcliente);
-            ViewBag.Idmesa = new SelectList(_context.Mesas, "Id", "Id", reserva.Idmesa);
+            var mesas = _context.Mesas.Select(m => m.Id).ToList();
+            ViewBag.Idmesa = new SelectList(mesas);
+
+            var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
+            ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
+
             return PartialView("CreatePartialView", reserva);
         }
+
+        //crea la vista del modal y le carga los datos necesarios
         public IActionResult CreatePartial()
         {
-            var Idcliente = _context.Reservas.Select(c =>c.Idcliente ).ToList();
-            ViewBag.Idcliente = new SelectList(Idcliente);
-            var idmesa = _context.Reservas.Select(c => c.Idmesa).ToList();
-            ViewBag.Idmesa = new SelectList(idmesa);
+            var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
+            ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
+
+            var restaurantes = _context.Restaurantes.Select(r=> new { r.Id, r.Nombre }).ToList();
+            ViewBag.Idrestaurante = new SelectList(restaurantes, "Id", "Nombre");
+
+            var mesas = _context.Mesas.Select(m => m.NumeroMesa).ToList();
+            ViewBag.Idmesa = new SelectList(mesas);
 
             return PartialView("CreatePartialView");
         }
+
+
+
+      
+
 
         // GET: Reservas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -174,5 +189,9 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Reservas.Any(e => e.Id == id);
         }
+
+       
+
+
     }
 }
