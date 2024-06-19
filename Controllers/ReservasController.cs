@@ -78,16 +78,22 @@ namespace ObligatorioProgram3.Controllers
         //crea la vista del modal y le carga los datos necesarios
         public IActionResult CreatePartial()
         {
-           
-           
-            var mesas = _context.Mesas.Select(m => m.Id).ToList();
-            ViewBag.Idmesa = new SelectList(mesas);
-
             var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
             ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
 
+            var restaurantes = _context.Restaurantes.Select(r=> new { r.Id, r.Nombre }).ToList();
+            ViewBag.Idrestaurante = new SelectList(restaurantes, "Id", "Nombre");
+
+            var mesas = _context.Mesas.Select(m => m.NumeroMesa).ToList();
+            ViewBag.Idmesa = new SelectList(mesas);
+
             return PartialView("CreatePartialView");
         }
+
+
+
+      
+
 
         // GET: Reservas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -183,5 +189,9 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Reservas.Any(e => e.Id == id);
         }
+
+       
+
+
     }
 }

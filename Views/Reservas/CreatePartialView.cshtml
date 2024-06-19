@@ -1,7 +1,7 @@
 ﻿@model ObligatorioProgram3.Models.Reserva
 
 <div class="modal-header">
-    <h5 class="modal-title" id="crearReservaModalLabel">añadir reserva</h5>
+    <h5 class="modal-title" id="crearReservaModalLabel">Añadir Reserva</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -9,12 +9,17 @@
 <div class="modal-body">
     <form id="createReservaForm" asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="form-group">
-            <label asp-for="Idcliente" class="control-label">Seleccionar Cliente</label>
+            <label class="control-label">Restaurante</label>
+            <select class="form-control" asp-items="ViewBag.Idrestaurante"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Idcliente" class="control-label">Cliente</label>
             <select asp-for="Idcliente" class="form-control" asp-items="ViewBag.IdCliente"></select>
         </div>
         <div class="form-group">
-            <label asp-for="Idmesa" class="control-label">Seleccionar Mesa</label>
+            <label asp-for="Idmesa" class="control-label">Mesa</label>
             <select asp-for="Idmesa" class="form-control" asp-items="ViewBag.IdMesa"></select>
         </div>
         <div class="form-group">
@@ -31,6 +36,7 @@
             </select>
             <span asp-validation-for="Estado" class="text-danger"></span>
         </div>
+
         <div class="form-group">
             <input type="submit" value="Crear" class="btn btn-dark" />
         </div>
@@ -43,7 +49,7 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-   }
-   
-  
+    }
+    <script src="~/js/site.js"></script>
+
 }

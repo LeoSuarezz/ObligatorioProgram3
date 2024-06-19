@@ -37,10 +37,6 @@ namespace ObligatorioProgram3.Controllers
         }
 
 
-
-
-
-
         // GET: Rols/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -112,15 +108,10 @@ namespace ObligatorioProgram3.Controllers
     
         public IActionResult CreatePartial()
         {
-        
-            var permisos = _context.Permisos
-           .Select(r => new SelectListItem
-           {
-               Value = r.Id.ToString(), 
-               Text = r.Nombre           
-           })
-           .ToList();
-            ViewBag.Permisos = new SelectList(permisos, "Value", "Text");
+          
+            var permisos = _context.Permisos.Select(p => new { p.Id, p.Nombre }).ToList();
+            ViewBag.Permisos = new SelectList(permisos, "Id", "Nombre");
+
             return PartialView("CreatePartialView");
         }
 
