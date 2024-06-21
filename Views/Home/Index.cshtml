@@ -1,9 +1,147 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome @ViewData["nombreUsuario"]</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+   @*  arreglar 
+   <button>
+        <a href="@Url.Action("Index","Inicio")">Login</a>
+   </button>
+   
+</div> *@
+
+
+@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @ViewData["nombreUsuario"]</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <button class="btn btn-primary">
+        <a href="@Url.Action("IniciarSesion", "Inicio")" class="text-white" style="text-decoration:none;">Login</a>
+    </button>
+</div> *@
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        .background-image {
+            background-image: url('https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-container {
+            max-width: 960px;
+            width: 100%;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7B7B7B; /* primary color */
+        }
+
+        .subtitle {
+            color: #6c757d; /* muted color */
+            font-size: 1.125rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn-custom {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 0.875rem;
+            font-weight: medium;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: #7B7B7B;
+            color: white;
+            border: none;
+        }
+
+            .btn-primary-custom:hover {
+                background-color: #535353;
+            }
+
+        .btn-secondary-custom {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+        }
+
+            .btn-secondary-custom:hover {
+                background-color: #e9ecef;
+                color: #535353;
+            }
+
+        .login-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image">
+        <div class="content-container">
+            <div class="text-center">
+                <h1 class="title">Al mal tiempo, buena cara</h1>
+                <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
+                <div class="button-group">
+                    <a href="@Url.Action("Index", "Menus")" class="btn-custom btn-primary-custom">Ver Menú</a>
+                    <a href="@Url.Action("Index", "Reseñas")" class="btn-custom btn-secondary-custom">Ver Reseñas</a>
+                </div>
+            </div>
+        </div>
+        <div class="login-button">
+            <a href="@Url.Action("IniciarSesion", "Inicio")" class="btn btn-outline-primary">Iniciar Sesión</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 

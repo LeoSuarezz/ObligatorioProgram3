@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,52 +8,49 @@
     <link rel="stylesheet" href="~/ObligatorioProgram3.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+        }
 
+        #sidebar-wrapper {
+            flex: 0 0 250px; /* ancho fijo del sidebar */
+        }
 
-
-
+        #content-wrapper {
+            flex: 1; /* ocupa el resto del espacio disponible */
+        }
+    </style>
 </head>
-
 <body>
     <header>
         <div class="d-flex" id="wrapper">
-            <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">Al mal tiempo, buena cara </div>
-                <div class="list-group list-group-flush">
-
-                    <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-dark">Usuario</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Clientes")' class="list-group-item list-group-item-action bg-light">Clientes</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Restaurantes")' class="list-group-item list-group-item-action bg-light">Restaurantes</a>
-                    
-
-                    <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
+            @if (ViewBag.OcultarSidebar != true)
+            {
+                <div class="bg-light border-right" id="sidebar-wrapper">
+                    <div class="sidebar-heading">Al mal tiempo, buena cara </div>
+                    <div class="list-group list-group-flush">
+                        <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-dark">Usuario</a>
+                        <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
+                        <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
+                        <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
+                        <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
+                        <a style="color:black" href='@Url.Action("Index", "Clientes")' class="list-group-item list-group-item-action bg-light">Clientes</a>
+                        <a style="color:black" href='@Url.Action("Index", "Restaurantes")' class="list-group-item list-group-item-action bg-light">Restaurantes</a>
+                        <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
+                    </div>
+                </div>
+            }
+            <div id="content-wrapper">
+                <div class="container-fluid">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
                 </div>
             </div>
-
-
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
-
         </div>
     </header>
-
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -62,13 +58,8 @@
         </div>
     </footer>
 
-
-    <div class="d-flex" id="wrapper">
-        @RenderBody()
-    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         $("#menu-toggle").click(function (e) {
@@ -79,5 +70,4 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>
