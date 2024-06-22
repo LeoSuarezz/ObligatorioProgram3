@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
     public class PermisosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -20,14 +16,13 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
-        // GET: Permisoes
+        // GET: Permisos
         public async Task<IActionResult> Index()
         {
-            var obligatorioProgram3Context = _context.Permisos.Include(p => p.IdrolNavigation);
-            return View(await obligatorioProgram3Context.ToListAsync());
+            return View(await _context.Permisos.ToListAsync());
         }
 
-        // GET: Permisoes/Details/5
+        // GET: Permisos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,7 +31,6 @@ namespace ObligatorioProgram3.Controllers
             }
 
             var permiso = await _context.Permisos
-                .Include(p => p.IdrolNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (permiso == null)
             {
@@ -46,19 +40,16 @@ namespace ObligatorioProgram3.Controllers
             return View(permiso);
         }
 
-        // GET: Permisoes/Create
+        // GET: Permisos/Create
         public IActionResult Create()
         {
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id");
             return View();
         }
 
-        // POST: Permisoes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Permisos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Idrol,Nombre")] Permiso permiso)
+        public async Task<IActionResult> Create([Bind("Id,Nombre")] Permiso permiso)
         {
             if (ModelState.IsValid)
             {
@@ -66,16 +57,8 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var roles = _context.Rols.Select(r => new SelectListItem
-            {
-                Value = r.Id.ToString(),
-                Text = r.NombreRol
-            }).ToList();
-            ViewBag.Idrol = new SelectList(roles, "Value", "Text", permiso.Idrol);
-            return PartialView("CreatePartialView", permiso);
+            return View(permiso);
         }
-
-
 
         public IActionResult CreatePartial()
         {
@@ -92,8 +75,7 @@ namespace ObligatorioProgram3.Controllers
             return PartialView("CreatePartialView");
         }
 
-
-        // GET: Permisoes/Edit/5
+        // GET: Permisos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -106,16 +88,13 @@ namespace ObligatorioProgram3.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", permiso.Idrol);
             return View(permiso);
         }
 
-        // POST: Permisoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Permisos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Idrol,Nombre")] Permiso permiso)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Permiso permiso)
         {
             if (id != permiso.Id)
             {
@@ -142,11 +121,10 @@ namespace ObligatorioProgram3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", permiso.Idrol);
             return View(permiso);
         }
 
-        // GET: Permisoes/Delete/5
+        // GET: Permisos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,7 +133,6 @@ namespace ObligatorioProgram3.Controllers
             }
 
             var permiso = await _context.Permisos
-                .Include(p => p.IdrolNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (permiso == null)
             {
@@ -165,17 +142,13 @@ namespace ObligatorioProgram3.Controllers
             return View(permiso);
         }
 
-        // POST: Permisoes/Delete/5
+        // POST: Permisos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var permiso = await _context.Permisos.FindAsync(id);
-            if (permiso != null)
-            {
-                _context.Permisos.Remove(permiso);
-            }
-
+            _context.Permisos.Remove(permiso);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

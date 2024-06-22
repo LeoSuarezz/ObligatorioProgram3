@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
     public class RolesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -20,24 +16,16 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
-        // GET: Rols
-        /*
+        // GET: Roles
         public async Task<IActionResult> Index()
         {
+            var permisos = _context.Permisos.ToList(); // Suponiendo que tienes un contexto de base de datos (_context) configurado correctamente
+            ViewBag.Permisos = permisos;
+
             return View(await _context.Rols.ToListAsync());
         }
-        */
 
-        public async Task<IActionResult> Index()
-        {
-            var roles = await _context.Rols
-                                      .Include(r => r.Permisos)
-                                      .ToListAsync();
-            return View(roles);
-        }
-
-
-        // GET: Rols/Details/5
+        // GET: Roles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,7 +34,6 @@ namespace ObligatorioProgram3.Controllers
             }
 
             var rol = await _context.Rols
-                .Include(r => r.Permisos)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (rol == null)
             {
@@ -56,55 +43,53 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
-        // GET: Rols/Create
+        // GET: Roles/Create
         public IActionResult Create()
         {
+            // Obtener todos los permisos disponibles desde alguna fuente (base de datos, servicio, etc.)
+            var permisos = _context.Permisos.ToList();
+            ViewBag.Permisos = new SelectList(permisos, "Id", "Nombre");
+
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol, int[] selectedPermisos)
+        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol, int[] permisosSeleccionados)
         {
             if (ModelState.IsValid)
             {
-                if (selectedPermisos != null)
-                {
-                    rol.Permisos = new List<Permiso>();
-                    foreach (var permisoId in selectedPermisos)
-                    {
-                        var permiso = await _context.Permisos.FindAsync(permisoId);
-                        if (permiso != null)
-                        {
-                            rol.Permisos.Add(permiso);
-                        }
-                    }
-                }
-
+                // Añadir el rol a la base de datos
                 _context.Add(rol);
                 await _context.SaveChangesAsync();
+
+                // Asignar permisos al rol
+                if (permisosSeleccionados != null)
+                {
+                    foreach (var permisoId in permisosSeleccionados)
+                    {
+                        var rolPermiso = new RolPermiso
+                        {
+                            IdRol = rol.Id,
+                            IdPermisos = permisoId
+                        };
+                        _context.Add(rolPermiso);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
+            // Obtener la lista de permisos
             var permisos = _context.Permisos.ToList();
-            ViewBag.Permisos = new SelectList(_context.Rols, "Id", "Nombre",rol.Permisos);
-            return View(rol);
-        }
-    
-        public IActionResult CreatePartial()
-        {
-          
-            var permisos = _context.Permisos.Select(p => new { p.Id, p.Nombre }).ToList();
-            ViewBag.Permisos = new SelectList(permisos, "Id", "Nombre");
+            ViewBag.Permisos = permisos;
 
-            return PartialView("CreatePartialView");
+            return PartialView("CreatePartialView", new Rol()); // Devolver la vista parcial con un nuevo objeto Rol
         }
 
-
-
-        // GET: Rols/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+            // GET: Roles/Edit/5
+            public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -119,7 +104,7 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
-        // POST: Rols/Edit/5
+        // POST: Roles/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol")] Rol rol)
@@ -152,7 +137,7 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
-        // GET: Rols/Delete/5
+        // GET: Roles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -170,17 +155,13 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
-        // POST: Rols/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rol = await _context.Rols.FindAsync(id);
-            if (rol != null)
-            {
-                _context.Rols.Remove(rol);
-            }
-
+            _context.Rols.Remove(rol);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -188,6 +169,14 @@ namespace ObligatorioProgram3.Controllers
         private bool RolExists(int id)
         {
             return _context.Rols.Any(e => e.Id == id);
+        }
+
+        public IActionResult CreatePartial()
+        {
+            var permisos = _context.Permisos.ToList();  // Obtener los permisos desde la base de datos
+            ViewBag.Permisos = permisos;
+
+            return PartialView("CreatePartialView");
         }
     }
 }

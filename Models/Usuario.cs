@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ObligatorioProgram3.Models;
@@ -19,6 +18,4 @@ public partial class Usuario
     public string Contraseña { get; set; } = null!;
 
     public virtual Rol? IdrolNavigation { get; set; }
-
-  
 }
