@@ -4,28 +4,18 @@ using ObligatorioProgram3.Servicios.Contrato;
 using ObligatorioProgram3.Servicios.Implementacion;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//ANGEL
 builder.Services.AddDbContext<ObligatorioProgram3Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
 });
-
-builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.LoginPath = "/Inicio/IniciarSesion";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.AccessDeniedPath = "/Home/Index"; // ruta para acceso denegado
-
-    });
 
 
 builder.Services.AddControllersWithViews(options =>
@@ -39,15 +29,17 @@ builder.Services.AddControllersWithViews(options =>
         );
 });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("VerUsuarios", policy =>
-       policy.RequireClaim("IdRol", "1"));
-    
-    // añadimos un servicio de autorizacion
-    // creamos el filtro adminOnly y llamamos a la claim diciendole q queremos el idrol 1 
-    // porque ya sabemos que 1 es admin
-});
+// AUTENTICACION DE USUARIO LOGEADO
+builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Inicio/IniciarSesion";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.AccessDeniedPath = "/Home/Index"; // ruta para acceso denegado
+
+    });
 
 var app = builder.Build();
 

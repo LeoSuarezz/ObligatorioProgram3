@@ -61,21 +61,7 @@ namespace ObligatorioProgram3.Controllers
         {
             return View();
         }
-        /*
-        // POST: Rols/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(rol);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(rol);
-        }
-        */
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

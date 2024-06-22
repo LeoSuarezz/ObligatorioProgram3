@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
-using ObligatorioProgram3.Recursos;
+
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -143,7 +142,7 @@ namespace ObligatorioProgram3.Controllers
             ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
             return View(usuario);
         }
-  
+
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -162,6 +161,7 @@ namespace ObligatorioProgram3.Controllers
 
             return View(usuario);
         }
+
 
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
