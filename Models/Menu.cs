@@ -8,6 +8,7 @@ public partial class Menu
     public int Id { get; set; }
 
     public string NombrePlato { get; set; } = null!;
+    public string Categoria { get; set; } = null!;
 
     public string Descripcion { get; set; } = null!;
 

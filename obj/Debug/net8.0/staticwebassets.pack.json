@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\imagenes\\background2.png",
+      "PackagePath": "staticwebassets\\imagenes\\background2.png"
+    },
+    {
+      "Id": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\imagenes\\fondoBienvenida.png",
+      "PackagePath": "staticwebassets\\imagenes\\fondoBienvenida.png"
+    },
+    {
       "Id": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
       "PackagePath": "staticwebassets\\imagenes\\iconoDB.png"
     },

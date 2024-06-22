@@ -1,32 +1,238 @@
-﻿@* @{
+﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome @ViewData["nombreUsuario"]</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-   @*  arreglar 
-   <button>
-        <a href="@Url.Action("Index","Inicio")">Login</a>
-   </button>
-   
-</div> *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            transition: background-color .5s;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden; /* Evitar scroll horizontal */
+        }
+
+        .background-image {
+            background-image: url('/imagenes/background2.png'); /* Ruta corregida */
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-container {
+            max-width: 960px;
+            width: 100%;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7B7B7B; /* primary color */
+        }
+
+        .subtitle {
+            color: #6c757d; /* muted color */
+            font-size: 1.125rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn-custom {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 0.875rem;
+            font-weight: medium;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: #7B7B7B;
+            color: white;
+            border: none;
+        }
+
+            .btn-primary-custom:hover {
+                background-color: #535353;
+            }
+
+        .btn-secondary-custom {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+        }
+
+            .btn-secondary-custom:hover {
+                background-color: #e9ecef;
+                color: #535353;
+            }
+
+        .login-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+            .login-button a {
+                background-color: white;
+                color: #535353;
+                border: 1px solid #ced4da;
+                padding: 8px 16px;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+                .login-button a:hover {
+                    background-color: #e9ecef;
+                    color: #535353;
+                }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="@Url.Action("Index", "Menus")">Menú</a>
+        <a href="@Url.Action("Index", "Resenas")">Reseñas</a>
+        <a href="#">Acerca de Nosotros</a>
+    </div>
+
+    <div id="main">
+        <div class="background-image">
+            <div class="login-button">
+                <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
+            </div>
+            <div class="content-container">
+                <h1 class="title">Al mal tiempo, buena cara</h1>
+                <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
+                <div class="container" onclick="toggleMenu(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            document.body.style.backgroundColor = "white";
+        }
+
+        function toggleMenu(x) {
+            x.classList.toggle("change");
+            if (document.getElementById("mySidenav").style.width === "250px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
 
 
 @* @{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome @ViewData["nombreUsuario"]</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    <button class="btn btn-primary">
-        <a href="@Url.Action("IniciarSesion", "Inicio")" class="text-white" style="text-decoration:none;">Login</a>
-    </button>
-</div> *@
-
-@{
     ViewData["Title"] = "Home Page";
     Layout = null;
 }
@@ -41,7 +247,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
         .background-image {
-            background-image: url('https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-image: url('/imagenes/fondoBienvenida.png'); /* Ruta corregida */
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -121,27 +327,442 @@
             top: 16px;
             right: 16px;
         }
+
+            .login-button a {
+                background-color: white;
+                color: #535353;
+                border: 1px solid #ced4da;
+                padding: 8px 16px;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+                .login-button a:hover {
+                    background-color: #e9ecef;
+                    color: #535353;
+                }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            position: absolute;
+            top: 3rem;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            z-index: 10;
+        }
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
     <div class="background-image">
+        <div class="login-button">
+            <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
+        </div>
         <div class="content-container">
             <div class="text-center">
                 <h1 class="title">Al mal tiempo, buena cara</h1>
                 <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
+                <div class="container" onclick="toggleMenu(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                <nav id="nav-menu" class="nav-menu">
+                    <a href="@Url.Action("Index", "Menus")" class="text-sm font-medium">Menú</a>
+                    <a href="@Url.Action("Index", "Resenas")" class="text-sm font-medium">Reseñas</a>
+                    <a href="#" class="text-sm font-medium">Acerca de Nosotros</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu(x) {
+            x.classList.toggle("change");
+            document.getElementById("nav-menu").classList.toggle("show");
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> *@
+
+
+
+@* @{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body, html {
+            position: relative;
+            font-family: 'Surveyor Text A', 'Surveyor Text B', serif;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .gap-6 {
+            gap: 1.5rem;
+        }
+
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .md\:p-10 {
+            padding: 2.5rem;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        .top-4 {
+            top: 1rem;
+        }
+
+        .right-4 {
+            right: 1rem;
+        }
+
+        .h-full {
+            height: 100%;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .object-cover {
+            object-fit: cover;
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .text-muted-foreground {
+            color: #6c757d;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 0.875rem;
+            font-weight: medium;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-outline {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-outline:hover {
+            background-color: #e9ecef;
+            color: #535353;
+        }
+
+        .background-image {
+            background-image: url('/imagenes/fotoBienvenida.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {opacity: 0;}
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            position: absolute;
+            top: 3rem;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            z-index: 10;
+        }
+
+        .nav-menu.show {
+            display: flex;
+        }
+
+        .content-container {
+            max-width: 960px;
+            width: 100%;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7B7B7B; /* primary color */
+        }
+
+        .subtitle {
+            color: #6c757d; /* muted color */
+            font-size: 1.125rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn-custom {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 0.875rem;
+            font-weight: medium;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: #7B7B7B;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #535353;
+        }
+
+        .btn-secondary-custom {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #e9ecef;
+            color: #535353;
+        }
+
+        .login-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+        .login-button a {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .login-button a:hover {
+            background-color: #e9ecef;
+            color: #535353;
+        }
+    </style>
+</head>
+<body>
+    <header class="grid">
+        <div class="flex flex-col items-center justify-center gap-6 p-6 md:p-10 relative">
+            <div class="flex items-center gap-2">
+                <div class="container" onclick="toggleMenu(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </div>
+            <nav id="nav-menu" class="nav-menu">
+                <a href="@Url.Action("Index", "Menus")" class="text-sm font-medium">Menú</a>
+                <a href="@Url.Action("Index", "Resenas")" class="text-sm font-medium">Reseñas</a>
+                <a href="#" class="text-sm font-medium">Acerca de Nosotros</a>
+            </nav>
+            <div class="flex flex-col items-center gap-4 content-container">
+                <img src="~/imagenes/placeholder.svg" width="80" height="80" alt="In bad weather, good face" class="rounded-full" />
+                <h1 class="title">In bad weather, good face</h1>
+                <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
                 <div class="button-group">
                     <a href="@Url.Action("Index", "Menus")" class="btn-custom btn-primary-custom">Ver Menú</a>
-                    <a href="@Url.Action("Index", "Reseñas")" class="btn-custom btn-secondary-custom">Ver Reseñas</a>
+                    <a href="@Url.Action("Index", "Resenas")" class="btn-custom btn-secondary-custom">Ver Reseñas</a>
                 </div>
             </div>
         </div>
-        <div class="login-button">
-            <a href="@Url.Action("IniciarSesion", "Inicio")" class="btn btn-outline-primary">Iniciar Sesión</a>
+        <div class="relative background-image">
+            <div class="absolute top-4 right-4 login-button">
+                <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
+            </div>
         </div>
-    </div>
+    </header>
+
+    <script>
+        function toggleMenu(x) {
+            x.classList.toggle("change");
+            document.getElementById("nav-menu").classList.toggle("show");
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+ *@
+
+
 
