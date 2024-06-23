@@ -12,4 +12,7 @@ public partial class Rol
     public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
 
     public virtual ICollection<Permiso> IdPermisos { get; set; } = new List<Permiso>();
+
+    public virtual ICollection<RolPermiso> RolPermisos { get; set; } = new List<RolPermiso>();
+
 }

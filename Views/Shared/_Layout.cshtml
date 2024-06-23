@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <title> ObligatorioProgram3</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/ObligatorioProgram3.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -12,36 +12,46 @@
 </head>
 
 <body>
-    <header>
+      <header>
         <div class="d-flex" id="wrapper">
             <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">Al mal tiempo, buena cara </div>
+                <div class="sidebar-heading">Al mal tiempo, buena cara</div>
                 <div class="list-group list-group-flush">
-
-                    <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-light">Usuarios</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Clientes")' class="list-group-item list-group-item-action bg-light">Clientes</a>
-
-                    <a style="color:black" href='@Url.Action("Index", "Restaurantes")' class="list-group-item list-group-item-action bg-light">Restaurantes</a>
-                    
-
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver usuarios"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-light">Usuarios</a>
+                    }
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver reservas"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
+                    }
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver mesas"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
+                    }
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver roles"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
+                    }
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver permisos"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
+                    }
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver clientes"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Clientes")' class="list-group-item list-group-item-action bg-light">Clientes</a>
+                    }
+                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver restaurantes"))
+                    {
+                        <a style="color:black" href='@Url.Action("Index", "Restaurantes")' class="list-group-item list-group-item-action bg-light">Restaurantes</a>
+                    }
                     <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
                 </div>
             </div>
 
-
             <div class="container-fluid">
                 @RenderBody()
             </div>
-
         </div>
     </header>
 

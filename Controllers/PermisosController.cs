@@ -62,7 +62,7 @@ namespace ObligatorioProgram3.Controllers
 
         public IActionResult CreatePartial()
         {
-            var roles = _context.Rols
+            var roles = _context.Rol
             .Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),    // Asignar el ID del rol como Value

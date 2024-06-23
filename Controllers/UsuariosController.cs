@@ -49,7 +49,7 @@ namespace ObligatorioProgram3.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id");
+            ViewData["Idrol"] = new SelectList(_context.Rol, "Id", "Id");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace ObligatorioProgram3.Controllers
                 return RedirectToAction(nameof(Index));
             }
         
-            var roles = _context.Rols.Select(r => new SelectListItem
+            var roles = _context.Rol.Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),
                 Text = r.NombreRol
@@ -79,7 +79,7 @@ namespace ObligatorioProgram3.Controllers
 
         public IActionResult CreatePartial()
         {
-            var roles = _context.Rols
+            var roles = _context.Rol
             .Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),    // Asignar el ID del rol como Value
@@ -106,7 +106,7 @@ namespace ObligatorioProgram3.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
+            ViewData["Idrol"] = new SelectList(_context.Rol, "Id", "Id", usuario.Idrol);
             return View(usuario);
         }
 
@@ -139,7 +139,7 @@ namespace ObligatorioProgram3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
+            ViewData["Idrol"] = new SelectList(_context.Rol, "Id", "Id", usuario.Idrol);
             return View(usuario);
         }
 

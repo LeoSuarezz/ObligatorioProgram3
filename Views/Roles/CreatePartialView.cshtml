@@ -21,7 +21,7 @@
             @foreach (var permiso in ViewBag.Permisos as List<ObligatorioProgram3.Models.Permiso>)
             {
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="permiso-@permiso.Id" name="Permisos" value="@permiso.Id">
+                    <input class="form-check-input" type="checkbox" id="permiso-@permiso.Id" name="permisosSeleccionados" value="@permiso.Id">
                     <label class="form-check-label" for="permiso-@permiso.Id">
                         @permiso.Nombre
                     </label>
@@ -47,14 +47,14 @@
                 e.preventDefault();
 
                 // Obtener los IDs de los permisos seleccionados
-                var permisosSeleccionados = $('input[name="Permisos"]:checked').map(function () {
+                var permisosSeleccionados = $('input[name="permisosSeleccionados"]:checked').map(function () { // Se corrigió el selector del nombre del campo
                     return $(this).val();
                 }).get();
 
                 // Agregar los IDs seleccionados como un campo oculto al formulario
                 $('<input>').attr({
                     type: 'hidden',
-                    name: 'Permisos',
+                    name: 'permisosSeleccionados', // Se corrigió el nombre del campo
                     value: permisosSeleccionados.join(',') // Convertir a cadena separada por comas
                 }).appendTo('#crearRolForm');
 
@@ -66,4 +66,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+ }

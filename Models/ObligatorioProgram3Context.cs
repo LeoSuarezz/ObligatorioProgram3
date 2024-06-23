@@ -39,9 +39,10 @@ public partial class ObligatorioProgram3Context : DbContext
 
     public virtual DbSet<Restaurante> Restaurantes { get; set; }
 
-    public virtual DbSet<Rol> Rols { get; set; }
+    public virtual DbSet<Rol> Rol { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
+    public IEnumerable<object> RolPermiso { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -189,15 +190,7 @@ public partial class ObligatorioProgram3Context : DbContext
                 .HasConstraintName("FK_PagosReserva");
         });
 
-        modelBuilder.Entity<Permiso>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Permisos__3214EC271A6B0000");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-        });
+       
 
         modelBuilder.Entity<Reserva>(entity =>
         {
@@ -257,35 +250,7 @@ public partial class ObligatorioProgram3Context : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Rol>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Rol__3214EC27339E87CE");
-
-            entity.ToTable("Rol");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.NombreRol)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-
-            entity.HasMany(d => d.IdPermisos).WithMany(p => p.IdRols)
-                .UsingEntity<Dictionary<string, object>>(
-                    "RolPermiso",
-                    r => r.HasOne<Permiso>().WithMany()
-                        .HasForeignKey("IdPermisos")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_Permisos_RolPermisos"),
-                    l => l.HasOne<Rol>().WithMany()
-                        .HasForeignKey("IdRol")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_Rol_RolPermisos"),
-                    j =>
-                    {
-                        j.HasKey("IdRol", "IdPermisos");
-                        j.ToTable("RolPermiso");
-                    });
-        });
-
+        
         modelBuilder.Entity<Usuario>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC2707E35BEF");
@@ -312,6 +277,61 @@ public partial class ObligatorioProgram3Context : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_UsuariosRoles");
         });
+
+        modelBuilder.Entity<Rol>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.NombreRol)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.HasMany(e => e.Usuarios)
+                .WithOne(u => u.IdrolNavigation)
+                .HasForeignKey(u => u.Idrol);
+
+            entity.HasMany(e => e.IdPermisos)
+                .WithMany(p => p.IdRols)
+                .UsingEntity<RolPermiso>(
+                    j => j
+                        .HasOne(rp => rp.Permiso)
+                        .WithMany(p => p.RolPermisos)
+                        .HasForeignKey(rp => rp.IdPermisos),
+                    j => j
+                        .HasOne(rp => rp.Rol)
+                        .WithMany(r => r.RolPermisos)
+                        .HasForeignKey(rp => rp.IdRol),
+                    j =>
+                    {
+                        j.HasKey(rp => new { rp.IdRol, rp.IdPermisos });
+                        j.ToTable("RolPermiso");
+                    });
+        });
+
+        modelBuilder.Entity<Permiso>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Nombre)
+                .IsRequired()
+                .HasMaxLength(100);
+
+        });
+
+        modelBuilder.Entity<RolPermiso>(entity =>
+        {
+            entity.HasKey(e => new { e.IdRol, e.IdPermisos });
+
+            entity.HasOne(d => d.Rol)
+                .WithMany(p => p.RolPermisos)
+                .HasForeignKey(d => d.IdRol);
+
+            entity.HasOne(d => d.Permiso)
+                .WithMany(p => p.RolPermisos)
+                .HasForeignKey(d => d.IdPermisos);
+
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

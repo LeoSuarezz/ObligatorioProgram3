@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Rol</th>
+                <th>Permisos</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -19,6 +20,14 @@
             {
                 <tr>
                     <td>@rol.NombreRol </td>
+                    <td>
+                        @foreach (var rolPermiso in rol.RolPermisos)
+                        {
+                            <ul>@rolPermiso.Permiso.Nombre</ul>
+
+                         
+                        }
+                    </td>
                     <td>
                         <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@rol.Id">Editar</a>
                         <a asp-action="Details" class="btn btn-light" asp-route-id="@rol.Id">Detalle</a>
