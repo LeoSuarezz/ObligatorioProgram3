@@ -19,7 +19,7 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow-x: hidden; /* Evitar scroll horizontal */
+            overflow-x: hidden;
         }
 
         .background-image {
@@ -47,11 +47,11 @@
         .title {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #7B7B7B; /* primary color */
+            color: #7B7B7B;
         }
 
         .subtitle {
-            color: #6c757d; /* muted color */
+            color: #6c757d;
             font-size: 1.125rem;
         }
 
@@ -117,6 +117,266 @@
                 }
 
         .container {
+            /*display: flex;*/
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            margin: 0 auto;
+            /**/
+            display: inline-block;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #222;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #535353;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #111;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #white;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        #main {
+            transition: margin-left .5s;
+        }
+
+        .menuIcon {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            cursor: pointer;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="menuIcon" onclick="toggleMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="@Url.Action("Index", "Menus")">Menú</a>
+        <a href="@Url.Action("Index", "Resenas")">Reseñas</a>
+        <a href="#">Acerca de Nosotros</a>
+    </div>
+
+    <div id="main">
+        <div class="background-image">
+            <div class="login-button">
+                <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
+            </div>
+            <div class="content-container">
+                <h1 class="title">Al mal tiempo, buena cara</h1>
+                <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
+                @* <div class="container" onclick="toggleMenu(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div> *@
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            document.body.style.backgroundColor = "white";
+        }
+
+        function toggleMenu(x) {
+            x.classList.toggle("change");
+            if (document.getElementById("mySidenav").style.width === "250px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+    </script>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+@* @{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            transition: background-color .5s;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden; /* Evitar scroll horizontal */
+        }
+
+        .background-image {
+            background-image: url('/imagenes/background2.png'); /* Ruta corregida */
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-container {
+            max-width: 960px;
+            width: 100%;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7B7B7B; /* primary color */
+        }
+
+        .subtitle {
+            color: #6c757d; /* muted color */
+            font-size: 1.125rem;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .btn-custom {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            padding: 0 24px;
+            font-size: 0.875rem;
+            font-weight: medium;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: #7B7B7B;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #535353;
+        }
+
+        .btn-secondary-custom {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #e9ecef;
+            color: #535353;
+        }
+
+        .login-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+        .login-button a {
+            background-color: white;
+            color: #535353;
+            border: 1px solid #ced4da;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .login-button a:hover {
+            background-color: #e9ecef;
+            color: #535353;
+        }
+
+        .container {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -159,18 +419,18 @@
             padding-top: 60px;
         }
 
-            .sidenav a {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
 
-                .sidenav a:hover {
-                    color: #f1f1f1;
-                }
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
 
         #main {
             transition: margin-left .5s;
@@ -228,7 +488,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html> *@
 
 
 
