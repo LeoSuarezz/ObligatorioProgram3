@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerRolesPermiso")]
+
     public class RolesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -20,24 +19,20 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
-        // GET: Rols
-        /*
+        // GET: Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rols.ToListAsync());
-        }
-        */
+            var rolesConPermisos = await _context.Rol
+                .Include(r => r.RolPermisos)
+                    .ThenInclude(rp => rp.Permiso)
+                .ToListAsync();
 
-        public async Task<IActionResult> Index()
-        {
-            var roles = await _context.Rols
-                                      .Include(r => r.Permisos)
-                                      .ToListAsync();
-            return View(roles);
+            return View(rolesConPermisos);
         }
 
 
-        // GET: Rols/Details/5
+
+        // GET: Roles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,8 +40,7 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var rol = await _context.Rols
-                .Include(r => r.Permisos)
+            var rol = await _context.Rol
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (rol == null)
             {
@@ -56,68 +50,57 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
-        // GET: Rols/Create
+
+
+        // GET: Roles/Create
         public IActionResult Create()
         {
+            var permisos = _context.Permisos.ToList();
+            ViewBag.Permisos = new SelectList(permisos, "Id", "Nombre");
             return View();
         }
-        /*
-        // POST: Rols/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(rol);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(rol);
-        }
-        */
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol, int[] selectedPermisos)
+        public async Task<IActionResult> Create([Bind("Id,NombreRol")] Rol rol, int[] permisosSeleccionados)
         {
             if (ModelState.IsValid)
             {
-                if (selectedPermisos != null)
+                // Añadir el rol a la base de datos
+                _context.Add(rol);
+                await _context.SaveChangesAsync();
+
+                // Asignar permisos al rol
+                if (permisosSeleccionados != null)
                 {
-                    rol.Permisos = new List<Permiso>();
-                    foreach (var permisoId in selectedPermisos)
+                    foreach (var permisoId in permisosSeleccionados)
                     {
-                        var permiso = await _context.Permisos.FindAsync(permisoId);
-                        if (permiso != null)
+                        var rolPermiso = new RolPermiso
                         {
-                            rol.Permisos.Add(permiso);
-                        }
+                            IdRol = rol.Id,
+                            IdPermisos = permisoId
+                        };
+                        _context.Add(rolPermiso);
                     }
+                    await _context.SaveChangesAsync();
+
                 }
 
-                _context.Add(rol);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            var permisos = _context.Permisos.ToList();
-            ViewBag.Permisos = new SelectList(_context.Rols, "Id", "Nombre",rol.Permisos);
-            return View(rol);
-        }
-    
-        public IActionResult CreatePartial()
-        {
-          
-            var permisos = _context.Permisos.Select(p => new { p.Id, p.Nombre }).ToList();
-            ViewBag.Permisos = new SelectList(permisos, "Id", "Nombre");
+            // Obtener la lista de permisos
+            var permisos = await _context.Permisos.ToListAsync();
+            ViewBag.Permisos = permisos;
 
-            return PartialView("CreatePartialView");
+            return PartialView("CreatePartialView", rol); // Devolver la vista parcial con un nuevo objeto Rol
         }
 
 
-
-        // GET: Rols/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -125,18 +108,26 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var rol = await _context.Rols.FindAsync(id);
+            var rol = await _context.Rol
+                .Include(r => r.IdPermisos)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
             if (rol == null)
             {
                 return NotFound();
             }
+
+            // Obtener todos los permisos disponibles
+            var permisos = _context.Permisos.ToList();
+            ViewBag.Permisos = permisos;
+
             return View(rol);
         }
 
-        // POST: Rols/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol")] Rol rol)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreRol")] Rol rol, int[] permisosSeleccionados)
         {
             if (id != rol.Id)
             {
@@ -147,8 +138,37 @@ namespace ObligatorioProgram3.Controllers
             {
                 try
                 {
-                    _context.Update(rol);
+                    var rolActualizado = await _context.Rol
+                        .Include(r => r.IdPermisos)
+                        .FirstOrDefaultAsync(r => r.Id == id);
+
+                    if (rolActualizado == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Actualizar los datos básicos del rol
+                    rolActualizado.NombreRol = rol.NombreRol;
+
+                    // Limpiar los permisos existentes
+                    rolActualizado.IdPermisos.Clear();
+
+                    // Agregar los nuevos permisos seleccionados
+                    if (permisosSeleccionados != null)
+                    {
+                        foreach (var permisoId in permisosSeleccionados)
+                        {
+                            var permiso = _context.Permisos.Find(permisoId);
+                            if (permiso != null)
+                            {
+                                rolActualizado.IdPermisos.Add(permiso);
+                            }
+                        }
+                    }
+
+                    _context.Update(rolActualizado);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -161,21 +181,32 @@ namespace ObligatorioProgram3.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
+            // Si el modelo no es válido, recargar la vista con los datos actuales
+            var permisos = _context.Permisos.ToList();
+            ViewBag.Permisos = permisos;
+
             return View(rol);
         }
 
-        // GET: Rols/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+
+
+
+
+        // GET: Roles/Delete/5
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var rol = await _context.Rols
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var rol = _context.Rol
+                               .Include(r => r.RolPermisos)
+                               .FirstOrDefault(r => r.Id == id);
+
             if (rol == null)
             {
                 return NotFound();
@@ -184,24 +215,60 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
-        // POST: Rols/Delete/5
+
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var rol = await _context.Rols.FindAsync(id);
-            if (rol != null)
+            var rol = _context.Rol
+                               .Include(r => r.RolPermisos)
+                               .FirstOrDefault(r => r.Id == id);
+
+            if (rol == null)
             {
-                _context.Rols.Remove(rol);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+
+              
+
+                var rolPermisos = _context.Set<RolPermiso>()
+                                      .Where(rp => rp.IdRol == id)
+                                      .ToList();
+
+                // Eliminar las asociaciones RolPermiso
+                _context.Set<RolPermiso>().RemoveRange(rolPermisos);
+
+                // Eliminar el rol
+                _context.Rol.Remove(rol);
+
+                // Guardar los cambios en la base de datos
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Manejar excepciones según tus necesidades
+                ModelState.AddModelError("", "Error al eliminar el rol. Detalles: " + ex.Message);
+                return View(rol);
+            }
         }
 
         private bool RolExists(int id)
         {
-            return _context.Rols.Any(e => e.Id == id);
+            return _context.Rol.Any(e => e.Id == id);
+        }
+
+        public IActionResult CreatePartial()
+        {
+            var permisos = _context.Permisos.ToList();  // Obtener los permisos desde la base de datos
+            ViewBag.Permisos = permisos;
+
+            return PartialView("CreatePartialView");
         }
     }
 }

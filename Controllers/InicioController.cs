@@ -7,6 +7,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ObligatorioProgram3.Controllers
@@ -25,8 +27,11 @@ namespace ObligatorioProgram3.Controllers
         public IActionResult IniciarSesion()
         {
             return View();
+
+
         }
-        [HttpPost]
+
+        
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string email, string contrasena)
         {
@@ -38,28 +43,38 @@ namespace ObligatorioProgram3.Controllers
                 return View();
             }
 
-            List<Claim> claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Name, usuario_encontrado.Nombre),
-                new Claim("IdRol", usuario_encontrado.Idrol.ToString() ?? "0") 
-                // manejar el caso de rol nulo
-                // creamos claim para obtener el idrol del objeto user que esta logeado
-            };
+            int idRol = usuario_encontrado.Idrol ?? 0; // Obtener el ID del rol del usuario
 
+            var permisosUsuario = await _usarioServicio.ObtenerPermisosPorRol(idRol); // obtiene los permisos del usuario logeado mediante un metodo
+
+            // Crear las claims necesarias para la autenticación
+            List<Claim> claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, usuario_encontrado.Nombre), // claim con el nombre
+                    new Claim("IdRol", idRol.ToString()), // claim con el rol
+                    new Claim("Permisos", string.Join(",", permisosUsuario))//claim q contiene permisos
+                };
+
+            // Crear identidad de claims
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Configurar propiedades de autenticación
             AuthenticationProperties properties = new AuthenticationProperties()
             {
                 AllowRefresh = true,
             };
 
+            // Realizar la autenticación
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                properties
-            );
+                    new ClaimsPrincipal(claimsIdentity),
+                    properties
+                );
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
         }
+
+
 
     }
 }

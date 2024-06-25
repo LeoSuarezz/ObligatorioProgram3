@@ -4,18 +4,32 @@ using ObligatorioProgram3.Servicios.Contrato;
 using ObligatorioProgram3.Servicios.Implementacion;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//ANGEL
 builder.Services.AddDbContext<ObligatorioProgram3Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"));
 });
 
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(
+        new ResponseCacheAttribute
+        {
+            NoStore = true,
+            Location = ResponseCacheLocation.None,
+        }
+        );
+});
+
+// AUTENTICACION DE USUARIO LOGEADO
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -26,34 +40,104 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Home/Index"; // ruta para acceso denegado
 
     });
-
-//options.UseSqlServer("Data Source=ANGELMACHADO;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
-
-//FRAN
-//options.UseSqlServer("Data Source=DESKTOP-LTBG5HI;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
-
-//LEO
-//options.UseSqlServer("Data Source=LAPTOP-83A9Q1R9;Initial Catalog=ObligatorioProgram3;Integrated Security=true; TrustServerCertificate=True"));
-
-builder.Services.AddControllersWithViews(options =>
-{
-    options.Filters.Add(
-        new ResponseCacheAttribute
-        {
-            NoStore = true,
-            Location=ResponseCacheLocation.None,
-        }
-        );
-});
-
+// autenticacion de permisos
+// se crea una politica para cada permiso
+// evalua si la claim de Permisos q tiene el permiso ver xxxxx y si la tiene esta autorizado
 builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy =>
-        policy.RequireClaim("IdRol", "1"));
-    // añadimos un servicio de autorizacion
-    // creamos el filtro adminOnly y llamamos a la claim diciendole q queremos el idrol 1 
-    // porque ya sabemos que 1 es admin
-});
+    {
+        options.AddPolicy("VerUsuariosPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; // obtiene el valor del claim Permisos del usuario.
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver usuarios"); //verifica si al menos uno de los permisos en la lista coincide con ver usuarios
+                }
+                return false;
+            });
+        });
+        options.AddPolicy("VerReservasPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value;
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver reservas");
+                }
+                return false;
+            });
+        });
+        options.AddPolicy("VerRestaurantesPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; 
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver restaurantes"); 
+                }
+                return false;
+            });
+        });
+        options.AddPolicy("VerMesasPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; 
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver mesas"); 
+                }
+                return false;
+            });
+        });
+        options.AddPolicy("VerClientesPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value;
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver clientes"); 
+                }
+                return false;
+            });
+        });
+        options.AddPolicy("VerRolesPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; 
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver roles");
+                }
+                return false;
+            });
+        });
+        options.AddPolicy("VerPermisosPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; 
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver permisos");
+                }
+                return false;
+            });
+        });
+
+    });
 
 var app = builder.Build();
 

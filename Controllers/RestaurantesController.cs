@@ -10,7 +10,7 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerRestaurantesPermiso")]
     public class RestaurantesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;

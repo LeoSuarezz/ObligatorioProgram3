@@ -11,7 +11,7 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerMesasPermiso")]
     public class MesasController : Controller
     {
         private readonly ObligatorioProgram3Context _context;

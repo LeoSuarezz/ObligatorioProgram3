@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<ObligatorioProgram3.Models.Rol>
 
 @{
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Roles</h2>
+<h1>Roles</h1>
 
 <div class="container-fluid">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre del Rol</th>
+                <th>Rol</th>
                 <th>Permisos</th>
                 <th>Acciones</th>
             </tr>
@@ -20,32 +19,26 @@
             @foreach (var rol in Model)
             {
                 <tr>
-                    <td>@rol.Id</td>
-                    <td>@rol.NombreRol</td>
+                    <td>@rol.NombreRol </td>
                     <td>
-                        @if (rol.Permisos != null && rol.Permisos.Any())
+                        @foreach (var rolPermiso in rol.RolPermisos)
                         {
-                            <ul>
-                                @foreach (var permiso in rol.Permisos)
-                                {
-                                    <li>@permiso.Nombre</li>
-                                }
-                            </ul>
-                        }
-                        else
-                        {
-                            <p>No permissions assigned</p>
+                            <ul>@rolPermiso.Permiso.Nombre</ul>
+
+                         
                         }
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@rol.Id">Editar</a>
-                        <a asp-action="Details" asp-route-id="@rol.Id">Detalle</a>
-                        <a asp-action="Delete" asp-route-id="@rol.Id">Eliminar</a>
+                        <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@rol.Id">Editar</a>
+                        <a asp-action="Details" class="btn btn-light" asp-route-id="@rol.Id">Detalle</a>
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@rol.Id">Eliminar</a>
                     </td>
+
                 </tr>
             }
         </tbody>
     </table>
+
     <button type="button" class="btn btn-dark" id="abrirModalRol">
         + nuevo rol
     </button>
@@ -84,12 +77,8 @@
                     type: $(this).attr('method'),
                     data: $(this).serialize(),
                     success: function (data) {
-                        if ($(data).find('form').length) {
-                            $('#crearRolModalContent').html(data);
-                        } else {
-                            $('#crearRolModal').modal('hide');
-                            location.reload();
-                        }
+                        $('#crearRolModal').modal('hide');
+                        location.reload();
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);

@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
-using ObligatorioProgram3.Recursos;
+
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerUsuariosPermiso")]
+
     public class UsuariosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -20,6 +21,7 @@ namespace ObligatorioProgram3.Controllers
         {
             _context = context;
         }
+
 
         // GET: Usuarios
         public async Task<IActionResult> Index()
@@ -50,7 +52,7 @@ namespace ObligatorioProgram3.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id");
+            ViewData["Idrol"] = new SelectList(_context.Rol, "Id", "Id");
             return View();
         }
 
@@ -69,7 +71,7 @@ namespace ObligatorioProgram3.Controllers
                 return RedirectToAction(nameof(Index));
             }
         
-            var roles = _context.Rols.Select(r => new SelectListItem
+            var roles = _context.Rol.Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),
                 Text = r.NombreRol
@@ -80,7 +82,7 @@ namespace ObligatorioProgram3.Controllers
 
         public IActionResult CreatePartial()
         {
-            var roles = _context.Rols
+            var roles = _context.Rol
             .Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),    // Asignar el ID del rol como Value
@@ -107,7 +109,7 @@ namespace ObligatorioProgram3.Controllers
             {
                 return NotFound();
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
+            ViewData["Idrol"] = new SelectList(_context.Rol, "Id", "Id", usuario.Idrol);
             return View(usuario);
         }
 
@@ -140,10 +142,10 @@ namespace ObligatorioProgram3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idrol"] = new SelectList(_context.Rols, "Id", "Id", usuario.Idrol);
+            ViewData["Idrol"] = new SelectList(_context.Rol, "Id", "Id", usuario.Idrol);
             return View(usuario);
         }
-  
+
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -162,6 +164,7 @@ namespace ObligatorioProgram3.Controllers
 
             return View(usuario);
         }
+
 
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
