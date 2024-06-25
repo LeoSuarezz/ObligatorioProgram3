@@ -1,22 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\",
+  "WorkspaceRootPath": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\controllers\\mesascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\mesascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\views\\reservas\\createpartialview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\reservas\\createpartialview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\views\\reservas\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\reservas\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\controllers\\reservascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\reservascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\francisco\\onedrive\\escritorio\\analista programador\\semestre 3\\programacion 3\\obligatorioprogram3\\views\\roles\\createpartialview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\roles\\createpartialview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,62 +26,65 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-22T15:43:56.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Reservas\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Reservas\\Index.cshtml",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Reservas\\Index.cshtml",
+              "RelativeToolTip": "Views\\Reservas\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAIMAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-22T10:29:19.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MesasController.cs",
-              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\MesasController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MesasController.cs",
-              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\MesasController.cs",
-              "RelativeToolTip": "Controllers\\MesasController.cs",
-              "ViewState": "AQIAALEAAAAAAAAAAAAqwMIAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T00:29:33.658Z",
+              "Title": "CreatePartialView.cshtml",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Reservas\\CreatePartialView.cshtml",
+              "RelativeDocumentMoniker": "Views\\Reservas\\CreatePartialView.cshtml",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Reservas\\CreatePartialView.cshtml",
+              "RelativeToolTip": "Views\\Reservas\\CreatePartialView.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAkwB8AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-22T00:58:10.306Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UsuariosController.cs",
-              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\UsuariosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UsuariosController.cs",
-              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\UsuariosController.cs",
-              "RelativeToolTip": "Controllers\\UsuariosController.cs",
-              "ViewState": "AQIAAEkAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Title": "ReservasController.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\ReservasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReservasController.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\ReservasController.cs",
+              "RelativeToolTip": "Controllers\\ReservasController.cs",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAowHgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T00:29:15.331Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RolesController.cs",
-              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\RolesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\RolesController.cs",
-              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Controllers\\RolesController.cs*",
-              "RelativeToolTip": "Controllers\\RolesController.cs*",
-              "ViewState": "AQIAAFsAAAAAAAAAAADwv3UAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T00:13:08.364Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CreatePartialView.cshtml",
-              "DocumentMoniker": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Views\\Roles\\CreatePartialView.cshtml",
-              "RelativeDocumentMoniker": "Views\\Roles\\CreatePartialView.cshtml",
-              "ToolTip": "C:\\Users\\Francisco\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\Views\\Roles\\CreatePartialView.cshtml",
-              "RelativeToolTip": "Views\\Roles\\CreatePartialView.cshtml",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABYAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-19T00:08:49.936Z",
+              "WhenOpened": "2024-06-20T22:45:26Z",
               "EditorCaption": ""
             }
           ]
@@ -96,15 +99,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Bookmark",
