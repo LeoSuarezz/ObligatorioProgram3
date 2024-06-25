@@ -30,6 +30,8 @@ namespace ObligatorioProgram3.Controllers
 
 
         }
+
+        
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string email, string contrasena)
         {
@@ -43,19 +45,15 @@ namespace ObligatorioProgram3.Controllers
 
             int idRol = usuario_encontrado.Idrol ?? 0; // Obtener el ID del rol del usuario
 
-            // Obtener los permisos del usuario
-            var permisosUsuario = await _usarioServicio.ObtenerPermisosPorRol(idRol);
-
-            // Asignar permisos al ViewBag.Permisos
-            ViewBag.Permisos = permisosUsuario;
+            var permisosUsuario = await _usarioServicio.ObtenerPermisosPorRol(idRol); // obtiene los permisos del usuario logeado mediante un metodo
 
             // Crear las claims necesarias para la autenticación
             List<Claim> claims = new List<Claim>()
-    {
-        new Claim(ClaimTypes.Name, usuario_encontrado.Nombre),
-        new Claim("IdRol", idRol.ToString()),
-        new Claim("Permisos", string.Join(",", permisosUsuario))
-    };
+                {
+                    new Claim(ClaimTypes.Name, usuario_encontrado.Nombre), // claim con el nombre
+                    new Claim("IdRol", idRol.ToString()), // claim con el rol
+                    new Claim("Permisos", string.Join(",", permisosUsuario))//claim q contiene permisos
+                };
 
             // Crear identidad de claims
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -69,11 +67,11 @@ namespace ObligatorioProgram3.Controllers
             // Realizar la autenticación
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                properties
-            );
+                    new ClaimsPrincipal(claimsIdentity),
+                    properties
+                );
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
         }
 
 

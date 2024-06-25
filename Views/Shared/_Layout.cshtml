@@ -9,51 +9,115 @@
     <link rel="stylesheet" href="~/ObligatorioProgram3.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
-      <header>
+    @using System.Security.Claims
+    @using System.Linq;
+    @{
+        var claimsIdentity = User.Identity as ClaimsIdentity;
+        var permisosClaim = claimsIdentity?.FindFirst("Permisos");
+        ViewBag.Permisos = permisosClaim?.Value?.Split(',');
+    }
+    <header>
         <div class="d-flex" id="wrapper">
+            <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">Al mal tiempo, buena cara</div>
+                <div class="sidebar-heading">AMT.BC</div>
                 <div class="list-group list-group-flush">
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver usuarios"))
+
+                    <!-- Opción con despliegue -->
+                    <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
+                        <i class="fas fa-database mr-2 fa-2x text-black"></i>
+                    </a>
+                    <ul class="collapse list-unstyled submenu-style" id="submenu1">
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver roles"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Roles")'>Roles</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver permisos"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Permisos")'>Permisos</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver restaurantes"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Restaurantes")'>Restaurantes</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver mesas"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Mesas")'>Mesas</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
+                        <i class="fas fa-users mr-2 fa-2x text-black"></i>
+                    </a>
+                    <ul class="collapse list-unstyled submenu-style" id="submenu2">
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver usuarios"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Usuarios")'>Usuarios</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver clientes"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Clientes")'>Clientes</a>
+                            </li>
+                        }
+                    </ul>
+
+                    @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reservas"))
                     {
-                        <a style="color:black" href='@Url.Action("Index", "Usuarios")' class="list-group-item list-group-item-action bg-light">Usuarios</a>
+                        <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
+                            <i class="far fa-calendar-alt mr-2 fa-2x text-black"></i>
+                        </a>
                     }
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver reservas"))
-                    {
-                        <a style="color:black" href='@Url.Action("Index", "Reservas")' class="list-group-item list-group-item-action bg-light">Reservas</a>
-                    }
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver mesas"))
-                    {
-                        <a style="color:black" href='@Url.Action("Index", "Mesas")' class="list-group-item list-group-item-action bg-light">Mesas</a>
-                    }
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver roles"))
-                    {
-                        <a style="color:black" href='@Url.Action("Index", "Roles")' class="list-group-item list-group-item-action bg-light">Roles</a>
-                    }
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver permisos"))
-                    {
-                        <a style="color:black" href='@Url.Action("Index", "Permisos")' class="list-group-item list-group-item-action bg-light">Permisos</a>
-                    }
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver clientes"))
-                    {
-                        <a style="color:black" href='@Url.Action("Index", "Clientes")' class="list-group-item list-group-item-action bg-light">Clientes</a>
-                    }
-                    @if (ViewBag.Permisos != null && ViewBag.Permisos.Contains("ver restaurantes"))
-                    {
-                        <a style="color:black" href='@Url.Action("Index", "Restaurantes")' class="list-group-item list-group-item-action bg-light">Restaurantes</a>
-                    }
-                    <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action bg-light">Cerrar Sesion</a>
+
+
+
+                    <!-- Opción final -->
+                    <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
+                        <i class="fas fa-sign-out-alt mr-2 fa-2x text-black"></i> Cerrar Sesión
+                    </a>
                 </div>
             </div>
 
+            <!-- Contenido principal -->
             <div class="container-fluid">
                 @RenderBody()
             </div>
         </div>
     </header>
+    <style>
+        .submenu-style {
+            padding-left: 0; /* Ajusta el padding izquierdo para alinear con la barra lateral */
+        }
+
+            .submenu-style li {
+                list-style: none; /* Elimina los puntos de la lista */
+            }
+
+            .submenu-style a {
+                display: block;
+                padding: 10px 15px; /* Ajusta el padding de los elementos del submenu */
+                color: black;
+                text-decoration: none;
+                text-align: center;
+            }
+    </style>
 
 
     <div class="container">

@@ -11,6 +11,8 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
+    [Authorize(Policy = "VerUsuariosPermiso")]
+
     public class UsuariosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -19,6 +21,7 @@ namespace ObligatorioProgram3.Controllers
         {
             _context = context;
         }
+
 
         // GET: Usuarios
         public async Task<IActionResult> Index()

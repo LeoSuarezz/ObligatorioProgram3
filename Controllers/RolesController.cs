@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace ObligatorioProgram3.Controllers
 {
+    [Authorize(Policy = "VerRolesPermiso")]
+
     public class RolesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -193,15 +196,17 @@ namespace ObligatorioProgram3.Controllers
 
 
         // GET: Roles/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var rol = await _context.Rol
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var rol = _context.Rol
+                               .Include(r => r.RolPermisos)
+                               .FirstOrDefault(r => r.Id == id);
+
             if (rol == null)
             {
                 return NotFound();
@@ -210,15 +215,47 @@ namespace ObligatorioProgram3.Controllers
             return View(rol);
         }
 
+
         // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var rol = await _context.Rol.FindAsync(id);
-            _context.Rol.Remove(rol);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var rol = _context.Rol
+                               .Include(r => r.RolPermisos)
+                               .FirstOrDefault(r => r.Id == id);
+
+            if (rol == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+
+              
+
+                var rolPermisos = _context.Set<RolPermiso>()
+                                      .Where(rp => rp.IdRol == id)
+                                      .ToList();
+
+                // Eliminar las asociaciones RolPermiso
+                _context.Set<RolPermiso>().RemoveRange(rolPermisos);
+
+                // Eliminar el rol
+                _context.Rol.Remove(rol);
+
+                // Guardar los cambios en la base de datos
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Manejar excepciones según tus necesidades
+                ModelState.AddModelError("", "Error al eliminar el rol. Detalles: " + ex.Message);
+                return View(rol);
+            }
         }
 
         private bool RolExists(int id)

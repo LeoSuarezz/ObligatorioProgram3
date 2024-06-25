@@ -274,7 +274,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
             entity.HasOne(d => d.IdrolNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.Idrol)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_UsuariosRoles");
         });
 

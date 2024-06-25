@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ObligatorioProgram3.Controllers
 {
+    [Authorize(Policy = "VerPermisosPermiso")]
     public class PermisosController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -125,15 +127,17 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // GET: Permisos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var permiso = await _context.Permisos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var permiso = _context.Permisos
+                                  .Include(p => p.RolPermisos)
+                                  .FirstOrDefault(p => p.Id == id);
+
             if (permiso == null)
             {
                 return NotFound();
@@ -145,12 +149,40 @@ namespace ObligatorioProgram3.Controllers
         // POST: Permisos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var permiso = await _context.Permisos.FindAsync(id);
-            _context.Permisos.Remove(permiso);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var permiso = _context.Permisos
+                                  .Include(p => p.RolPermisos)
+                                  .FirstOrDefault(p => p.Id == id);
+
+            if (permiso == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var rolPermisos = _context.Set<RolPermiso>()
+                                                      .Where(rp => rp.IdPermisos == id)
+                                                      .ToList();
+
+                // Eliminar las asociaciones RolPermiso
+                _context.Set<RolPermiso>().RemoveRange(rolPermisos);
+
+                // Eliminar el permiso
+                _context.Permisos.Remove(permiso);
+
+                // Guardar los cambios en la base de datos
+                _context.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Manejar excepciones según tus necesidades
+                ModelState.AddModelError("", "Error al eliminar el permiso. Detalles: " + ex.Message);
+                return View(permiso);
+            }
         }
 
         private bool PermisoExists(int id)
