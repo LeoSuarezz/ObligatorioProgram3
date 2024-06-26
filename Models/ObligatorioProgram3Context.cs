@@ -39,18 +39,20 @@ public partial class ObligatorioProgram3Context : DbContext
 
     public virtual DbSet<Restaurante> Restaurantes { get; set; }
 
-    public virtual DbSet<Rol> Rols { get; set; }
+    public virtual DbSet<Rol> Rol { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
+    public IEnumerable<object> RolPermiso { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    { }
-   
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-LTBG5HI;Initial Catalog=ObligatorioProgram3;Trusted_Connection=True;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Clientes__3214EC27CB2112B0");
+            entity.HasKey(e => e.Id).HasName("PK__Clientes__3214EC27AAE9DA96");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Apellido)
@@ -69,7 +71,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Clima>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Clima__3214EC27237D7D40");
+            entity.HasKey(e => e.Id).HasName("PK__Clima__3214EC27180A4653");
 
             entity.ToTable("Clima");
 
@@ -82,7 +84,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Cotizacion>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cotizaci__3214EC2707DA1A8E");
+            entity.HasKey(e => e.Id).HasName("PK__Cotizaci__3214EC27815FD456");
 
             entity.ToTable("Cotizacion");
 
@@ -95,7 +97,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Menu>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Menu__3214EC27F47E07B9");
+            entity.HasKey(e => e.Id).HasName("PK__Menu__3214EC278613F335");
 
             entity.ToTable("Menu");
 
@@ -114,7 +116,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Mesa>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Mesas__3214EC27B9E8A190");
+            entity.HasKey(e => e.Id).HasName("PK__Mesas__3214EC27EEDBF2F1");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Estado)
@@ -130,7 +132,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<OrdenDetalle>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__OrdenDet__3214EC27E638D6B8");
+            entity.HasKey(e => e.Id).HasName("PK__OrdenDet__3214EC27293E9D4B");
 
             entity.ToTable("OrdenDetalle");
 
@@ -150,7 +152,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Ordene>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ordenes__3214EC2730C13D2C");
+            entity.HasKey(e => e.Id).HasName("PK__Ordenes__3214EC2760805297");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idreserva).HasColumnName("IDReserva");
@@ -164,7 +166,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Pagos__3214EC2740B14741");
+            entity.HasKey(e => e.Id).HasName("PK__Pagos__3214EC27A3E14295");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idclima).HasColumnName("IDClima");
@@ -188,25 +190,11 @@ public partial class ObligatorioProgram3Context : DbContext
                 .HasConstraintName("FK_PagosReserva");
         });
 
-        modelBuilder.Entity<Permiso>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Permisos__3214EC271EEF490F");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Idrol).HasColumnName("IDRol");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-
-            entity.HasOne(d => d.IdrolNavigation).WithMany(p => p.Permisos)
-                .HasForeignKey(d => d.Idrol)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_PermisosRol");
-        });
+       
 
         modelBuilder.Entity<Reserva>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reservas__3214EC272CCFE4F3");
+            entity.HasKey(e => e.Id).HasName("PK__Reservas__3214EC271470247F");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Estado)
@@ -228,7 +216,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Reseña>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Reseñas__3214EC27E6058218");
+            entity.HasKey(e => e.Id).HasName("PK__Reseñas__3214EC277E3C5AC0");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Comentario)
@@ -248,7 +236,7 @@ public partial class ObligatorioProgram3Context : DbContext
 
         modelBuilder.Entity<Restaurante>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Restaura__3214EC27B34E531D");
+            entity.HasKey(e => e.Id).HasName("PK__Restaura__3214EC27D6EF9985");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Direccion)
@@ -262,23 +250,12 @@ public partial class ObligatorioProgram3Context : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Rol>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Rol__3214EC2700BB89D9");
-
-            entity.ToTable("Rol");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.NombreRol)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-        });
-
+        
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC276BDF0841");
+            entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC2707E35BEF");
 
-            entity.HasIndex(e => e.Email, "UQ__Usuarios__A9D105349382CA98").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Usuarios__A9D10534CAEBD9BC").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Apellido)
@@ -297,9 +274,64 @@ public partial class ObligatorioProgram3Context : DbContext
 
             entity.HasOne(d => d.IdrolNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.Idrol)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_UsuariosRoles");
         });
+
+        modelBuilder.Entity<Rol>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.NombreRol)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.HasMany(e => e.Usuarios)
+                .WithOne(u => u.IdrolNavigation)
+                .HasForeignKey(u => u.Idrol);
+
+            entity.HasMany(e => e.IdPermisos)
+                .WithMany(p => p.IdRols)
+                .UsingEntity<RolPermiso>(
+                    j => j
+                        .HasOne(rp => rp.Permiso)
+                        .WithMany(p => p.RolPermisos)
+                        .HasForeignKey(rp => rp.IdPermisos),
+                    j => j
+                        .HasOne(rp => rp.Rol)
+                        .WithMany(r => r.RolPermisos)
+                        .HasForeignKey(rp => rp.IdRol),
+                    j =>
+                    {
+                        j.HasKey(rp => new { rp.IdRol, rp.IdPermisos });
+                        j.ToTable("RolPermiso");
+                    });
+        });
+
+        modelBuilder.Entity<Permiso>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Nombre)
+                .IsRequired()
+                .HasMaxLength(100);
+
+        });
+
+        modelBuilder.Entity<RolPermiso>(entity =>
+        {
+            entity.HasKey(e => new { e.IdRol, e.IdPermisos });
+
+            entity.HasOne(d => d.Rol)
+                .WithMany(p => p.RolPermisos)
+                .HasForeignKey(d => d.IdRol);
+
+            entity.HasOne(d => d.Permiso)
+                .WithMany(p => p.RolPermisos)
+                .HasForeignKey(d => d.IdPermisos);
+
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

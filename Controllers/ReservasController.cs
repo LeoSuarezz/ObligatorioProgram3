@@ -11,7 +11,7 @@ using ObligatorioProgram3.Recursos;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerReservasPermiso")]
     public class ReservasController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
