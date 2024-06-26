@@ -62,7 +62,11 @@ using System.Security.Claims;
 
 namespace ObligatorioProgram3.Controllers
 {
+<<<<<<< HEAD
     [Authorize] // Requiere autenticación por defecto
+=======
+    [Authorize] // Solo accede si estás autorizado
+>>>>>>> main
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -75,6 +79,7 @@ namespace ObligatorioProgram3.Controllers
         [AllowAnonymous] // Permite el acceso anónimo solo a la acción Index
         public IActionResult Index()
         {
+<<<<<<< HEAD
             ViewBag.OcultarSidebar = true;
             ClaimsPrincipal claimUser = HttpContext.User;
             string nombreUsuario = "";
@@ -84,6 +89,11 @@ namespace ObligatorioProgram3.Controllers
                     .Select(c => c.Value).SingleOrDefault();
             }
             ViewData["nombreUsuario"] = nombreUsuario;
+=======
+            // No se necesita más código para manejar el nombre de usuario
+           var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            // Verifica los claims aquí para asegurarte de que el usuario tiene el claim "Permisos" con los valores adecuados
+>>>>>>> main
             return View();
         }
 

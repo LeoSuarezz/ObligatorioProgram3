@@ -30,5 +30,16 @@ namespace ObligatorioProgram3.Servicios.Implementacion
 
             return usuarioEncontrado;
         }
+        public async Task<List<string>> ObtenerPermisosPorRol(int idRol)
+        {
+            // Lógica para obtener permisos por el idRol
+            var permisos = await _dbContext.Rol
+                                .Where(r => r.Id == idRol)
+                                .SelectMany(r => r.RolPermisos)
+                                .Select(rp => rp.Permiso.Nombre)
+                                .ToListAsync();
+
+            return permisos;
+        }
     }
 }
