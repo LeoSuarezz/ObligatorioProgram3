@@ -77,6 +77,12 @@
                                 <a style="color:black" href='@Url.Action("Index", "Clientes")'>Clientes</a>
                             </li>
                         }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reservas"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Reservas")'>Clientes</a>
+                            </li>
+                        }
                     </ul>
 
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reservas"))
