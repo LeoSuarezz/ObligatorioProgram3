@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
+using ObligatorioProgram3.Recursos;
 
 namespace ObligatorioProgram3.Controllers
 {
@@ -19,12 +20,52 @@ namespace ObligatorioProgram3.Controllers
         {
             _context = context;
         }
-
-        // GET: Reservas
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string filter, int? idRestaurante, DateOnly? fechaReserva)
         {
-            var obligatorioProgram3Context = _context.Reservas.Include(r => r.IdclienteNavigation).Include(r => r.IdmesaNavigation);
-            return View(await obligatorioProgram3Context.ToListAsync());
+            var reservas = _context.Reservas
+                                    .Include(r => r.IdmesaNavigation)
+                                    .Include(r => r.IdclienteNavigation)
+                                    .Include(r => r.IdmesaNavigation.IdrestauranteNavigation)
+                                    .AsQueryable();
+
+            DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+            DateOnly nextWeek = today.AddDays(7);
+            DateOnly tomorrow = today.AddDays(1);
+
+            if (fechaReserva.HasValue)
+            {
+                reservas = reservas.Where(r => r.FechaReserva == fechaReserva.Value);
+            }
+            else
+            {
+
+                switch (filter)
+                {
+                    case "hoy":
+                        reservas = reservas.Where(r => r.FechaReserva == today);
+                        break;
+                    case "pasadas":
+                        reservas = reservas.Where(r => r.FechaReserva < today);
+                        break;
+                    case "proximos7dias":
+                        reservas = reservas.Where(r => r.FechaReserva >= tomorrow && r.FechaReserva <= nextWeek);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (idRestaurante.HasValue)
+            {
+                reservas = reservas.Where(r => r.IdmesaNavigation.Idrestaurante == idRestaurante.Value);
+            }
+
+            var restaurantes = _context.Restaurantes.ToList();
+            ViewBag.Restaurantes = restaurantes;
+
+            ViewBag.FechaReserva = fechaReserva?.ToString("yyyy-MM-dd") ?? string.Empty;
+
+            return View(reservas.ToList());
         }
 
         // GET: Reservas/Details/5
@@ -55,19 +96,60 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
 
+        //crea la vista del modal y le carga los datos necesarios
+        public IActionResult CreatePartial(int idRestaurante, DateOnly fechaReserva)
+        {
+            var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
+            ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
+
+            ViewBag.IdRestaurante = idRestaurante;
+
+            var mesasOcupadas = _context.Reservas
+                                .Where(r => r.FechaReserva == fechaReserva && r.IdmesaNavigation.Idrestaurante == idRestaurante)
+                                .Select(r => r.Idmesa)
+                                .ToList();
+
+            var mesasDisponibles = _context.Mesas
+                                           .Where(m => m.Idrestaurante == idRestaurante && !mesasOcupadas.Contains(m.Id))
+                                           .Select(m => new { m.Id, m.NumeroMesa })
+                                           .ToList();
+            ViewBag.IdMesa = new SelectList(mesasDisponibles, "Id", "NumeroMesa");
+            ViewBag.FechaReserva = fechaReserva;
+
+            return PartialView("CreatePartialView", new Reserva() { FechaReserva = fechaReserva });
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Idcliente,Idmesa,FechaReserva,Estado")] Reserva reserva)
         {
+            if (_context.Reservas.Any(r => r.Idmesa == reserva.Idmesa && r.FechaReserva == reserva.FechaReserva))
+            {
+                ModelState.AddModelError("FechaReserva", "La mesa no está disponible para la fecha seleccionada.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(reserva);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var mesas = _context.Mesas.Select(m => m.Id).ToList();
-            ViewBag.Idmesa = new SelectList(mesas);
+            var mesa = await _context.Mesas.FindAsync(reserva.Idmesa);
+            if (mesa != null)
+            {
+                var mesas = _context.Mesas
+                                    .Where(m => m.Estado == "Disponible" && m.Idrestaurante == reserva.IdmesaNavigation.Idrestaurante)
+                                    .Select(m => new { m.Id, m.NumeroMesa })
+                                    .ToList();
+                ViewBag.IdMesa = new SelectList(mesas, "Id", "NumeroMesa");
+            }
+            else
+            {
+                ViewBag.IdMesa = new SelectList(Enumerable.Empty<SelectListItem>());
+            }
+
+            //mesa.Idrestaurante
 
             var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
             ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
@@ -75,25 +157,7 @@ namespace ObligatorioProgram3.Controllers
             return PartialView("CreatePartialView", reserva);
         }
 
-        //crea la vista del modal y le carga los datos necesarios
-        public IActionResult CreatePartial()
-        {
-            var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
-            ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
-
-            var restaurantes = _context.Restaurantes.Select(r=> new { r.Id, r.Nombre }).ToList();
-            ViewBag.Idrestaurante = new SelectList(restaurantes, "Id", "Nombre");
-
-            var mesas = _context.Mesas.Select(m => m.NumeroMesa).ToList();
-            ViewBag.Idmesa = new SelectList(mesas);
-
-            return PartialView("CreatePartialView");
-        }
-
-
-
-      
-
+        
 
         // GET: Reservas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -189,9 +253,24 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Reservas.Any(e => e.Id == id);
         }
+        public IActionResult GetMesasDisponibles(int idRestaurante)
+        {
+            var mesasDisponibles = _context.Mesas
+                                           .Where(m => m.Estado == "Disponible" && m.Idrestaurante == idRestaurante)
+                                           .Select(m => new { m.Id, m.NumeroMesa })
+                                           .ToList();
 
-       
+            return Json(mesasDisponibles);
+        }
 
+        [HttpGet]
+        public JsonResult CheckDisponibilidad(int idMesa, DateTime fechaReserva)
+        {
+            DateOnly fecha = DateOnly.FromDateTime(fechaReserva);
+            bool disponible = !_context.Reservas.Any(r => r.Idmesa == idMesa && r.FechaReserva == fecha);
+
+            return Json(new { disponible });
+        }
 
     }
 }

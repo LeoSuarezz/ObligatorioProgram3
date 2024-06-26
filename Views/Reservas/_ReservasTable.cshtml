@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ObligatorioProgram3.Models.Reserva>
+
+@foreach (var reserva in Model)
+{
+    <tr>
+        <td>@reserva.IdmesaNavigation.NumeroMesa</td>
+        <td>@reserva.IdclienteNavigation.Nombre</td>
+        <td>@reserva.FechaReserva</td>
+        <td>@reserva.Estado</td>
+        <td>@reserva.IdmesaNavigation.IdrestauranteNavigation.Nombre</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@reserva.Id">Editar</a> |
+            <a asp-action="Details" asp-route-id="@reserva.Id">Detalle</a> |
+            <a asp-action="Delete" asp-route-id="@reserva.Id">Eliminar</a>
+        </td>
+    </tr>
+}

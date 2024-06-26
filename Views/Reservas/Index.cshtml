@@ -4,6 +4,39 @@
 }
 
 <h2>Reservas</h2>
+
+<div class="form-group">
+    <label class="control-label">Restaurante</label>
+    <select id="restauranteSelect" class="form-control">
+        <option value="">Seleccione un restaurante</option>
+        @if (ViewBag.Restaurantes != null)
+        {
+            foreach (var restaurante in ViewBag.Restaurantes)
+            {
+                <option value="@restaurante.Id">@restaurante.Nombre</option>
+            }
+        }
+        else
+        {
+            <option value="">No hay restaurantes disponibles</option>
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label class="control-label">Fecha de Reserva</label>
+    <input type="date" id="fechaReservaSelect" class="form-control" value="@ViewBag.FechaReserva" />
+    <div class="input-group-append">
+        <button type="button" class="btn btn-outline-secondary" id="limpiarFechaReserva">Limpiar Fecha</button>
+    </div>
+</div>
+
+<div class="btn-group mb-3">
+    <button type="button" class="btn btn-outline-secondary" data-filter="hoy">Hoy</button>
+    <button type="button" class="btn btn-light" data-filter="pasadas">Pasadas</button>
+    <button type="button" class="btn btn-outline-danger" data-filter="proximos7dias">Próximos 7 Días</button>
+</div>
+
 <div class="container-fluid">
    
     <table class="table table-striped">
@@ -17,7 +50,7 @@
 
             </tr>
         </thead>
-        <tbody>
+        <tbody id="reservasTableBody">  @* ACA se renderiza la nueva View _ReservasTable tomando en cuenta el restaurante elegido en el DropDownList *@
             @foreach (var reserva in Model)
             {
                 <tr>
@@ -25,6 +58,7 @@
                     <td>@reserva.IdclienteNavigation.Nombre</td>
                     <td>@reserva.FechaReserva</td>
                     <td>@reserva.Estado</td>
+                    <td>@reserva.IdmesaNavigation.IdrestauranteNavigation.Nombre</td>
 
                     <td>
                         <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@reserva.Id">Editar</a>
@@ -52,39 +86,112 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
+            // Maneja el clic en el botón para abrir el modal de creación de reservas
             $('#abrirModalReserva').click(function () {
+                var restauranteId = $('#restauranteSelect').val();
+                var fechaReserva = $('#fechaReservaSelect').val();
+                if (!restauranteId || !fechaReserva) {
+                    alert("Por favor, seleccione un restaurante y una fecha antes de crear una reserva.");
+                    return;
+                }
                 $.ajax({
                     url: '@Url.Action("CreatePartial", "Reservas")',
                     type: 'GET',
+                    data: { idRestaurante: restauranteId, fechaReserva: fechaReserva },
                     success: function (data) {
                         $('#createReservaModalContent').html(data);
                         $('#crearModalReserva').modal('show');
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        // Manejar el error si es necesario
                     }
                 });
             });
 
+            // Maneja el envío del formulario de creación de reservas mediante AJAX
             $('#createReservaModalContent').on('submit', '#createReservaForm', function (e) {
                 e.preventDefault(); // Evitar el envío normal del formulario
 
-                // Enviar el formulario mediante AJAX
                 $.ajax({
                     url: $(this).attr('action'),
                     type: $(this).attr('method'),
                     data: $(this).serialize(),
                     success: function (data) {
-                        $('#crearModalReserva').modal('hide'); // Cerrar el modal
-                        location.reload(); // Recargar la página para actualizar la lista de reservas
+                        if ($(data).find('.text-danger').length > 0) {
+                            // Si hay mensajes de error, actualizar el contenido del modal con los nuevos datos
+                            $('#createReservaModalContent').html(data);
+                        } else {
+                            $('#crearModalReserva').modal('hide'); // Cerrar el modal
+                            location.reload(); // Recargar la página para actualizar la lista de reservas
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        // Manejar el error si es necesario
                     }
                 });
             });
+
+            // Maneja el clic en los botones de filtro
+            $('.filter-btn').click(function () {
+                var filter = $(this).data('filter');
+                var restauranteId = $('#restauranteSelect').val();
+
+                $.ajax({
+                    url: '@Url.Action("Index", "Reservas")',
+                    type: 'GET',
+                    data: { filter: filter, idRestaurante: restauranteId },
+                    success: function (data) {
+                        $('#reservasTableBody').html($(data).find('#reservasTableBody').html());
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            // Maneja el cambio en la selección de restaurante
+            $('#restauranteSelect').change(function () {
+                var restauranteId = $(this).val();
+                var fechaReserva = $('#fechaReservaSelect').val();
+
+                $.ajax({
+                    url: '@Url.Action("Index", "Reservas")',
+                    type: 'GET',
+                    data: { idRestaurante: restauranteId, fechaReserva: fechaReserva },
+                    success: function (data) {
+                        $('#reservasTableBody').html($(data).find('#reservasTableBody').html());
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            function filterReservas() {
+                var restauranteId = $('#restauranteSelect').val();
+                var fechaReserva = $('#fechaReservaSelect').val();
+
+                $.ajax({
+                    url: '@Url.Action("Index", "Reservas")',
+                    type: 'GET',
+                    data: { idRestaurante: restauranteId, fechaReserva: fechaReserva },
+                    success: function (data) {
+                        $('#reservasTableBody').html($(data).find('#reservasTableBody').html());
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+            $('#restauranteSelect').change(filterReservas);
+            $('#fechaReservaSelect').change(filterReservas);
+            
+            
+            $('#limpiarFechaReserva').click(function () {
+                $('#fechaReservaSelect').val('');
+                filterReservas();
+            });
         });
     </script>
+    <script src="~/js/site.js"></script>
 }
