@@ -71,7 +71,7 @@ namespace ObligatorioProgram3.Controllers
                     properties
                 );
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Menus");
         }
 
 

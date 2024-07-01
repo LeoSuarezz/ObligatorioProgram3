@@ -1,6 +1,6 @@
 ﻿/* Custom styles for this template */
 
-h2{
+/*h2{
     padding:15px;
 }
 #wrapper {
@@ -72,4 +72,259 @@ h2{
     #reservas-page .btn-active:hover {
         background-color: #0056b3;
         border-color: #0056b3;
+    }*/
+
+/* Custom styles for this template */
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Evitar scroll horizontal */
+}
+
+.background-image {
+    background-image: url('/imagenes/background2.png'); /* Ruta corregida */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-container {
+    max-width: 960px;
+    width: 100%;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #7B7B7B; /* primary color */
+}
+
+.subtitle {
+    color: #6c757d; /* muted color */
+    font-size: 1.125rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.btn-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 24px;
+    font-size: 0.875rem;
+    font-weight: medium;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary-custom {
+    background-color: #7B7B7B;
+    color: white;
+    border: none;
+}
+
+    .btn-primary-custom:hover {
+        background-color: #535353;
     }
+
+.btn-secondary-custom {
+    background-color: white;
+    color: #535353;
+    border: 1px solid #ced4da;
+}
+
+    .btn-secondary-custom:hover {
+        background-color: #e9ecef;
+        color: #535353;
+    }
+
+.login-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+    .login-button a {
+        background-color: white;
+        color: #535353;
+        border: 1px solid #ced4da;
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .login-button a:hover {
+            background-color: #e9ecef;
+            color: #535353;
+        }
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 3px;
+    background-color: #000000;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+#main {
+    transition: margin-left .5s;
+    padding: 0px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+/* Styles from the main site.css */
+
+h2 {
+    padding: 15px;
+}
+
+#wrapper {
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+}
+
+    #sidebar-wrapper .sidebar-heading {
+        padding: 0.875rem 1.25rem;
+        font-size: 1.2rem;
+    }
+
+    #sidebar-wrapper .list-group {
+        width: 15rem;
+    }
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+.btn-default {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+#reservas-page .btn-default {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+#reservas-page .btn-active {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+    #reservas-page .btn-active:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
