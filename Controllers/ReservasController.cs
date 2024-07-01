@@ -124,32 +124,53 @@ namespace ObligatorioProgram3.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Idcliente,Idmesa,FechaReserva,Estado")] Reserva reserva)
         {
-            if (_context.Reservas.Any(r => r.Idmesa == reserva.Idmesa && r.FechaReserva == reserva.FechaReserva))
-            {
-                ModelState.AddModelError("FechaReserva", "La mesa no está disponible para la fecha seleccionada.");
-            }
 
             if (ModelState.IsValid)
             {
                 _context.Add(reserva);
                 await _context.SaveChangesAsync();
+
+                if (reserva.Estado == "Confirmada")
+                {
+                    var orden = new Ordene
+                    {
+                        Idreserva = reserva.Id,
+                        Total = 0,
+                        IdreservaNavigation = reserva
+                        
+                        // Otros campos necesarios
+                    };
+                    _context.Ordenes.Add(orden);
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            var mesa = await _context.Mesas.FindAsync(reserva.Idmesa);
+
+            // Cargar la mesa y el restaurante asociados a la mesa
+            var mesa = await _context.Mesas
+                                    .Include(m => m.IdrestauranteNavigation)
+                                    .FirstOrDefaultAsync(m => m.Id == reserva.Idmesa);
             if (mesa != null)
             {
-                var mesas = _context.Mesas
-                                    .Where(m => m.Estado == "Disponible" && m.Idrestaurante == reserva.IdmesaNavigation.Idrestaurante)
-                                    .Select(m => new { m.Id, m.NumeroMesa })
+                // Obtener las mesas ocupadas para la fecha y el restaurante seleccionados
+                var mesasOcupadas = _context.Reservas
+                                    .Where(r => r.FechaReserva == reserva.FechaReserva && r.IdmesaNavigation.Idrestaurante == mesa.Idrestaurante)
+                                    .Select(r => r.Idmesa)
                                     .ToList();
-                ViewBag.IdMesa = new SelectList(mesas, "Id", "NumeroMesa");
+
+                // Filtrar las mesas disponibles
+                var mesasDisponibles = _context.Mesas
+                                               .Where(m => m.Idrestaurante == mesa.Idrestaurante && !mesasOcupadas.Contains(m.Id))
+                                               .Select(m => new { m.Id, m.NumeroMesa })
+                                               .ToList();
+
+                ViewBag.IdMesa = new SelectList(mesasDisponibles, "Id", "NumeroMesa");
             }
             else
             {
                 ViewBag.IdMesa = new SelectList(Enumerable.Empty<SelectListItem>());
             }
-
-            //mesa.Idrestaurante
 
             var clientes = _context.Clientes.Select(c => new { c.Id, c.Nombre }).ToList();
             ViewBag.IdCliente = new SelectList(clientes, "Id", "Nombre");
@@ -157,7 +178,6 @@ namespace ObligatorioProgram3.Controllers
             return PartialView("CreatePartialView", reserva);
         }
 
-        
 
         // GET: Reservas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -167,27 +187,68 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
-            var reserva = await _context.Reservas.FindAsync(id);
+            var reserva = await _context.Reservas
+                .Include(r => r.IdclienteNavigation)
+                .Include(r => r.IdmesaNavigation)
+                .ThenInclude(m => m.IdrestauranteNavigation) // Incluye el restaurante
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (reserva == null)
             {
                 return NotFound();
             }
-            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reserva.Idcliente);
-            ViewData["Idmesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.Idmesa);
+
+            var clientes = _context.Clientes.Select(c => new { c.Id, NombreCompleto = c.Nombre + " " + c.Apellido }).ToList();
+            ViewData["Idcliente"] = new SelectList(clientes, "Id", "NombreCompleto", reserva.Idcliente);
+
+            var mesasOcupadas = _context.Reservas
+                                .Where(r => r.FechaReserva == reserva.FechaReserva && r.IdmesaNavigation.Idrestaurante == reserva.IdmesaNavigation.Idrestaurante && r.Id != reserva.Id)
+                                .Select(r => r.Idmesa)
+                                .ToList();
+
+            var mesasDisponibles = _context.Mesas
+                                           .Where(m => m.Idrestaurante == reserva.IdmesaNavigation.Idrestaurante && !mesasOcupadas.Contains(m.Id))
+                                           .Select(m => new { m.Id, m.NumeroMesa })
+                                           .ToList();
+
+            // Agregar la mesa actual a las mesas disponibles
+            if (!mesasDisponibles.Any(m => m.Id == reserva.Idmesa))
+            {
+                var mesaActual = _context.Mesas
+                                         .Where(m => m.Id == reserva.Idmesa)
+                                         .Select(m => new { m.Id, m.NumeroMesa })
+                                         .FirstOrDefault();
+                if (mesaActual != null)
+                {
+                    mesasDisponibles.Add(mesaActual);
+                }
+            }
+
+            ViewData["Idmesa"] = new SelectList(mesasDisponibles, "Id", "NumeroMesa", reserva.Idmesa);
+
             return View(reserva);
         }
 
-        // POST: Reservas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Idcliente,Idmesa,FechaReserva,Estado")] Reserva reserva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Idcliente,Idmesa,Estado")] Reserva reserva)
         {
             if (id != reserva.Id)
             {
                 return NotFound();
             }
+
+            // Obtén la reserva original de la base de datos
+            var reservaOriginal = await _context.Reservas.AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
+            if (reservaOriginal == null)
+            {
+                return NotFound();
+            }
+
+            // Mantén la fecha y el restaurante originales
+            reserva.FechaReserva = reservaOriginal.FechaReserva;
+            reserva.IdmesaNavigation = reservaOriginal.IdmesaNavigation;
 
             if (ModelState.IsValid)
             {
@@ -195,6 +256,22 @@ namespace ObligatorioProgram3.Controllers
                 {
                     _context.Update(reserva);
                     await _context.SaveChangesAsync();
+
+                    if (reserva.Estado == "Confirmada")
+                    {
+                        var ordenExistente = _context.Ordenes.FirstOrDefault(o => o.Idreserva == reserva.Id);
+                        if (ordenExistente == null)
+                        {
+                            var orden = new Ordene
+                            {
+                                Idreserva = reserva.Id,
+                                Total = 0, // Inicializar con 0 o calcular el total según tu lógica
+                                IdreservaNavigation = reserva
+                            };
+                            _context.Ordenes.Add(orden);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -210,7 +287,9 @@ namespace ObligatorioProgram3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reserva.Idcliente);
-            ViewData["Idmesa"] = new SelectList(_context.Mesas, "Id", "Id", reserva.Idmesa);
+            ViewData["Idmesa"] = new SelectList(_context.Mesas
+                                    .Where(m => m.Estado == "Disponible" && m.Idrestaurante == reservaOriginal.IdmesaNavigation.Idrestaurante)
+                                    .Select(m => new { m.Id, m.NumeroMesa }), "Id", "NumeroMesa", reserva.Idmesa);
             return View(reserva);
         }
 
@@ -263,6 +342,36 @@ namespace ObligatorioProgram3.Controllers
             return Json(mesasDisponibles);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ConfirmarReserva(int id)
+        {
+            var reserva = await _context.Reservas.FindAsync(id);
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+
+            reserva.Estado = "Confirmada";
+            _context.Update(reserva);
+            await _context.SaveChangesAsync();
+
+            // Crear una orden asociada a la reserva confirmada
+            var ordenExistente = await _context.Ordenes.FirstOrDefaultAsync(o => o.Idreserva == reserva.Id);
+            if (ordenExistente == null)
+            {
+                var orden = new Ordene
+                {
+                    Idreserva = reserva.Id,
+                    Total = 0, // Inicializar con 0 o calcular el total según tu lógica
+                    IdreservaNavigation = reserva
+                };
+                _context.Ordenes.Add(orden);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok();
+        }
+
         [HttpGet]
         public JsonResult CheckDisponibilidad(int idMesa, DateTime fechaReserva)
         {
@@ -271,6 +380,5 @@ namespace ObligatorioProgram3.Controllers
 
             return Json(new { disponible });
         }
-
     }
 }

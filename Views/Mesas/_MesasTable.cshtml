@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ObligatorioProgram3.Models.Mesa>
+
+<tbody>
+    @foreach (var mesa in Model)
+    {
+        <tr>
+            <td>@mesa.NumeroMesa</td>
+            <td>@mesa.Capacidad</td>
+            <td>@mesa.Estado</td>
+            <td>
+                <a asp-action="Edit" class="btn btn-outline-secondary btn-sm" asp-route-id="@mesa.Id">Editar</a>
+                <a asp-action="Details" class="btn btn-light btn-sm" asp-route-id="@mesa.Id">Detalle</a>
+                <a asp-action="Delete" class="btn btn-outline-danger btn-sm" asp-route-id="@mesa.Id">Eliminar</a>
+            </td>
+        </tr>
+    }
+</tbody>

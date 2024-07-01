@@ -47,3 +47,29 @@ h2{
         margin-left: -15rem;
     }
 }
+
+.btn-default {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+#reservas-page .btn-default {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+#reservas-page .btn-active {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+    #reservas-page .btn-active:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
