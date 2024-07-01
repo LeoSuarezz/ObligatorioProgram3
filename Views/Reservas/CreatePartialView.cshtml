@@ -27,7 +27,6 @@
         <div class="form-group">
             <label asp-for="Estado" class="control-label"></label>
             <select asp-for="Estado" class="form-control">
-                <option value="Confirmada">Confirmada</option>
                 <option value="Pendiente">Pendiente</option>
             </select>
             <span asp-validation-for="Estado" class="text-danger"></span>
@@ -50,34 +49,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    @* <script>
-        $(document).ready(function () {
-            $('#createReservaForm').on('submit', function (e) {
-                var today = new Date().toISOString().split('T')[0];
-                var fechaReserva = $('#fechaReserva').val();
-                if (fechaReserva < today) {
-                    alert("La fecha de la reserva no puede ser menor al día de hoy.");
-                    e.preventDefault(); // Evitar el envío normal del formulario
-                    return false;
-                }
-
-                // Si la fecha es válida, enviar el formulario mediante AJAX
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        $('#crearModalReserva').modal('hide'); // Cerrar el modal
-                        location.reload(); // Recargar la página para actualizar la lista de reservas
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-                e.preventDefault(); // Evitar el envío normal del formulario
-            });
-        });
-    </script> *@
+    
 }
 
 

@@ -22,10 +22,23 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // GET: Mesas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? idRestaurante)
         {
-            var obligatorioProgram3Context = _context.Mesas.Include(m => m.IdrestauranteNavigation);
-            return View(await obligatorioProgram3Context.ToListAsync());
+            var mesas = _context.Mesas.Include(m => m.IdrestauranteNavigation).AsQueryable();
+
+            if (idRestaurante.HasValue)
+            {
+                mesas = mesas.Where(m => m.Idrestaurante == idRestaurante.Value);
+            }
+
+            mesas = mesas.OrderBy(m => m.IdrestauranteNavigation.Id)
+                         .ThenBy(m => m.NumeroMesa);
+            
+
+            var restaurantes = await _context.Restaurantes.ToListAsync();
+            ViewBag.Restaurantes = restaurantes;
+
+            return View(await mesas.ToListAsync()); ;
         }
 
         // GET: Mesas/Details/5

@@ -27,7 +27,7 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar -->
             <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading">AMT.BC</div>
+                <div class="sidebar-heading">El tobi gatienso</div>
                 <div class="list-group list-group-flush">
 
                     <!-- Opción con despliegue -->
@@ -80,7 +80,19 @@
                         @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reservas"))
                         {
                             <li>
-                                <a style="color:black" href='@Url.Action("Index", "Reservas")'>Clientes</a>
+                                <a style="color:black" href='@Url.Action("Index", "Reservas")'>Reservas</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver ordenes"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Ordenes")'>Ordenes</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver ordenDetalle"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "OrdenDetalles")'>Orden Detalle</a>
                             </li>
                         }
                     </ul>

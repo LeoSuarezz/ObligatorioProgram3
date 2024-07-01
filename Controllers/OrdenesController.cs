@@ -23,8 +23,15 @@ namespace ObligatorioProgram3.Controllers
         // GET: Ordenes
         public async Task<IActionResult> Index()
         {
-            var obligatorioProgram3Context = _context.Ordenes.Include(o => o.IdreservaNavigation);
-            return View(await obligatorioProgram3Context.ToListAsync());
+            var ordenes = await _context.Ordenes
+                .Include(o => o.IdreservaNavigation)
+                    .ThenInclude(r => r.IdmesaNavigation)
+                        .ThenInclude(m => m.IdrestauranteNavigation)
+                .Include(o => o.IdreservaNavigation)
+                    .ThenInclude(r => r.IdclienteNavigation)
+                .ToListAsync();
+
+            return View(ordenes);
         }
 
         // GET: Ordenes/Details/5
