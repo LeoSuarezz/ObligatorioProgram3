@@ -498,9 +498,7 @@ C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\De
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ObligatorioProgram3.props
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ObligatorioProgram3.props
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\scopedcss\bundle\ObligatorioProgram3.styles.css
-C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\scopedcss\projectbundle\ObligatorioProgram3.bundle.scp.css
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\Obligato.C192526E.Up2Date
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.genruntimeconfig.cache
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\obj\Debug\net8.0\ref\ObligatorioProgram3.dll
@@ -1271,3 +1269,4 @@ C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\refint\Obligato
 C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.pdb
 C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.genruntimeconfig.cache
 C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\ref\ObligatorioProgram3.dll
+C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\bin\Debug\net8.0\Views\appsettings.json
