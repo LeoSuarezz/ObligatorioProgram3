@@ -9,8 +9,28 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
-      "PackagePath": "staticwebassets\\imagenes\\iconoDB.png"
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\fuentes\\Astrid.otf",
+      "PackagePath": "staticwebassets\\fuentes\\Astrid.otf"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\background2.png",
+      "PackagePath": "staticwebassets\\imagenes\\background2.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logo.png",
+      "PackagePath": "staticwebassets\\imagenes\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logo3.png",
+      "PackagePath": "staticwebassets\\imagenes\\logo3.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoLayout.png",
+      "PackagePath": "staticwebassets\\imagenes\\logoLayout.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoSolIzq.png",
+      "PackagePath": "staticwebassets\\imagenes\\logoSolIzq.png"
     },
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\js\\site.js",

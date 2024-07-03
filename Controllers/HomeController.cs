@@ -8,7 +8,6 @@ using System.Security.Claims;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize] // Solo accede si estás autorizado
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -50,9 +50,7 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
 
-        // POST: Restaurantes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Direccion,Telefono")] Restaurante restaurante)
@@ -63,7 +61,7 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(restaurante);
+            return PartialView("CreatePartialView", restaurante);
         }
 
 

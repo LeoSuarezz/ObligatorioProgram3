@@ -59,7 +59,7 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(permiso);
+            return PartialView("CreatePartialView", permiso);
         }
 
         public IActionResult CreatePartial()

@@ -137,6 +137,20 @@ builder.Services.AddAuthorization(options =>
             });
         });
 
+        options.AddPolicy("VerOrdenesPermiso", policy =>
+        {
+            policy.RequireAssertion(context =>
+            {
+                var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value;
+                if (permisosClaim != null)
+                {
+                    var permisosUsuario = permisosClaim.Split(',');
+                    return permisosUsuario.Any(p => p.Trim() == "ver ordenes");
+                }
+                return false;
+            });
+        });
+
     });
 
 var app = builder.Build();

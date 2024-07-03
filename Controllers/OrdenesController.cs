@@ -10,7 +10,7 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerOrdenesPermiso")]
     public class OrdenesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -74,7 +74,7 @@ namespace ObligatorioProgram3.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Idreserva"] = new SelectList(_context.Reservas, "Id", "Id", ordene.Idreserva);
-            return View(ordene);
+            return PartialView("CreatePartialView", ordene);
         }
 
         // GET: Ordenes/Edit/5

@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
+
         body {
-            font-family: "Lato", sans-serif;
+            font-family: Astrid;
             transition: background-color .5s;
             margin: 0;
             padding: 0;
@@ -38,11 +39,19 @@
             max-width: 960px;
             width: 100%;
             padding: 24px;
-            background: rgba(255, 255, 255, 0.8);
+            /*
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                **/
             text-align: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .title {
@@ -103,9 +112,9 @@
         }
 
             .login-button a {
-                background-color: white;
-                color: #535353;
-                border: 1px solid #ced4da;
+                background-color: #f2ce54;
+                color: black;
+                border: 1px solid;
                 padding: 8px 16px;
                 border-radius: 8px;
                 text-decoration: none;
@@ -113,8 +122,8 @@
             }
 
                 .login-button a:hover {
-                    background-color: #e9ecef;
-                    color: #535353;
+                    background-color: black;
+                    color: white;
                 }
 
         .container {
@@ -130,7 +139,7 @@
         .bar1, .bar2, .bar3 {
             width: 35px;
             height: 5px;
-            color: #white;
+            color: white;
             margin: 6px 0;
             transition: 0.4s;
         }
@@ -154,23 +163,24 @@
             z-index: 1;
             top: 0;
             left: 0;
-            background-color: #535353;
+            background-color: rgba(242, 206, 84);
+            
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
         }
 
             .sidenav a {
-                padding: 8px 8px 8px 32px;
+                padding: 8px 8px 50px 32px;
                 text-decoration: none;
-                font-size: 20px;
-                color: #white;
+                font-size: 30px;
+                color: black;
                 display: block;
                 transition: 0.3s;
             }
 
                 .sidenav a:hover {
-                    color: #white;
+                    color: white;
                 }
 
             .sidenav .closebtn {
@@ -192,16 +202,23 @@
             cursor: pointer;
             z-index: 2;
             border-radius: 50%;
-            background-color: #535353;
-            padding: 8px;
+            background-size: cover;
+            background-position: center;
+            width: 50px;
+            height: 50px;
         }
 
-        .logo{
+        
+
+
+        .logo3{
             border-radius: 5%;
             width: 300px; /* Ajusta el tamaño según sea necesario */
             height: auto;
             margin: 0 auto 20px; /* Centrado horizontal y margen inferior */
         }
+       
+      
     </style>
 </head>
 <body>
@@ -221,11 +238,8 @@
         <div class="background-image">
             <div class="login-button">
                 <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
-            </div>
-            <div class="content-container">
-                <img src="~/imagenes/logo.png" alt="Logo del Restaurante" class="logo" />
-                <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
-            </div>
+            </div> 
+            <img  src="~/imagenes/logo3.png" alt="Logo del Restaurante" class="logo" />
         </div>
     </div>
 
