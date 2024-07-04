@@ -2,90 +2,91 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<div id="reservas-page">
 <h2>Reservas</h2>
 
-<div class="form-group">
-    <label class="control-label">Restaurante:</label>
-    <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;">
-        <option value="">Seleccione un restaurante</option>
-        @if (ViewBag.Restaurantes != null)
-        {
-            foreach (var restaurante in ViewBag.Restaurantes)
-            {
-                <option value="@restaurante.Id">@restaurante.Nombre</option>
-            }
-        }
-        else
-        {
-            <option value="">No hay restaurantes disponibles</option>
-        }
-    </select>
-</div>
+<div id="reservas-page">
 
-<div class="form-group">
-    <label class="control-label">Fecha de Reserva</label>
-    <input type="date" id="fechaReservaSelect" class="form-control form-control-sm d-inline-block" style="width: auto;" value="@ViewBag.FechaReserva" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
-    <div class="input-group-append">
-        <button type="button" class="btn btn-outline-secondary " id="limpiarFechaReserva">Limpiar Fecha</button>
+    <div class="form-group">
+        <label class="control-label">Restaurante:</label>
+        <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;">
+            <option value="">Seleccione un restaurante</option>
+            @if (ViewBag.Restaurantes != null)
+            {
+                foreach (var restaurante in ViewBag.Restaurantes)
+                {
+                    <option value="@restaurante.Id">@restaurante.Nombre</option>
+                }
+            }
+            else
+            {
+                <option value="">No hay restaurantes disponibles</option>
+            }
+        </select>
     </div>
-</div>
 
-<div class="btn-group mb-3">
-    <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="hoy">Hoy</button>
-    <button type="button" class="btn btn-outline-info filter-btn" data-filter="pasadas">Pasadas</button>
-    <button type="button" class="btn btn-outline-danger filter-btn" data-filter="proximos7dias">Próximos 7 Días</button>
-</div>
-
-<div class="container-fluid">
-   
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Mesa</th>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Restaurante</th>
-                <th>Acciones</th>
-
-            </tr>
-        </thead>
-        <tbody id="reservasTableBody">  @* ACA se renderiza la nueva View _ReservasTable tomando en cuenta el restaurante elegido en el DropDownList *@
-            @foreach (var reserva in Model)
-            {
-                <tr>
-                    <td>@reserva.IdmesaNavigation.NumeroMesa</td>
-                    <td>@reserva.IdclienteNavigation.Nombre @reserva.IdclienteNavigation.Apellido</td>
-                    <td>@reserva.FechaReserva</td>
-                    <td>@reserva.Estado</td>
-                    <td>@reserva.IdmesaNavigation.IdrestauranteNavigation.Nombre</td>
-
-                    <td>
-                        <button type="button" class="btn confirmar-reserva @((reserva.Estado == "Confirmada") ? "btn-default" : "btn-active")" data-id="@reserva.Id" @((reserva.Estado == "Confirmada") ? "disabled" : "")>
-                            Confirmar Reserva
-                        </button>
-                        <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@reserva.Id">Editar</a> |
-                        <a asp-action="Details" class="btn btn-light" asp-route-id="@reserva.Id">Detalle</a> |
-                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@reserva.Id">Eliminar</a> 
-                    </td>
-                </tr>
-          
-            }
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-dark" id="abrirModalReserva">
-        + nueva reserva
-    </button>
-</div>
-
-<div class="modal fade" id="crearModalReserva" tabindex="-1" role="dialog" aria-labelledby="crearReservaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" id="createReservaModalContent">
+    <div class="form-group">
+        <label class="control-label">Fecha de Reserva</label>
+        <input type="date" id="fechaReservaSelect" class="form-control form-control-sm d-inline-block" style="width: auto;" value="@ViewBag.FechaReserva" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary " id="limpiarFechaReserva">Limpiar Fecha</button>
         </div>
     </div>
-</div>
+
+    <div class="btn-group mb-3">
+        <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="hoy">Hoy</button>
+        <button type="button" class="btn btn-outline-info filter-btn" data-filter="pasadas">Pasadas</button>
+        <button type="button" class="btn btn-outline-danger filter-btn" data-filter="proximos7dias">Próximos 7 Días</button>
+    </div>
+
+    <div class="container-fluid">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Mesa</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Restaurante</th>
+                    <th>Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody id="reservasTableBody">
+                @* ACA se renderiza la nueva View _ReservasTable tomando en cuenta el restaurante elegido en el DropDownList *@
+                @foreach (var reserva in Model)
+                {
+                    <tr>
+                        <td>@reserva.IdmesaNavigation.NumeroMesa</td>
+                        <td>@reserva.IdclienteNavigation.Nombre @reserva.IdclienteNavigation.Apellido</td>
+                        <td>@reserva.FechaReserva</td>
+                        <td>@reserva.Estado</td>
+                        <td>@reserva.IdmesaNavigation.IdrestauranteNavigation.Nombre</td>
+
+                        <td>
+                            <button type="button" class="btn confirmar-reserva @((reserva.Estado == "Confirmada") ? "btn-default" : "btn-active")" data-id="@reserva.Id" @((reserva.Estado == "Confirmada") ? "disabled" : "")>
+                                Confirmar Reserva
+                            </button>
+                            <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@reserva.Id">Editar</a> |
+                            <a asp-action="Details" class="btn btn-light" asp-route-id="@reserva.Id">Detalle</a> |
+                            <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@reserva.Id">Eliminar</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-dark" id="abrirModalReserva">
+            + nueva reserva
+        </button>
+    </div>
+
+    <div class="modal fade" id="crearModalReserva" tabindex="-1" role="dialog" aria-labelledby="crearReservaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="createReservaModalContent">
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
@@ -222,8 +223,8 @@
             }
             $('#restauranteSelect').change(filterReservas);
             $('#fechaReservaSelect').change(filterReservas);
-            
-            
+
+
             $('#limpiarFechaReserva').click(function () {
                 $('#fechaReservaSelect').val('');
                 filterReservas();

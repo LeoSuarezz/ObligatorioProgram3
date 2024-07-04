@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ObligatorioProgram3.Models;
+using ObligatorioProgram3.ViewModels;
 
 namespace ObligatorioProgram3.Controllers
 {
@@ -20,153 +21,103 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
-        // GET: Ordenes
-        public async Task<IActionResult> Index()
+    
+        public async Task<IActionResult> Index(int? restauranteId)
         {
-            var ordenes = await _context.Ordenes
-                .Include(o => o.IdreservaNavigation)
-                    .ThenInclude(r => r.IdmesaNavigation)
-                        .ThenInclude(m => m.IdrestauranteNavigation)
-                .Include(o => o.IdreservaNavigation)
-                    .ThenInclude(r => r.IdclienteNavigation)
+            // Obtener todas las mesas si no se especifica un restauranteId
+            IQueryable<Mesa> mesasQuery = _context.Mesas;
+
+            if (restauranteId.HasValue)
+            {
+                // Filtrar las mesas por restauranteId si se especifica
+                mesasQuery = mesasQuery.Where(m => m.Idrestaurante == restauranteId.Value);
+            }
+
+            var mesas = await mesasQuery.ToListAsync();
+            var menuItems = await _context.Menus.ToListAsync();
+
+            // También puedes obtener los restaurantes para el selector de la vista
+            ViewBag.Restaurantes = await _context.Restaurantes.ToListAsync();
+
+            var viewModel = new MesaViewModel
+            {
+                Mesas = mesas,
+                MenuItems = menuItems
+                // Asegúrate de incluir cualquier otra información necesaria en el ViewModel
+            };
+
+            return View(viewModel);
+        }
+
+        // Acción para obtener detalles de la orden de una mesa
+        [HttpGet]
+        public async Task<IActionResult> GetOrderDetails(int mesaId)
+        {
+            var mesa = await _context.Mesas
+                .Include(m => m.Reservas)
+                .ThenInclude(r => r.Ordenes)
+                .FirstOrDefaultAsync(m => m.Id == mesaId);
+
+            if (mesa == null)
+            {
+                return NotFound();
+            }
+
+            var orden = mesa.Reservas
+                .SelectMany(r => r.Ordenes)
+                .FirstOrDefault();
+
+            if (orden == null)
+            {
+                return PartialView("OrdenDetallePartial", new OrdenDetailsViewModel { Mesa = mesa });
+            }
+
+            orden.OrdenDetalles = await _context.OrdenDetalles
+                .Where(od => od.Idorden == orden.Id)
+                .Include(od => od.IdmenuNavigation) // Asegúrate de incluir la navegación al menú
                 .ToListAsync();
 
-            return View(ordenes);
-        }
-
-        // GET: Ordenes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            var viewModel = new OrdenDetailsViewModel
             {
-                return NotFound();
-            }
+                Mesa = mesa,
+                Orden = orden
+            };
 
-            var ordene = await _context.Ordenes
-                .Include(o => o.IdreservaNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ordene == null)
-            {
-                return NotFound();
-            }
-
-            return View(ordene);
+            return PartialView("OrdenDetallePartial", viewModel);
         }
 
-        // GET: Ordenes/Create
-        public IActionResult Create()
-        {
-            ViewData["Idreserva"] = new SelectList(_context.Reservas, "Id", "Id");
-            return View();
-        }
 
-        // POST: Ordenes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // Acción para agregar un ítem del menú a la orden de una mesa
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Idreserva,Total")] Ordene ordene)
+        public async Task<IActionResult> AddMenuItemToOrder(int ordenId, int menuItemId)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(ordene);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["Idreserva"] = new SelectList(_context.Reservas, "Id", "Id", ordene.Idreserva);
-            return PartialView("CreatePartialView", ordene);
-        }
-
-        // GET: Ordenes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            var orden = await _context.Ordenes.FindAsync(ordenId);
+            if (orden == null)
             {
                 return NotFound();
             }
 
-            var ordene = await _context.Ordenes.FindAsync(id);
-            if (ordene == null)
-            {
-                return NotFound();
-            }
-            ViewData["Idreserva"] = new SelectList(_context.Reservas, "Id", "Id", ordene.Idreserva);
-            return View(ordene);
-        }
-
-        // POST: Ordenes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Idreserva,Total")] Ordene ordene)
-        {
-            if (id != ordene.Id)
+            var menuItem = await _context.Menus.FindAsync(menuItemId);
+            if (menuItem == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            var ordenDetalle = new OrdenDetalle
             {
-                try
-                {
-                    _context.Update(ordene);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrdeneExists(ordene.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["Idreserva"] = new SelectList(_context.Reservas, "Id", "Id", ordene.Idreserva);
-            return View(ordene);
-        }
+                
+                Idorden = ordenId,
+                Idmenu = menuItemId,
+                Cantidad = 1,
+            };
 
-        // GET: Ordenes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ordene = await _context.Ordenes
-                .Include(o => o.IdreservaNavigation)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ordene == null)
-            {
-                return NotFound();
-            }
-
-            return View(ordene);
-        }
-
-        // POST: Ordenes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var ordene = await _context.Ordenes.FindAsync(id);
-            if (ordene != null)
-            {
-                _context.Ordenes.Remove(ordene);
-            }
-
+            _context.OrdenDetalles.Add(ordenDetalle);
+            orden.Total += ordenDetalle.IdmenuNavigation.Precio;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool OrdeneExists(int id)
-        {
-            return _context.Ordenes.Any(e => e.Id == id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

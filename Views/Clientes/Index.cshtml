@@ -73,8 +73,13 @@
                     type: $(this).attr('method'),
                     data: $(this).serialize(),
                     success: function (data) {
-                        $('#crearClienteModal').modal('hide'); // Cerrar el modal
-                        location.reload(); // Recargar la página para actualizar la lista de usuarios
+                        // Si la respuesta contiene el formulario, significa que hay errores de validación
+                        if ($(data).find('form').length) {
+                            $('#crearClienteModalContent').html(data); // Reemplazar el contenido del modal
+                        } else {
+                            $('#crearClienteModal').modal('hide'); // Cerrar el modal si no hay errores
+                            location.reload(); // Recargar la página para actualizar la lista de clientes
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
@@ -84,6 +89,4 @@
             });
         });
     </script>
-
-
 }

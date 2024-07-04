@@ -16,4 +16,5 @@ public partial class OrdenDetalle
     public virtual Menu? IdmenuNavigation { get; set; }
 
     public virtual Ordene? IdordenNavigation { get; set; }
+
 }
