@@ -109,6 +109,7 @@ public partial class ObligatorioProgram3Context : DbContext
             entity.Property(e => e.RutaImagen)
                 .HasMaxLength(1000)
                 .IsUnicode(false);
+            entity.Property(e => e.Categoria).HasMaxLength(30);
         });
 
         modelBuilder.Entity<Mesa>(entity =>

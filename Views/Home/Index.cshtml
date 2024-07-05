@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
     Layout = null;
 }
@@ -25,7 +24,7 @@
         }
 
         .background-image {
-            background-image: url('/imagenes/background2.png');
+            background-image: url('/imagenes/fondo.webp');
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -35,24 +34,6 @@
             justify-content: center;
         }
 
-        .content-container {
-            max-width: 960px;
-            width: 100%;
-            padding: 24px;
-            /*
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                **/
-            text-align: center;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
 
         .title {
             font-size: 2.5rem;
@@ -144,15 +125,31 @@
             transition: 0.4s;
         }
 
+        .menuIcon {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            .menuIcon:hover {
+                .bar1, .bar2, .bar3
+
+        {
+            background-color: rgba(242, 206, 84);
+        }
+
+        }
+
         .change .bar1 {
+            background-color: black;
             transform: translate(0, 11px) rotate(-45deg);
         }
 
         .change .bar2 {
+            background-color: black;
             opacity: 0;
         }
 
         .change .bar3 {
+            background-color: black;
             transform: translate(0, -11px) rotate(45deg);
         }
 
@@ -164,7 +161,6 @@
             top: 0;
             left: 0;
             background-color: rgba(242, 206, 84);
-            
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
@@ -208,17 +204,62 @@
             height: 50px;
         }
 
-        
 
 
-        .logo3{
+
+        .logo3 {
             border-radius: 5%;
             width: 300px; /* Ajusta el tamaño según sea necesario */
             height: auto;
             margin: 0 auto 20px; /* Centrado horizontal y margen inferior */
         }
-       
-      
+
+        .tables {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .card {
+            margin: 10px;
+            padding: 20px;
+            width: 200px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .menu {
+            display: block;
+            margin-top: 20px;
+            background-color: rgba(242, 206, 84);
+        }
+
+        .categorias {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h3 {
+            display: block;
+            width: 10%;
+            text-align:center;
+            justify-content:center;
+        }
+        .menuHeader{
+
+           
+            display: block;
+            background-color: #e49414
+        }
     </style>
 </head>
 <body>
@@ -238,10 +279,94 @@
         <div class="background-image">
             <div class="login-button">
                 <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
-            </div> 
-            <img  src="~/imagenes/logo3.png" alt="Logo del Restaurante" class="logo" />
+            </div>
+            <img src="~/imagenes/logo3.png" alt="Logo del Restaurante" class="logo" />
         </div>
     </div>
+
+
+
+
+
+    <div class="menuHeader">
+        <img src="~/imagenes/menu.png"/>
+    </div>
+
+    <div class="menu">
+        <div class="row">
+            <h3>Entradas</h3>
+        </div>
+
+        <div class="categorias" id="platoEntradas">
+
+            @foreach (var item in ViewBag.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    @item.NombrePlato - @item.Precio
+                    <div class="card-body">
+                        <img src="@item.RutaImagen" style="width: 100px;" />
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="categorias" id="platoPrincipales">
+            <h3>Principales</h3>
+            @foreach (var item in ViewBag.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    @item.NombrePlato - @item.Precio
+                    <div class="card-body">
+                        <img src="@item.RutaImagen" style="width: 100px;" />
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="categorias" id="platoPostres">
+
+            <h3>Postre</h3>
+            @foreach (var item in ViewBag.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    @item.NombrePlato - @item.Precio
+                    <div class="card-body">
+                        <img src="@item.RutaImagen" style="width: 100px;" />
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
         function openNav() {
@@ -265,7 +390,7 @@
             }
         }
     </script>
-   
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

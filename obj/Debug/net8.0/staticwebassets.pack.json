@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\imagenes\\background2.png"
     },
     {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondo.webp",
+      "PackagePath": "staticwebassets\\imagenes\\fondo.webp"
+    },
+    {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logo.png",
       "PackagePath": "staticwebassets\\imagenes\\logo.png"
     },
@@ -31,6 +35,10 @@
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoSolIzq.png",
       "PackagePath": "staticwebassets\\imagenes\\logoSolIzq.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\menu.png",
+      "PackagePath": "staticwebassets\\imagenes\\menu.png"
     },
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\js\\site.js",

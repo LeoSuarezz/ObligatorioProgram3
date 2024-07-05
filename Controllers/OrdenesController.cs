@@ -21,33 +21,47 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
-    
+
         public async Task<IActionResult> Index(int? restauranteId)
         {
-            // Obtener todas las mesas si no se especifica un restauranteId
             IQueryable<Mesa> mesasQuery = _context.Mesas;
 
             if (restauranteId.HasValue)
             {
-                // Filtrar las mesas por restauranteId si se especifica
                 mesasQuery = mesasQuery.Where(m => m.Idrestaurante == restauranteId.Value);
             }
 
             var mesas = await mesasQuery.ToListAsync();
             var menuItems = await _context.Menus.ToListAsync();
+            var categorias = new List<string> { "Principal", "Entradas", "Bebidas", "Postres" };
 
-            // También puedes obtener los restaurantes para el selector de la vista
+            ViewBag.Categorias = categorias;
             ViewBag.Restaurantes = await _context.Restaurantes.ToListAsync();
+            ViewBag.MenuItems = menuItems;
 
             var viewModel = new MesaViewModel
             {
                 Mesas = mesas,
                 MenuItems = menuItems
-                // Asegúrate de incluir cualquier otra información necesaria en el ViewModel
             };
 
             return View(viewModel);
         }
+
+        public async Task<IActionResult> FiltrarMenus(string categoria)
+        {
+            var menus = _context.Menus.AsQueryable();
+
+            if (!string.IsNullOrEmpty(categoria))
+            {
+                menus = menus.Where(m => m.Categoria == categoria);
+            }
+
+            var menusList = await menus.ToListAsync();
+            return Json(menusList);
+        }
+    
+
 
         // Acción para obtener detalles de la orden de una mesa
         [HttpGet]
