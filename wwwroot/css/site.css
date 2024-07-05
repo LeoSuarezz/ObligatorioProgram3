@@ -97,16 +97,6 @@ body {
     justify-content: center;
 }
 
-.content-container {
-    max-width: 960px;
-    width: 100%;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
 
 .title {
     font-size: 2.5rem;
@@ -198,6 +188,7 @@ body {
     transition: 0.4s;
 }
 
+
 .change .bar1 {
     transform: translate(0, 11px) rotate(-45deg);
 }
@@ -271,7 +262,7 @@ h2 {
 }
 
     #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
+        padding: 0;
         font-size: 1.2rem;
     }
 
@@ -328,3 +319,10 @@ h2 {
         border-color: #0056b3;
     }
 
+.btn-dark {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.btn.btn-dark:hover {
+    background-color: rgba(242, 206, 84);
+}

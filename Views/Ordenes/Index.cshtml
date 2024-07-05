@@ -1,43 +1,174 @@
-﻿@model IEnumerable<ObligatorioProgram3.Models.Ordene>
-
+﻿@model ObligatorioProgram3.ViewModels.MesaViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Menu";
 }
 
-<h1>Órdenes</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear Nueva</a>
-</p>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Restaurante</th>
-            <th>Id Orden</th>
-            <th>Id Reserva</th>
-            <th>Mesa</th>
-            <th>Cliente</th>
-            <th>Cuenta Total</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+<div class="form-group">
+    <label class="control-label">Restaurante</label>
+    <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;">
+        <option value="">Seleccione un restaurante</option>
+        @if (ViewBag.Restaurantes != null)
         {
-            <tr>
-                <td>@item.IdreservaNavigation.IdmesaNavigation.IdrestauranteNavigation.Nombre</td>
-                <td>@item.Id</td>
-                <td>@item.Idreserva</td>
-                <td>@item.IdreservaNavigation.IdmesaNavigation.NumeroMesa</td>
-                <td>@item.IdreservaNavigation.IdclienteNavigation.Nombre @item.IdreservaNavigation.IdclienteNavigation.Apellido</td>
-                <td>@item.Total?.ToString("C")</td>
-                <td>
-                    <a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-outline-secondary">Editar</a> |
-                    <a asp-action="Detalle" asp-route-id="@item.Id" class="btn btn-light">Detalles</a> |
-                    <a asp-action="Eliminar" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
-                </td>
-            </tr>
+            foreach (var restaurante in ViewBag.Restaurantes)
+            {
+                <option value="@restaurante.Id">@restaurante.Nombre</option>
+            }
         }
-    </tbody>
-</table>
+        else
+        {
+            <option value="">No hay restaurantes disponibles</option>
+        }
+    </select>
+</div>
+
+<div class="tables">
+    @foreach (var mesa in Model.Mesas)
+    {
+        <div class="card cardMesa" data-mesa-id="@mesa.Id">
+            <div class="card-body">
+                <h5 class="card-title">Mesa @mesa.NumeroMesa</h5>
+                <p class="card-text">Capacidad: @mesa.Capacidad</p>
+                <p class="card-text">Estado: @mesa.Estado</p>
+            </div>
+        </div>
+    }
+</div>
+
+<aside>
+    <div id="orderDetails">
+        <!-- Aquí se cargarán los detalles de la orden -->
+    </div>
+</aside>
+
+<h3>Menu</h3>
+<div class="btn-group mb-3">
+    <button type="button" class="btn btn-outline-secondary filter-btn" data-categoria="">Todos</button>
+    @foreach (var categoria in ViewBag.Categorias)
+    {
+        <button type="button" class="btn btn-outline-info filter-btn" data-categoria="@categoria">@categoria</button>
+    }
+</div>
+
+
+<div class="menu">
+    @foreach (var item in Model.MenuItems)
+    {
+        <div class="card add-to-order-btn" data-item-id="@item.Id">
+            @item.NombrePlato - @item.Precio
+            <div class="card-body">
+                <img src="@item.RutaImagen" style="width: 100px;" />
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.cardMesa').click(function () {
+                var mesaId = $(this).data('mesa-id');
+                loadOrderDetails(mesaId);
+            });
+
+            $('.add-to-order-btn').click(function () {
+                var menuItemId = $(this).data('item-id');
+                addMenuItemToOrder(menuItemId);
+            });
+
+            $('#restauranteSelect').change(function () {
+                var restauranteId = $(this).val();
+                window.location.href = '@Url.Action("Index", "Ordenes")' + '?restauranteId=' + restauranteId;
+            });
+
+            //FILTRAR MENUS
+            function filterMenus() {
+                var categoria = $('.filter-btn.active').data('categoria') || '';
+
+                $.ajax({
+                    url: '@Url.Action("FiltrarMenus", "Ordenes")',
+                    type: 'GET',
+                    data: { categoria: categoria },
+                    success: function (data) {
+                        $('.menuContent').html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
+            $('.filter-btn').click(function () {
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                filterMenus();
+            });
+
+            filterMenus();
+        });
+
+        function loadOrderDetails(mesaId) {
+            $.ajax({
+                url: '@Url.Action("GetOrderDetails", "Ordenes")',
+                type: 'GET',
+                data: { mesaId: mesaId },
+                success: function (data) {
+                    $('#orderDetails').html(data);
+                },
+                error: function () {
+                    alert('Error al cargar los detalles de la orden.');
+                }
+            });
+        }
+
+        function addMenuItemToOrder(menuItemId) {
+            var ordenId = $('#orderId').val(); // Asegúrate de tener el valor correcto de orderId
+            $.ajax({
+                url: '@Url.Action("AddMenuItemToOrder", "Ordenes")',
+                type: 'POST',
+                data: { ordenId: ordenId, menuItemId: menuItemId },
+                success: function (data) {
+                    loadOrderDetails($('#mesaId').val()); // Asegúrate de tener el valor correcto de mesaId
+                },
+                error: function () {
+                    alert('Error al agregar el ítem al pedido.');
+                }
+            });
+        }
+    </script>
+}
+
+
+
+<style>
+    .tables {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .card {
+        margin: 10px;
+        padding: 20px;
+        width: 200px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+
+    .card-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+
+</style>

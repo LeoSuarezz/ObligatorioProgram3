@@ -31,7 +31,7 @@ namespace ObligatorioProgram3.Controllers
 
         }
 
-        
+
         [HttpPost]
         public async Task<IActionResult> IniciarSesion(string email, string contrasena)
         {
@@ -71,7 +71,7 @@ namespace ObligatorioProgram3.Controllers
                     properties
                 );
 
-                return RedirectToAction("Index", "Menus");
+            return RedirectToAction("Index", "Menus");
         }
 
 

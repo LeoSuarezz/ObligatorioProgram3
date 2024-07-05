@@ -50,9 +50,7 @@ namespace ObligatorioProgram3.Controllers
             return View();
         }
 
-        // POST: Clientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Email,TipoCliente")] Cliente cliente)
@@ -61,7 +59,7 @@ namespace ObligatorioProgram3.Controllers
             {
                 var existeCliente = await _context.Clientes
                     .AnyAsync(c => c.Email == cliente.Email);
-                if(existeCliente)
+                if (existeCliente)
                 {
                     ModelState.AddModelError(string.Empty, "Ya existe un cliente registrado con este email.");
                 }
@@ -71,14 +69,14 @@ namespace ObligatorioProgram3.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                
+
             }
-            return View(cliente);
+            return PartialView("CreatePartialView", cliente);
         }
 
         public IActionResult CreatePartial()
         {
-          
+
 
             return PartialView("CreatePartialView");
         }
@@ -100,9 +98,6 @@ namespace ObligatorioProgram3.Controllers
             return View(cliente);
         }
 
-        // POST: Clientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Email,TipoCliente")] Cliente cliente)
@@ -116,7 +111,7 @@ namespace ObligatorioProgram3.Controllers
             {
                 var existeCliente = await _context.Clientes
                     .AnyAsync(c => c.Email == cliente.Email && c.Id != cliente.Id);
-                if( existeCliente )
+                if (existeCliente)
                 {
                     ModelState.AddModelError(string.Empty, "Ya existe un cliente registrado con este email.");
                 }
@@ -181,6 +176,6 @@ namespace ObligatorioProgram3.Controllers
         {
             return _context.Clientes.Any(e => e.Id == id);
         }
-        
+
     }
 }
