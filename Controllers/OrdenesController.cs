@@ -22,17 +22,23 @@ namespace ObligatorioProgram3.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int? restauranteId)
+        public async Task<IActionResult> Index(int? restauranteId, string categoria = "")
         {
             IQueryable<Mesa> mesasQuery = _context.Mesas;
+            IQueryable<Menu> menusQuery = _context.Menus;
 
             if (restauranteId.HasValue)
             {
                 mesasQuery = mesasQuery.Where(m => m.Idrestaurante == restauranteId.Value);
             }
 
+            if (!string.IsNullOrEmpty(categoria))
+            {
+                menusQuery = menusQuery.Where(m => m.Categoria == categoria);
+            }
+
             var mesas = await mesasQuery.ToListAsync();
-            var menuItems = await _context.Menus.ToListAsync();
+            var menuItems = await menusQuery.ToListAsync();
             var categorias = new List<string> { "Principal", "Entradas", "Bebidas", "Postres" };
 
             ViewBag.Categorias = categorias;
@@ -47,21 +53,6 @@ namespace ObligatorioProgram3.Controllers
 
             return View(viewModel);
         }
-
-        public async Task<IActionResult> FiltrarMenus(string categoria)
-        {
-            var menus = _context.Menus.AsQueryable();
-
-            if (!string.IsNullOrEmpty(categoria))
-            {
-                menus = menus.Where(m => m.Categoria == categoria);
-            }
-
-            var menusList = await menus.ToListAsync();
-            return Json(menusList);
-        }
-
-
 
         // Acción para obtener detalles de la orden de una mesa
         [HttpGet]
@@ -118,20 +109,36 @@ namespace ObligatorioProgram3.Controllers
                 return NotFound();
             }
 
+            // Buscar si ya existe un OrdenDetalle con el mismo ordenId y menuItemId
+            var existingOrdenDetalle = await _context.OrdenDetalles
+                .FirstOrDefaultAsync(od => od.Idorden == ordenId && od.Idmenu == menuItemId);
 
-            var ordenDetalle = new OrdenDetalle
+            if (existingOrdenDetalle != null)
             {
+                // Si existe, incrementar la cantidad
+                existingOrdenDetalle.Cantidad++;
+            }
+            else
+            {
+                // Si no existe, crear un nuevo registro
+                var ordenDetalle = new OrdenDetalle
+                {
+                    Idorden = ordenId,
+                    Idmenu = menuItemId,
+                    Cantidad = 1,
+                };
+                _context.OrdenDetalles.Add(ordenDetalle);
+            }
 
-                Idorden = ordenId,
-                Idmenu = menuItemId,
-                Cantidad = 1,
-            };
-
-            _context.OrdenDetalles.Add(ordenDetalle);
-            orden.Total += ordenDetalle.IdmenuNavigation.Precio;
+            // Actualizar el total de la orden
+            orden.Total += menuItem.Precio;
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+
+
+  
+
     }
 }

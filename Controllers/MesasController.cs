@@ -33,12 +33,12 @@ namespace ObligatorioProgram3.Controllers
 
             mesas = mesas.OrderBy(m => m.IdrestauranteNavigation.Id)
                          .ThenBy(m => m.NumeroMesa);
-            
+
 
             var restaurantes = await _context.Restaurantes.ToListAsync();
             ViewBag.Restaurantes = restaurantes;
 
-            return View(await mesas.ToListAsync()); ;
+            return View(mesas);
         }
 
         // GET: Mesas/Details/5

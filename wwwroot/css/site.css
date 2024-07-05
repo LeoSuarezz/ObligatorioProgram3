@@ -326,3 +326,6 @@ h2 {
 button.btn.btn-dark:hover {
     background-color: rgba(242, 206, 84);
 }
+.order-details .card-body {
+    text-align: left;
+}
