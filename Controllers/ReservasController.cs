@@ -137,7 +137,7 @@ namespace ObligatorioProgram3.Controllers
                         Idreserva = reserva.Id,
                         Total = 0,
                         IdreservaNavigation = reserva
-                        
+
                         // Otros campos necesarios
                     };
                     _context.Ordenes.Add(orden);
@@ -345,25 +345,39 @@ namespace ObligatorioProgram3.Controllers
         [HttpPost]
         public async Task<IActionResult> ConfirmarReserva(int id)
         {
-            var reserva = await _context.Reservas.FindAsync(id);
+            var reserva = await _context.Reservas
+                                .Include(r => r.IdmesaNavigation)
+                                .FirstOrDefaultAsync(r => r.Id == id);
             if (reserva == null)
             {
                 return NotFound();
             }
 
+            
             reserva.Estado = "Confirmada";
             _context.Update(reserva);
+
+            var mesa = reserva.IdmesaNavigation;
+            if (mesa != null)
+            {
+                mesa.Estado = "Reservada";
+                _context.Update(mesa);
+            }
+
+
             await _context.SaveChangesAsync();
 
             // Crear una orden asociada a la reserva confirmada
             var ordenExistente = await _context.Ordenes.FirstOrDefaultAsync(o => o.Idreserva == reserva.Id);
             if (ordenExistente == null)
             {
+                reserva.IdmesaNavigation.Estado = "Ocupada";
+
                 var orden = new Ordene
                 {
                     Idreserva = reserva.Id,
                     Total = 0, // Inicializar con 0 o calcular el total según tu lógica
-                    IdreservaNavigation = reserva
+                    IdreservaNavigation = reserva,
                 };
                 _context.Ordenes.Add(orden);
                 await _context.SaveChangesAsync();

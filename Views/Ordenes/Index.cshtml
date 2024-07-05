@@ -3,63 +3,87 @@
     ViewData["Title"] = "Menu";
 }
 
-<div class="form-group">
-    <label class="control-label">Restaurante</label>
-    <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;">
-        <option value="">Seleccione un restaurante</option>
-        @if (ViewBag.Restaurantes != null)
-        {
-            foreach (var restaurante in ViewBag.Restaurantes)
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label class="control-label">Restaurante</label>
+            <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;">
+                <option value="">Seleccione un restaurante</option>
+                @if (ViewBag.Restaurantes != null)
+                {
+                    foreach (var restaurante in ViewBag.Restaurantes)
+                    {
+                        <option value="@restaurante.Id">@restaurante.Nombre</option>
+                    }
+                }
+                else
+                {
+                    <option value="">No hay restaurantes disponibles</option>
+                }
+            </select>
+        </div>
+        <div class="tables">
+            @foreach (var mesa in Model.Mesas)
             {
-                <option value="@restaurante.Id">@restaurante.Nombre</option>
+                var cardClass = "";
+                switch (mesa.Estado.ToLower())
+                {
+                    case "ocupada":
+                        cardClass = "mesa-ocupada";
+                        break;
+                    case "disponible":
+                        cardClass = "mesa-disponible";
+                        break;
+                    case "reservada":
+                        cardClass = "mesa-reservada";
+                        break;
+                    default:
+                        cardClass = "mesa-default";
+                        break;
+                }
+                <div class="card cardMesa @cardClass" data-mesa-id="@mesa.Id">
+                    <div class="card-body">
+                        <h5 class="card-title">Mesa @mesa.NumeroMesa</h5>
+                        <p class="card-text">Capacidad: @mesa.Capacidad</p>
+                        <p class="card-text">Estado: @mesa.Estado</p>
+                    </div>
+                </div>
             }
-        }
-        else
-        {
-            <option value="">No hay restaurantes disponibles</option>
-        }
-    </select>
-</div>
-
-<div class="tables">
-    @foreach (var mesa in Model.Mesas)
-    {
-        <div class="card cardMesa" data-mesa-id="@mesa.Id">
-            <div class="card-body">
-                <h5 class="card-title">Mesa @mesa.NumeroMesa</h5>
-                <p class="card-text">Capacidad: @mesa.Capacidad</p>
-                <p class="card-text">Estado: @mesa.Estado</p>
-            </div>
         </div>
-    }
-</div>
-
-<aside>
-    <div id="orderDetails">
-        <!-- Aquí se cargarán los detalles de la orden -->
     </div>
-</aside>
+    <div class="col-md-4">
+        <div id="orderDetails" class="order-details card-body">
+            <!-- Aquí se cargarán los detalles de la orden -->
+        </div>
 
-<h3>Menu</h3>
-<div class="btn-group mb-3">
-    <button type="button" class="btn btn-outline-secondary filter-btn" data-categoria="">Todos</button>
-    @foreach (var categoria in ViewBag.Categorias)
-    {
-        <button type="button" class="btn btn-outline-info filter-btn" data-categoria="@categoria">@categoria</button>
-    }
+    </div>
 </div>
 
-
-<div class="menu">
-    @foreach (var item in Model.MenuItems)
-    {
-        <div class="card add-to-order-btn" data-item-id="@item.Id">
-            @item.NombrePlato - @item.Precio
-            <div class="card-body">
-                <img src="@item.RutaImagen" style="width: 100px;" />
-            </div>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Menu</h3>
+        <div class="btn-group mb-3">
+            <button type="button" class="btn btn-outline-secondary filter-btn" data-categoria="">Todos</button>
+            @foreach (var categoria in ViewBag.Categorias)
+            {
+                <button type="button" class="btn btn-outline-info filter-btn" data-categoria="@categoria">@categoria</button>
+            }
         </div>
-    }
+
+        <div class="menu" id="menuContent">
+            @foreach (var item in Model.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    <img class="card-img-top" src="@item.RutaImagen" />
+                    <h5 class="card-title"> @item.NombrePlato</h5>
+                    <div class="card-body">
+                        <p class="card-text">@item.Descripcion</p>
+                        <p class="font-weight-bold">$@item.Precio</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
 @section Scripts {
@@ -67,8 +91,40 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
+            function loadOrderDetails(mesaId) {
+                $.ajax({
+                    url: '@Url.Action("GetOrderDetails", "Ordenes")',
+                    type: 'GET',
+                    data: { mesaId: mesaId },
+                    success: function (data) {
+                        $('#orderDetails').html(data);
+                        $('#mesaId').val(mesaId); // Asegúrate de actualizar el valor de mesaId
+                    },
+                    error: function () {
+                        alert('Error al cargar los detalles de la orden.');
+                    }
+                });
+            }
+
+            function addMenuItemToOrder(menuItemId) {
+                var ordenId = $('#orderId').val(); // Asegúrate de tener el valor correcto de orderId
+                var mesaId = localStorage.getItem('mesaSeleccionada'); // Obtener mesaId de localStorage
+                $.ajax({
+                    url: '@Url.Action("AddMenuItemToOrder", "Ordenes")',
+                    type: 'POST',
+                    data: { ordenId: ordenId, menuItemId: menuItemId },
+                    success: function (data) {
+                        loadOrderDetails(mesaId);
+                    },
+                    error: function () {
+                        alert('Error al agregar el ítem al pedido.');
+                    }
+                });
+            }
+
             $('.cardMesa').click(function () {
                 var mesaId = $(this).data('mesa-id');
+                localStorage.setItem('mesaSeleccionada', mesaId); // Guardar mesaId en localStorage
                 loadOrderDetails(mesaId);
             });
 
@@ -77,69 +133,25 @@
                 addMenuItemToOrder(menuItemId);
             });
 
+            $('.filter-btn').click(function () {
+                var categoria = $(this).data('categoria');
+                var restauranteId = $('#restauranteSelect').val();
+                window.location.href = '@Url.Action("Index", "Ordenes")' + '?restauranteId=' + restauranteId + '&categoria=' + categoria;
+            });
+
             $('#restauranteSelect').change(function () {
                 var restauranteId = $(this).val();
                 window.location.href = '@Url.Action("Index", "Ordenes")' + '?restauranteId=' + restauranteId;
             });
 
-            //FILTRAR MENUS
-            function filterMenus() {
-                var categoria = $('.filter-btn.active').data('categoria') || '';
-
-                $.ajax({
-                    url: '@Url.Action("FiltrarMenus", "Ordenes")',
-                    type: 'GET',
-                    data: { categoria: categoria },
-                    success: function (data) {
-                        $('.menuContent').html(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+            // Cargar la mesa seleccionada desde localStorage al cargar la página
+            var mesaSeleccionada = localStorage.getItem('mesaSeleccionada');
+            if (mesaSeleccionada) {
+                loadOrderDetails(mesaSeleccionada);
             }
-
-            $('.filter-btn').click(function () {
-                $('.filter-btn').removeClass('active');
-                $(this).addClass('active');
-                filterMenus();
-            });
-
-            filterMenus();
         });
-
-        function loadOrderDetails(mesaId) {
-            $.ajax({
-                url: '@Url.Action("GetOrderDetails", "Ordenes")',
-                type: 'GET',
-                data: { mesaId: mesaId },
-                success: function (data) {
-                    $('#orderDetails').html(data);
-                },
-                error: function () {
-                    alert('Error al cargar los detalles de la orden.');
-                }
-            });
-        }
-
-        function addMenuItemToOrder(menuItemId) {
-            var ordenId = $('#orderId').val(); // Asegúrate de tener el valor correcto de orderId
-            $.ajax({
-                url: '@Url.Action("AddMenuItemToOrder", "Ordenes")',
-                type: 'POST',
-                data: { ordenId: ordenId, menuItemId: menuItemId },
-                success: function (data) {
-                    loadOrderDetails($('#mesaId').val()); // Asegúrate de tener el valor correcto de mesaId
-                },
-                error: function () {
-                    alert('Error al agregar el ítem al pedido.');
-                }
-            });
-        }
     </script>
 }
-
-
 
 <style>
     .tables {
@@ -158,6 +170,11 @@
 
     .card-body {
         text-align: center;
+        padding:0;
+    }
+
+    .order-details .card-body {
+        text-align: left;
     }
 
     .card-title {
@@ -165,10 +182,71 @@
         margin-bottom: 10px;
     }
 
+    .card-img-top {
+        height: 12rem;
+        object-fit: cover;
+    }
+
+   
     .menu {
         display: flex;
         justify-content: flex-start;
         margin-top: 20px;
+        flex-wrap: wrap;
     }
 
+    .add-to-order-btn {
+        cursor: pointer;
+    }
+
+    .mesa-ocupada {
+        background-color: #FF9797;
+        border-color: #f5c6cb;
+    }
+
+    .mesa-disponible {
+        background-color: #ACE1AF;
+        border-color: #c3e6cb;
+    }
+
+    .mesa-reservada {
+        background-color: #FFE599;
+        border-color: #ffeeba;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .col-md-6 {
+        flex: 1;
+    }
+
+    aside {
+        position: sticky;
+        top: 0;
+        height: 100vh; /* Altura máxima del aside */
+        overflow-y: auto; /* Permitir desplazamiento vertical si es necesario */
+    }
+
+    .order-details {
+        position: sticky;
+        top: 0;
+        height: 100vh; /* Altura máxima del aside */
+        overflow-y: auto; /* Permitir desplazamiento vertical si es necesario */
+        max-height: 600px; /*calc(100vh - 150px);  Ajustar según sea necesario para mantener el espacio suficiente */
+        overflow-y: auto; /* Permitir desplazamiento vertical si es necesario */
+    }
+
+    .menu-row {
+        position: relative; /* Asegura que la altura se ajuste según el contenido */
+        padding-top: 0; /* Se ajustará dinámicamente en el script */
+    }
 </style>
