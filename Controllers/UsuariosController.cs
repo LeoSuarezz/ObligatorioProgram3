@@ -70,7 +70,7 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-        
+
             var roles = _context.Rol.Select(r => new SelectListItem
             {
                 Value = r.Id.ToString(),
@@ -187,7 +187,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
 
-     
-      
+
+
     }
 }

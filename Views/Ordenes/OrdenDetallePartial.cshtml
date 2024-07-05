@@ -1,0 +1,21 @@
+﻿@model ObligatorioProgram3.ViewModels.OrdenDetailsViewModel
+
+<h3>Orden para Mesa @Model.Mesa.NumeroMesa</h3>
+<input type="hidden" id="mesaId" value="@Model.Mesa.Id" />
+
+@if (Model.Orden != null)
+{
+    <input type="hidden" id="orderId" value="@Model.Orden.Id" />
+    <p>Total: @Model.Orden.Total</p>
+    <ul>
+        @foreach (var detalle in Model.Orden.OrdenDetalles)
+        {
+            <li>@detalle.IdmenuNavigation.NombrePlato - @detalle.Cantidad x @detalle.IdmenuNavigation.Precio</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hay ninguna orden para esta mesa.</p>
+}
+
