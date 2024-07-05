@@ -204,14 +204,11 @@
             height: 50px;
         }
 
-
-
-
         .logo3 {
             border-radius: 5%;
-            width: 300px; /* Ajusta el tamaño según sea necesario */
+            width: 300px;
             height: auto;
-            margin: 0 auto 20px; /* Centrado horizontal y margen inferior */
+            margin: 0 auto 20px;
         }
 
         .tables {
@@ -269,7 +266,7 @@
     </div>
 
     <div id="mySidenav" class="sidenav">
-        <a href="@Url.Action("Index", "Menus")">Menú</a>
+        <a href="#menuheader">Menú</a>
         <a href="@Url.Action("Index", "Resenas")">Reseñas</a>
         <a href="#">Acerca de Nosotros</a>
     </div>
@@ -283,11 +280,7 @@
         </div>
     </div>
 
-
-
-
-
-    <div class="menuHeader">
+    <div id="menuheader" class="menuHeader">
         <img src="~/imagenes/menu.png" />
     </div>
 
@@ -338,7 +331,46 @@
 
     </div>
 
+    <div id="section2" class="content-container">
+            <h2>Acerca de Nosotros</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <img src="/imagenes/placeholder.svg" alt="About Us" class="w-100 h-auto rounded-lg">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="text-2xl font-bold mb-3">Delicious Bites: A Culinary Journey</h3>
+                    <p class="text-muted mb-3">
+                        Delicious Bites is a family-owned restaurant that has been serving the community for over 20 years. Our passion for exceptional cuisine and exceptional service has been the driving force behind our success.
+                    </p>
+                    <p class="text-muted mb-3">
+                        Our talented team of chefs, led by the renowned Chef Emily Wilkins, is dedicated to creating innovative and flavorful dishes using only the freshest, locally-sourced ingredients. We take pride in our commitment to sustainability and supporting local producers.
+                    </p>
+                    <p class="text-muted mb-3">
+                        At Delicious Bites, we believe that dining is not just about satisfying hunger, but about creating an unforgettable experience. From the moment you step through our doors, you'll be greeted with warm hospitality and a passion for gastronomy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <footer class="bg-primary text-white py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <img src="/imagenes/placeholder.svg" alt="Restaurant Logo" class="mr-2" width="40" height="40">
+                <p class="mb-0">Delicious Bites</p>
+            </div>
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <p class="mb-0 mr-3">123 Main Street, Anytown USA</p>
+                <p class="mb-0 mr-3">555-555-5555</p>
+                <p class="mb-0">info@deliciousbites.com</p>
+            </div>
+            <div class="d-flex">
+                <a href="#" class="text-white mr-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mr-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
 
 
 
@@ -395,3 +427,318 @@
 </body>
 </html>
 
+
+
+@* @{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ObligatorioProgram3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            transition: background-color .5s;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .background-image {
+            background-image: url('/imagenes/background2.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-container {
+            max-width: 960px;
+            width: 100%;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7B7B7B;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.125rem;
+        }
+
+        .login-button {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+        }
+
+            .login-button a {
+                background-color: white;
+                color: #535353;
+                border: 1px solid #ced4da;
+                padding: 8px 16px;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+                .login-button a:hover {
+                    background-color: #e9ecef;
+                    color: #535353;
+                }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 3px;
+            background-color: #000000;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 0px;
+        }
+
+        .menuIcon {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="menuIcon" onclick="toggleMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="#section1">Menú</a>
+        <a href="#section2">Reseñas</a>
+        <a href="#section3">Acerca de Nosotros</a>
+    </div>
+
+    <div id="main">
+        <div class="background-image">
+            <div class="login-button">
+                <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
+            </div>
+            <div class="content-container">
+                <h1 class="title">Al mal tiempo, buena cara</h1>
+                <img src="~/imagenes/logo.png" alt="Logo del Restaurante" class="logo-img" style="width: 200px; height: auto;" />
+                <p class="subtitle">Disfruta de una experiencia culinaria excepcional en nuestro acogedor restaurante.</p>
+            </div>
+        </div>
+
+        <div id="section1" class="content-container">
+            <h2>Menú</h2>
+            <!-- Contenido del Menú -->
+        </div>
+
+        <section id="reviews" class="bg-light py-5 px-3">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-4">What Our Customers Say</h2>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card bg-white rounded-lg shadow-md p-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/imagenes/placeholder.svg" alt="Customer 1" class="rounded-circle mr-3" width="40" height="40">
+                                <div>
+                                    <h3 class="text-lg font-bold">John Doe</h3>
+                                    <div class="d-flex text-warning">
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-muted">
+                                "The food at Delicious Bites is absolutely amazing! The presentation is beautiful, and the flavors are out of this world. I highly recommend this restaurant to anyone looking for an exceptional dining experience."
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card bg-white rounded-lg shadow-md p-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/imagenes/placeholder.svg" alt="Customer 2" class="rounded-circle mr-3" width="40" height="40">
+                                <div>
+                                    <h3 class="text-lg font-bold">Jane Smith</h3>
+                                    <div class="d-flex text-warning">
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-muted">
+                                "I've been to Delicious Bites several times, and it never disappoints. The service is impeccable, and the ambiance is simply divine. I highly recommend trying their signature dishes - they are truly a culinary delight!"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card bg-white rounded-lg shadow-md p-3">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="/imagenes/placeholder.svg" alt="Customer 3" class="rounded-circle mr-3" width="40" height="40">
+                                <div>
+                                    <h3 class="text-lg font-bold">Michael Johnson</h3>
+                                    <div class="d-flex text-warning">
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                        <i class="fas fa-star mr-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-muted">
+                                "Delicious Bites is my go-to restaurant for special occasions. The attention to detail and the quality of the food is unparalleled. I highly recommend this place to anyone looking for an unforgettable dining experience."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="section2" class="content-container">
+            <h2>Acerca de Nosotros</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <img src="/imagenes/placeholder.svg" alt="About Us" class="w-100 h-auto rounded-lg">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="text-2xl font-bold mb-3">Delicious Bites: A Culinary Journey</h3>
+                    <p class="text-muted mb-3">
+                        Delicious Bites is a family-owned restaurant that has been serving the community for over 20 years. Our passion for exceptional cuisine and exceptional service has been the driving force behind our success.
+                    </p>
+                    <p class="text-muted mb-3">
+                        Our talented team of chefs, led by the renowned Chef Emily Wilkins, is dedicated to creating innovative and flavorful dishes using only the freshest, locally-sourced ingredients. We take pride in our commitment to sustainability and supporting local producers.
+                    </p>
+                    <p class="text-muted mb-3">
+                        At Delicious Bites, we believe that dining is not just about satisfying hunger, but about creating an unforgettable experience. From the moment you step through our doors, you'll be greeted with warm hospitality and a passion for gastronomy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-white py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <img src="/imagenes/placeholder.svg" alt="Restaurant Logo" class="mr-2" width="40" height="40">
+                <p class="mb-0">Delicious Bites</p>
+            </div>
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <p class="mb-0 mr-3">123 Main Street, Anytown USA</p>
+                <p class="mb-0 mr-3">555-555-5555</p>
+                <p class="mb-0">info@deliciousbites.com</p>
+            </div>
+            <div class="d-flex">
+                <a href="#" class="text-white mr-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mr-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+            document.body.style.backgroundColor = "white";
+        }
+
+        function toggleMenu(x) {
+            x.classList.toggle("change");
+            if (document.getElementById("mySidenav").style.width === "250px") {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+ *@

@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,80 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InicioController.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\InicioController.cs",
-              "RelativeDocumentMoniker": "Controllers\\InicioController.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\InicioController.cs*",
-              "RelativeToolTip": "Controllers\\InicioController.cs*",
-              "ViewState": "AQIAADUAAAAAAAAAAAAgwEsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T23:52:28.146Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T23:52:05.285Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
               "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\css\\site.css",
               "RelativeToolTip": "wwwroot\\css\\site.css",
-              "ViewState": "AQIAACwBAAAAAAAAAAAowEkBAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2024-07-01T23:47:45.879Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAAAjAAAA",
+              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Views\\Home\\Index.cshtml*",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAK0BAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-07-01T23:31:33.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-01T23:31:06.097Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAJAAAAAAAAAAAAAAAKIAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T23:30:52.53Z",
               "EditorCaption": ""
             }
           ]
