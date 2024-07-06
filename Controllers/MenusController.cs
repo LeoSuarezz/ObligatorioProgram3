@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
+    [Authorize(Policy = "VerMenusPermiso")] 
     public class MenusController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -61,7 +64,14 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(menu);
+            return PartialView("CreatePartialView", menu);
+        }
+
+        public IActionResult CreatePartial()
+        {
+
+
+            return PartialView("CreatePartialView");
         }
 
         // GET: Menus/Edit/5

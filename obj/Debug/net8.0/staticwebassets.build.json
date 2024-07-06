@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GWkca2/T7gZBULLbGIC2zSMjxig/GGIjkKJUlbJMn+Q=",
+  "Hash": "9ulZ0ynXuxehaswb0l1TUHBvpTqihfpDhynH1/MgvKc=",
   "Source": "ObligatorioProgram3",
   "BasePath": "_content/ObligatorioProgram3",
   "Mode": "Default",
@@ -150,6 +150,25 @@
       "OriginalItemSpec": "wwwroot\\imagenes\\background2.png"
     },
     {
+      "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\collage.png",
+      "SourceId": "ObligatorioProgram3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\",
+      "BasePath": "_content/ObligatorioProgram3",
+      "RelativePath": "imagenes/collage.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\collage.png"
+    },
+    {
       "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondo.webp",
       "SourceId": "ObligatorioProgram3",
       "SourceType": "Discovered",
@@ -167,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\imagenes\\fondo.webp"
+    },
+    {
+      "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondoLogin.jpg",
+      "SourceId": "ObligatorioProgram3",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\",
+      "BasePath": "_content/ObligatorioProgram3",
+      "RelativePath": "imagenes/fondoLogin.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\imagenes\\fondoLogin.jpg"
     },
     {
       "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
@@ -226,12 +264,12 @@
       "OriginalItemSpec": "wwwroot\\imagenes\\logo3.png"
     },
     {
-      "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoLayout.png",
+      "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoInicioSesion.png",
       "SourceId": "ObligatorioProgram3",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\",
       "BasePath": "_content/ObligatorioProgram3",
-      "RelativePath": "imagenes/logoLayout.png",
+      "RelativePath": "imagenes/logoInicioSesion.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -242,7 +280,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\imagenes\\logoLayout.png"
+      "OriginalItemSpec": "wwwroot\\imagenes\\logoInicioSesion.png"
     },
     {
       "Identity": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoSolIzq.png",

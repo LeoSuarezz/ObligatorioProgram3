@@ -3,51 +3,98 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h2>Menu</h2>
 
-<h1>Index</h1>
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombrePlato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RutaImagen)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombrePlato)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RutaImagen)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+                <th>
+                    NombrePlato
+                </th>
+                <th>
+                    Descripcion
+                </th>
+                <th>
+                    Precio
+                </th>
+                <th>
+                    Imagen
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var menu in Model)
+            {
+                <tr>
+
+                    <td>@menu.NombrePlato</td>
+                    <td>@menu.Descripcion</td>
+                    <td>@menu.Precio</td>
+                    <td> <img width="60px" src="@menu.RutaImagen" /></td>
+
+                    <td>
+                        <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@menu.Id">Editar</a>
+                        <a asp-action="Details" class="btn btn-light" asp-route-id="@menu.Id">Detalle</a>
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@menu.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-dark" id="abrirModalMenu">
+        + nuevo plato
+    </button>
+</div>
+
+<div class="modal fade" id="crearMenuModal" tabindex="-1" role="dialog" aria-labelledby="crearMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="crearMenuModalContent">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#abrirModalMenu').click(function () {
+                $.ajax({
+                    url: '@Url.Action("CreatePartial", "Menus")',
+                    type: 'GET',
+                    success: function (data) {
+                        $('#crearMenuModalContent').html(data);
+                        $('#crearMenuModal').modal('show');
+                    }
+                });
+            });
+
+            // Manejar el submit del formulario dentro del modal
+            $('#crearMenuModalContent').on('submit', '#crearClienteForm', function (e) {
+                e.preventDefault(); // Evitar el envío normal del formulario
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        // Si la respuesta contiene el formulario, significa que hay errores de validación
+                        if ($(data).find('form').length) {
+                            $('#crearMenuModalContent').html(data); // Reemplazar el contenido del modal
+                        } else {
+                            $('#crearMenuModal').modal('hide'); // Cerrar el modal si no hay errores
+                            location.reload(); // Recargar la página para actualizar la lista de clientes
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        // Manejar el error si es necesario
+                    }
+                });
+            });
+        });
+    </script>
 }
-    </tbody>
-</table>

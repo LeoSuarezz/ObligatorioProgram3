@@ -2,12 +2,14 @@
 @{
     ViewData["Title"] = "Menu";
 }
-
+<head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
 <div class="row">
     <div class="col-md-8">
         <div class="form-group">
-            <label class="control-label">Restaurante</label>
-            <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;">
+            <h3 class="form-group">Restaurante</h3>
+            <select id="restauranteSelect" class="form-control form-control-sm d-inline-block" style="width: auto;margin: auto;margin-left: 0;">
                 <option value="">Seleccione un restaurante</option>
                 @if (ViewBag.Restaurantes != null)
                 {
@@ -61,12 +63,12 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3>Menu</h3>
+        <h3 class="form-group">Menu</h3>
         <div class="btn-group mb-3">
             <button type="button" class="btn btn-outline-secondary filter-btn" data-categoria="">Todos</button>
             @foreach (var categoria in ViewBag.Categorias)
             {
-                <button type="button" class="btn btn-outline-info filter-btn" data-categoria="@categoria">@categoria</button>
+                <button type="button" class="btn btn-outline-dark filter-btn" data-categoria="@categoria">@categoria</button>
             }
         </div>
 
@@ -106,6 +108,7 @@
                 });
             }
 
+            //Agregar plato a la orden
             function addMenuItemToOrder(menuItemId) {
                 var ordenId = $('#orderId').val(); // Asegúrate de tener el valor correcto de orderId
                 var mesaId = localStorage.getItem('mesaSeleccionada'); // Obtener mesaId de localStorage
@@ -121,6 +124,22 @@
                     }
                 });
             }
+            // Eliminar plato de orden
+            function removeMenuItemFromOrder(menuItemId) {
+                var ordenId = $('#orderId').val(); // Asegúrate de tener el valor correcto de orderId
+                var mesaId = localStorage.getItem('mesaSeleccionada'); // Obtener mesaId de localStorage
+                $.ajax({
+                    url: '@Url.Action("RemoveMenuItemFromOrder", "Ordenes")',
+                    type: 'POST',
+                    data: { ordenId: ordenId, menuItemId: menuItemId },
+                    success: function (data) {
+                        loadOrderDetails(mesaId); // Cargar detalles de la orden actualizados
+                    },
+                    error: function () {
+                        alert('Error al eliminar el ítem del pedido.');
+                    }
+                });
+            }
 
             $('.cardMesa').click(function () {
                 var mesaId = $(this).data('mesa-id');
@@ -128,10 +147,17 @@
                 loadOrderDetails(mesaId);
             });
 
-            $('.add-to-order-btn').click(function () {
-                var menuItemId = $(this).data('item-id');
-                addMenuItemToOrder(menuItemId);
-            });
+           
+                $('.add-to-order-btn').off('click').on('click', function () {
+                    var menuItemId = $(this).data('item-id');
+                    addMenuItemToOrder(menuItemId);
+                });
+
+                $('.rmv-from-order-btn').off('click').on('click', function () {
+                    var menuItemId = $(this).data('menu-item-id');
+                    removeMenuItemFromOrder(menuItemId);
+                });
+            
 
             $('.filter-btn').click(function () {
                 var categoria = $(this).data('categoria');
@@ -162,7 +188,7 @@
 
     .card {
         margin: 10px;
-        padding: 20px;
+        padding: 0;
         width: 200px;
         border: 1px solid #ccc;
         cursor: pointer;
@@ -223,10 +249,12 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        margin-top:20px;
+        height: 40%;
     }
 
-    .col-md-6 {
-        flex: 1;
+    .col-md-12, .col-md-4{
+        box-shadow: 0 30px 40px rgba(0,0,0,.1);
     }
 
     aside {
@@ -237,6 +265,7 @@
     }
 
     .order-details {
+        text-align:left;
         position: sticky;
         top: 0;
         height: 100vh; /* Altura máxima del aside */
@@ -249,4 +278,18 @@
         position: relative; /* Asegura que la altura se ajuste según el contenido */
         padding-top: 0; /* Se ajustará dinámicamente en el script */
     }
+
+    .form-group{
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 0;
+    }
+    .tables .card{
+        padding:0;
+    }
+    .card-footer{
+        display: flex;
+        justify-content: space-between;
+    }
+
 </style>

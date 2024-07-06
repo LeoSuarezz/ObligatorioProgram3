@@ -1,81 +1,4 @@
-﻿/* Custom styles for this template */
-
-/*h2{
-    padding:15px;
-}
-#wrapper {
-    overflow-x: hidden;
-}
-
-#sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    -webkit-transition: margin 0.25s ease-out;
-    -moz-transition: margin 0.25s ease-out;
-    -o-transition: margin 0.25s ease-out;
-    transition: margin 0.25s ease-out;
-}
-
-    #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
-        font-size: 1.2rem;
-    }
-
-    #sidebar-wrapper .list-group {
-        width: 15rem;
-    }
-
-#page-content-wrapper {
-    min-width: 100vw;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
-}
-
-@media (min-width: 768px) {
-    #sidebar-wrapper {
-        margin-left: 0;
-    }
-
-    #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        margin-left: -15rem;
-    }
-}
-
-.btn-default {
-    background-color: #f8f9fa;
-    color: #6c757d;
-    cursor: not-allowed;
-    opacity: 0.65;
-}
-
-#reservas-page .btn-default {
-    background-color: #f8f9fa;
-    color: #6c757d;
-    cursor: not-allowed;
-    opacity: 0.65;
-}
-
-#reservas-page .btn-active {
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-    #reservas-page .btn-active:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-    }*/
-
-/* Custom styles for this template */
-
+﻿
 body {
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
@@ -95,6 +18,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    mask-image: linear-gradient(black 80%, transparent);
 }
 
 
@@ -212,6 +137,7 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    background-color: #e6e6e6;
 }
 
     .sidenav a {
@@ -244,7 +170,7 @@ body {
 
 /* Styles from the main site.css */
 
-h2 {
+h2, h3 {
     padding: 15px;
 }
 
@@ -328,4 +254,11 @@ button.btn.btn-dark:hover {
 }
 .order-details .card-body {
     text-align: left;
+}
+.btn-outline-dark {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.btn.btn-outline-dark:hover {
+    background-color: rgba(242, 206, 84);
 }

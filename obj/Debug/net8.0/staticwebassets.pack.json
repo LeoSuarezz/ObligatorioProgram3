@@ -17,8 +17,16 @@
       "PackagePath": "staticwebassets\\imagenes\\background2.png"
     },
     {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\collage.png",
+      "PackagePath": "staticwebassets\\imagenes\\collage.png"
+    },
+    {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondo.webp",
       "PackagePath": "staticwebassets\\imagenes\\fondo.webp"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondoLogin.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\fondoLogin.jpg"
     },
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
@@ -33,8 +41,8 @@
       "PackagePath": "staticwebassets\\imagenes\\logo3.png"
     },
     {
-      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoLayout.png",
-      "PackagePath": "staticwebassets\\imagenes\\logoLayout.png"
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoInicioSesion.png",
+      "PackagePath": "staticwebassets\\imagenes\\logoInicioSesion.png"
     },
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logoSolIzq.png",

@@ -1270,3 +1270,14 @@ C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProg
 C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\ObligatorioProgram3.genruntimeconfig.cache
 C:\Users\menge\Source\Repos\ObligatorioProgram3\obj\Debug\net8.0\ref\ObligatorioProgram3.dll
 C:\Users\angel\OneDrive\Desktop\Prog. III\Obligatorio\ObligatorioProgram3\bin\Debug\net8.0\Views\appsettings.json
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.JSInterop.dll
