@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
+    [Authorize(Policy = "VerMenusPermiso")] 
     public class MenusController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -19,10 +22,21 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // GET: Menus
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string categoria)
         {
-            return View(await _context.Menus.ToListAsync());
+            var categorias = new List<string> { "Principal", "Entradas", "Bebidas", "Postres" };
+            ViewBag.Categorias = categorias;
+
+            var menus = _context.Menus.AsQueryable();
+
+            if (!string.IsNullOrEmpty(categoria))
+            {
+                menus = menus.Where(m => m.Categoria == categoria);
+            }
+
+            return View(await menus.ToListAsync());
         }
+
 
         // GET: Menus/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -49,11 +63,10 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Menus/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombrePlato,Descripcion,Precio,RutaImagen")] Menu menu)
+        public async Task<IActionResult> Create([Bind("Id,NombrePlato,Descripcion,Categoria,Precio,RutaImagen")] Menu menu)
         {
             if (ModelState.IsValid)
             {
@@ -61,9 +74,16 @@ namespace ObligatorioProgram3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(menu);
+            return PartialView("CreatePartialView", menu);
         }
 
+        public IActionResult CreatePartial()
+        {
+            var categroias = _context.Menus.Select(m => new { m.Id, m.Categoria }).ToList();
+            ViewBag.Categorias = new SelectList(categroias, "Id", "Categoria");
+
+            return PartialView("CreatePartialView");
+        }
         // GET: Menus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,11 +101,10 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Menus/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombrePlato,Descripcion,Precio,RutaImagen")] Menu menu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombrePlato,Descripcion,Categoria,Precio,RutaImagen")] Menu menu)
         {
             if (id != menu.Id)
             {

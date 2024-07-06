@@ -137,8 +137,47 @@ namespace ObligatorioProgram3.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> RemoveMenuItemFromOrder(int ordenId, int menuItemId)
+        {
+            var orden = await _context.Ordenes.FindAsync(ordenId);
+            if (orden == null)
+            {
+                return NotFound();
+            }
 
-  
+            var menuItem = await _context.Menus.FindAsync(menuItemId);
+            if (menuItem == null)
+            {
+                return NotFound();
+            }
+
+            var existingOrdenDetalle = await _context.OrdenDetalles
+                .FirstOrDefaultAsync(od => od.Idorden == ordenId && od.Idmenu == menuItemId);
+
+            if (existingOrdenDetalle != null)
+            {
+                if (existingOrdenDetalle.Cantidad > 1)
+                {
+                    existingOrdenDetalle.Cantidad--;
+                }
+                else
+                {
+                    _context.OrdenDetalles.Remove(existingOrdenDetalle);
+                }
+
+                orden.Total -= menuItem.Precio;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
     }
 }

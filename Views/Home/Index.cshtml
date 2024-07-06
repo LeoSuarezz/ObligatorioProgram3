@@ -192,7 +192,7 @@
         }
 
         .menuIcon {
-            position: absolute;
+            position: fixed;
             top: 16px;
             left: 16px;
             cursor: pointer;
@@ -257,7 +257,8 @@
 
         .menuHeader {
             display: block;
-            background-color: #e49414
+            background: rgb(228,148,20);
+            background: linear-gradient(90deg, rgba(228,148,20,1) 0%, rgba(242,206,84,1) 35%, rgba(255,255,255,1) 100%);
         }
     </style>
 </head>
@@ -269,7 +270,7 @@
     </div>
 
     <div id="mySidenav" class="sidenav">
-        <a href="@Url.Action("Index", "Menus")">Menú</a>
+        <a href="#menu">Menú</a>
         <a href="@Url.Action("Index", "Resenas")">Reseñas</a>
         <a href="#">Acerca de Nosotros</a>
     </div>
@@ -287,7 +288,7 @@
 
 
 
-    <div class="menuHeader">
+    <div  id="menu" class="menuHeader">
         <img src="~/imagenes/menu.png" />
     </div>
 

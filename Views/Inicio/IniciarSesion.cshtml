@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IniciarSesion</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -24,41 +24,7 @@
             margin-left: 0;
         }
 
-        .sidenav {
-            height: 100%;
-            width: 40% !important;
-            overflow-x: hidden;
-            position: fixed;
-            padding-top: 20px;
-            margin-top: auto;
-            z-index: 0;
-            top: 0;
-            left: 0;
-            /*                                              */
-            background-image: url('/imagenes/background2.png');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .main {
-            padding: 0px 10px;
-            margin: auto;
-        }
-
-        .container.body-content {
-            padding: 20px;
-            width: 60% !important;
-            margin-top: auto;
-            overflow-x: hidden;
-            float: right;
-            align-content: center;
-        }
-
+       
 
         .login-main-text {
             margin-top: 0;
@@ -76,9 +42,10 @@
         }
 
 
-        /* Añadido para el formato del formulario ASP.NET */
         .row {
             margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
         }
 
         .form-control {
@@ -102,25 +69,23 @@
             background-color: rgba(0,0,0,0.2);
             border-radius: 5px;
             padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 30px 40px rgba(0,0,0,.1);
             max-width: 100%;
-            text-align: center; /* Alinea el contenido al centro */
-            margin: auto; /* Centra el contenedor */
+            margin: auto;
+            margin-top:30px;
+            font-family:Astrid;
+            font-size:40px;
         }
 
             .login-container label,
             .login-container input,
             .login-container button {
-                margin-bottom: 20px;
-                margin-top: 20px;
+                margin-bottom: 10px;
+                margin-top: 10px;
             }
 
-        .h2-tabulado {
-            text-indent: 50px;
-        }
-
         .main.d-flex.align-items-right {
-            margin-top: 25%;
+            margin-top: 1%;
             justify-self: stretch;
         }
 
@@ -132,44 +97,70 @@
             background-color: rgba(242, 206, 84);
         }
 
+        .col-3 {
+            height: 100%;
+            width: 40% !important;
+            overflow-x: hidden;
+            padding-top: 20px;
+            margin-top: auto;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            /*                                              */
+            background-image: url('/imagenes/fondoLogin.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 20px solid rgba(242, 206, 84);
+        }
+        .col-8{
+            width:60%;
+            padding: 50px;
+        }
     </style>
 
 </head>
 <body>
-    <div class="col-md-3">
-        <div class="sidenav">
-            <div class="login-main-text">
-                <img style="width:max-content" src="/imagenes/logoLayout.png" />
+    <div class="row">
 
-            </div>
+        <div class="col-3">
+            <img style="width:max-content" src="/imagenes/logoInicioSesion.png" />
         </div>
-    </div>
-    <div class="container body-content">
-        <div class="main d-flex align-items-right">
-            <div class="col-md-6 col-sm-12 mx-auto">
-                <div class="login-container">
-                    <form asp-controller="Inicio" asp-action="IniciarSesion" method="post">
+        <div class="col-8">
+            <h1 style="font-family:Astrid; font-size:80px; margin:30px;">Iniciar Sesion</h1>
+            <div class="main d-flex align-items-right">
+                <div class="col-md-6 col-sm-12 mx-auto">
+                    <div class="login-container">
+                        <form asp-controller="Inicio" asp-action="IniciarSesion" method="post">
 
-                        <input class="form-control mb-3" type="text" placeholder="Email" required name="email" />
-                        <input class="form-control mb-3" type="password" placeholder="Contraseña" required name="contrasena" />
+                            <label>Email</label>
+                            <input class="form-control mb-3" type="text" placeholder="xxx@email.com" required name="email" />
+                            <label>Contraseña</label>
+                            <input class="form-control mb-3" type="password" placeholder="***********" required name="contrasena" />
 
-                        <div class="d-grid gap-2 mb-3 ">
-                            <button class="btn btn-dark" type="submit">Iniciar Sesion</button>
-                        </div>
-                        @if (ViewData["Mensaje"] != null)
-                        {
-                            <div class="form-group">
-                                <div class="alert alert-danger" role="alert">
-                                    @ViewData["Mensaje"]
-                                </div>
-
+                            <div class="d-grid gap-2 mb-3 ">
+                                <button class="btn btn-dark" type="submit">Iniciar Sesion</button>
                             </div>
-                        }
+                            @if (ViewData["Mensaje"] != null)
+                            {
+                                <div class="form-group">
+                                    <div class="alert alert-danger" role="alert">
+                                        @ViewData["Mensaje"]
+                                    </div>
 
-                    </form>
+                                </div>
+                            }
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </body>
 </html>

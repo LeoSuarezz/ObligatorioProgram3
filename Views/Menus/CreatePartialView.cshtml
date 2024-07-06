@@ -1,0 +1,58 @@
+﻿@model ObligatorioProgram3.Models.Menu
+
+<div class="modal-header">
+    <h5 class="modal-title" id="crearMenuModalLabel">Añadir Plato</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="crearMenuForm" asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="NombrePlato" class="control-label"></label>
+            <input asp-for="NombrePlato" class="form-control" />
+            <span asp-validation-for="NombrePlato" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descripcion" class="control-label"></label>
+            <input asp-for="Descripcion" class="form-control" />
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Precio" class="control-label"></label>
+            <input asp-for="Precio" class="form-control" type="number" />
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Categoria" class="control-label"></label>
+            <select asp-for="Categoria" class="form-control">
+                <option value="Entradas">Entradas</option>
+                <option value="Principal">Principal</option>
+                <option value="Postres">Postres</option>
+                <option value="Bebidas">Bebidas</option>
+
+
+            </select>
+            <span asp-validation-for="Categoria" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="RutaImagen" class="control-label"></label>
+            <input asp-for="RutaImagen" class="form-control" />
+            <span asp-validation-for="RutaImagen" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Crear" class="btn btn-dark" />
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

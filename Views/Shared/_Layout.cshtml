@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
 
 
 </head>
@@ -25,16 +26,16 @@
     }
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">
-                <img style="width:200px" src="imagenes/logoSolIzq.png" alt="Logo del Restaurante" class="logo" />
-
+                <img style="width:200px" src="/imagenes/logoSolIzq.png" alt="Logo del Restaurante" class="logo" />
+              
             </div>
             <div class="list-group list-group-flush">
 
                 <!-- Opción con despliegue -->
-                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
-                    <i class="fas fa-database mr-2 fa-2x text-black"></i>
+                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
+                    <i class="bi bi-gear text-black" style="font-size:2rem"></i>
                 </a>
                 <ul class="collapse list-unstyled submenu-style" id="submenu1">
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver roles"))
@@ -67,10 +68,16 @@
                             <a style="color:black" href='@Url.Action("Index", "Ordenes")'>Ordenes</a>
                         </li>
                     }
+                    @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver menus"))
+                    {
+                        <li>
+                            <a style="color:black" href='@Url.Action("Index", "Menus")'>Menu</a>
+                        </li>
+                    }
                 </ul>
 
-                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
-                    <i class="fas fa-users mr-2 fa-2x text-black"></i>
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
+                    <i class="bi bi-people text-black" style="font-size:2rem;" ></i>
                 </a>
                 <ul class="collapse list-unstyled submenu-style" id="submenu2">
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver usuarios"))
@@ -87,8 +94,8 @@
                     }
                 </ul>
 
-                <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
-                    <i class="fas fa-calendar-alt mr-2 fa-2x text-black"></i>
+                <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
+                    <i class="bi bi-calendar3 text-black" style="font-size:2rem;"></i>
                 </a>
                 <ul class="collapse list-unstyled submenu-style" id="submenu3">
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reservas"))
@@ -100,8 +107,8 @@
                 </ul>
 
 
-                <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action btn-outline-dark bg-light text-center">
-                    <i class="fas fa-sign-out-alt mr-2 fa-2x text-black"></i>
+                <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action btn-outline-dark text-center">
+                    <i class="bi bi-box-arrow-right text-black" style="font-size:2rem;"></i>
                 </a>
             </div>
         </div>
@@ -112,6 +119,10 @@
     </div>
 
     <style>
+
+        #sidebar-wrapper{
+            background-color: #e6e6e6;
+        }
         .submenu-style {
             padding-left: 0; /* Ajusta el padding izquierdo para alinear con la barra lateral */
         }
@@ -135,6 +146,18 @@
             li:hover {
                 background-color: rgba(242, 206, 84);
             }
+
+        .list-group{
+            background-color: #e6e6e6;
+        }
+        .list-group-item{
+            background-color: #e6e6e6;
+        }
+
+        .list-group-item:hover{
+                background-color: rgba(242, 206, 84);
+        }
+        
     </style>
 
 
