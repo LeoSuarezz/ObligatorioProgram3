@@ -3,38 +3,38 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <h2>Menu</h2>
 
 <div class="container-fluid">
+    <div class="btn-group mb-3">
+        <button type="button" class="btn btn-outline-secondary filter-btn" data-categoria="">Todos</button>
+        @foreach (var categoria in ViewBag.Categorias)
+        {
+            <button type="button" class="btn btn-outline-dark filter-btn" data-categoria="@categoria">@categoria</button>
+        }
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
-
-                <th>
-                    NombrePlato
-                </th>
-                <th>
-                    Descripcion
-                </th>
-                <th>
-                    Precio
-                </th>
-                <th>
-                    Imagen
-                </th>
+                <th>NombrePlato</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Categoria</th>
+                <th>Imagen</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="menuContent">
             @foreach (var menu in Model)
             {
                 <tr>
-
                     <td>@menu.NombrePlato</td>
                     <td>@menu.Descripcion</td>
                     <td>@menu.Precio</td>
-                    <td> <img width="60px" src="@menu.RutaImagen" /></td>
-
+                    <td>@menu.Categoria</td>
+                    <td><img width="60px;" src="@menu.RutaImagen" /></td>
                     <td>
                         <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@menu.Id">Editar</a>
                         <a asp-action="Details" class="btn btn-light" asp-route-id="@menu.Id">Detalle</a>
@@ -44,6 +44,7 @@
             }
         </tbody>
     </table>
+
     <button type="button" class="btn btn-dark" id="abrirModalMenu">
         + nuevo plato
     </button>
@@ -94,6 +95,12 @@
                         // Manejar el error si es necesario
                     }
                 });
+            });
+
+            // Filtrado por categoría
+            $('.filter-btn').click(function () {
+                var categoria = $(this).data('categoria');
+                window.location.href = '@Url.Action("Index", "Menus")' + '?categoria=' + categoria;
             });
         });
     </script>

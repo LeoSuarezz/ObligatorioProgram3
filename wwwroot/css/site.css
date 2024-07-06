@@ -249,7 +249,7 @@ h2, h3 {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-button.btn.btn-dark:hover {
+.btn.btn-dark:hover {
     background-color: rgba(242, 206, 84);
 }
 .order-details .card-body {

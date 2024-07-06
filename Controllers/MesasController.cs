@@ -68,8 +68,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Mesas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NumeroMesa,Capacidad,Estado,Idrestaurante")] Mesa mesa)
@@ -114,8 +113,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Mesas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NumeroMesa,Capacidad,Estado,Idrestaurante")] Mesa mesa)

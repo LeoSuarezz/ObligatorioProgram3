@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
 
 
 </head>
@@ -34,7 +35,7 @@
 
                 <!-- Opción con despliegue -->
                 <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
-                    <i class="fas fa-database mr-2 fa-2x text-black"></i>
+                    <i class="bi bi-gear text-black" style="font-size:2rem"></i>
                 </a>
                 <ul class="collapse list-unstyled submenu-style" id="submenu1">
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver roles"))
@@ -76,7 +77,7 @@
                 </ul>
 
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
-                    <i class="fas fa-users mr-2 fa-2x text-black"></i>
+                    <i class="bi bi-people text-black" style="font-size:2rem;" ></i>
                 </a>
                 <ul class="collapse list-unstyled submenu-style" id="submenu2">
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver usuarios"))
@@ -94,7 +95,7 @@
                 </ul>
 
                 <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
-                    <i class="fas fa-calendar-alt mr-2 fa-2x text-black"></i>
+                    <i class="bi bi-calendar3 text-black" style="font-size:2rem;"></i>
                 </a>
                 <ul class="collapse list-unstyled submenu-style" id="submenu3">
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reservas"))
@@ -107,7 +108,7 @@
 
 
                 <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action btn-outline-dark text-center">
-                    <i class="fas fa-sign-out-alt mr-2 fa-2x text-black"></i>
+                    <i class="bi bi-box-arrow-right text-black" style="font-size:2rem;"></i>
                 </a>
             </div>
         </div>
