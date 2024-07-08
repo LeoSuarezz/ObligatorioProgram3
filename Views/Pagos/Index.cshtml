@@ -1,65 +1,138 @@
-﻿@model IEnumerable<ObligatorioProgram3.Models.Pago>
+﻿@model ObligatorioProgram3.ViewModels.PagoViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pagos";
 }
 
-<h1>Index</h1>
+<h1>Pagos</h1>
+<div>
+    <h2>Detalle de la Orden</h2>
+    <p><strong>ID Orden:</strong> @Model.Orden.Id</p>
+    <p><strong>Número de Mesa:</strong> @Model.Orden.IdreservaNavigation.IdmesaNavigation.NumeroMesa</p>
+    <p><strong>Número de Reserva:</strong> @Model.Orden.IdreservaNavigation.Id</p>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Monto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MetodoPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdclimaNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdcotizacionNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdreservaNavigation)
-            </th>
-            <th></th>
+            <th>Plato</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetodoPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdclimaNavigation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdcotizacionNavigation.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdreservaNavigation.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var detalle in Model.Orden.OrdenDetalles)
+        {
+            <tr>
+                <td>@detalle.IdmenuNavigation.NombrePlato</td>
+                <td>@detalle.Cantidad</td>
+                <td>@detalle.IdmenuNavigation.Precio</td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="card-footer">
+    <p>Total: $@Model.Orden.Total</p>
+    <p>Descuento: @((Model.Descuento + Model.DescuentoCliente) * 100)%</p>
+    <p>Monto final con Descuento: $@Model.MontoConDescuento</p>
+    <button id="botonPago" class="btn btn-primary">Pagar</button>
+</div>
+
+<div id="confirmacionPago" class="mt-3"></div>
+
+<div>
+    <h3>Descuentos Aplicados</h3>
+    <h4>Clima</h4>
+    <p><strong>Temperatura Actual:</strong> @Model.Temperatura°C</p>
+    <p><strong>Descripción del Clima:</strong> @Model.DescripcionClima</p>
+    <p><strong>Descuento por Clima:</strong> @(Model.Descuento * 100)%</p>
+</div>
+
+<div>
+    <h4>Cliente</h4>
+    <p><strong>Nombre del Cliente:</strong> @Model.Orden.IdreservaNavigation.IdclienteNavigation.Nombre</p>
+    <p><strong>Tipo de Cliente:</strong> @Model.Orden.IdreservaNavigation.IdclienteNavigation.TipoCliente</p>
+    <p><strong>Descuento Cliente:</strong> @(Model.DescuentoCliente * 100)%</p>
+</div>
+
+<div class="modal fade" id="metodoPagoModal" tabindex="-1" role="dialog" aria-labelledby="metodoPagoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="metodoPagoModalContent">
+            <!-- Aquí se cargará la vista parcial -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#botonPago').click(function () {
+                var ordenId = @Model.Orden.Id;
+                var montoConDescuento = '@Model.MontoConDescuento.ToString("F2").Replace(",", ".")'; // Aquí se formatea el decimal
+
+                $.ajax({
+                    url: '@Url.Action("PagosPartial", "Pagos")',
+                    type: 'GET',
+                    data: {
+                        ordenId: ordenId,
+                        montoConDescuento: montoConDescuento
+                    },
+                    success: function (data) {
+                        $('#metodoPagoModalContent').html(data);
+                        $('#metodoPagoModal').modal('show');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+
+            $('#metodoPagoModalContent').on('click', '#confirmarPago', function () {
+                var metodoPago = $('#metodoPago').val();
+                var ordenId = @Model.Orden.Id;
+                var moneda = $('#moneda').val();
+
+                $.ajax({
+                    url: '@Url.Action("Pagar", "Pagos")',
+                    type: 'POST',
+                    data: {
+                        id: ordenId,
+                        metodoPago: metodoPago,
+                        moneda: moneda
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            $('#metodoPagoModal').modal('hide');
+                            $('#confirmacionPago').html(`
+                                        <div class="alert alert-success">
+                                            Pago realizado con éxito. Redireccionando a Órdenes en <span id="countdown">3</span> segundos.
+                                        </div>
+                                    `);
+                            var countdown = 3;
+                            var countdownInterval = setInterval(function () {
+                                countdown--;
+                                $('#countdown').text(countdown);
+                                if (countdown === 0) {
+                                    clearInterval(countdownInterval);
+                                    window.location.href = '@Url.Action("Index", "Ordenes")';
+                                }
+                            }, 1000); // Actualiza el contador cada segundo
+                        } else {
+                            $('#confirmacionPago').html(`
+                                        <div class="alert alert-danger">
+                                            Error al realizar el pago.
+                                        </div>
+                                    `);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

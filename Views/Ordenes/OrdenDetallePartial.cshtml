@@ -40,7 +40,7 @@
     </table>
     <div class="card-footer">
         <p>Total: @Model.Orden.Total</p>
-        <button class="btn btn-dark">Cobrar</button>
+        <a asp-action="Index" asp-controller="Pagos" asp-route-id="@Model.Orden.Id" class="btn btn-dark">Cobrar</a>
     </div>
     
 }

@@ -11,6 +11,8 @@ public partial class Ordene
 
     public decimal? Total { get; set; }
 
+    public string? Estado {  get; set; }
+
     public virtual Reserva? IdreservaNavigation { get; set; }
 
     public virtual ICollection<OrdenDetalle> OrdenDetalles { get; set; } = new List<OrdenDetalle>();

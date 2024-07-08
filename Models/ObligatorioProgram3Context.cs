@@ -76,7 +76,7 @@ public partial class ObligatorioProgram3Context : DbContext
             entity.Property(e => e.DescripcionClima)
                 .HasMaxLength(30)
                 .IsUnicode(false);
-            entity.Property(e => e.Temperatura).HasColumnType("decimal(2, 2)");
+            entity.Property(e => e.Temperatura).HasColumnType("float");
         });
 
         modelBuilder.Entity<Cotizacion>(entity =>
@@ -155,6 +155,9 @@ public partial class ObligatorioProgram3Context : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idreserva).HasColumnName("IDReserva");
             entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(30)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdreservaNavigation).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.Idreserva)
@@ -188,7 +191,7 @@ public partial class ObligatorioProgram3Context : DbContext
                 .HasConstraintName("FK_PagosReserva");
         });
 
-       
+
 
         modelBuilder.Entity<Reserva>(entity =>
         {
@@ -248,7 +251,7 @@ public partial class ObligatorioProgram3Context : DbContext
                 .IsUnicode(false);
         });
 
-        
+
         modelBuilder.Entity<Usuario>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC2707E35BEF");
