@@ -74,6 +74,12 @@
                             <a style="color:black" href='@Url.Action("Index", "Menus")'>Menu</a>
                         </li>
                     }
+                    @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver pagos"))
+                    {
+                        <li>
+                            <a style="color:black" href='@Url.Action("Index", "Pagos")'>Pagos</a>
+                        </li>
+                    }
                 </ul>
 
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
@@ -106,17 +112,6 @@
                     }
                 </ul>
 
-                <a href="#submenu4" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
-                    <i class="bi bi-clipboard2-data text-black" style="font-size:2rem;"></i>
-                </a>
-                <ul class="collapse list-unstyled submenu-style" id="submenu4">
-                   @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reportes"))
-                    {
-                        <li>
-                            <a style="color:black" href='@Url.Action("Reportes", "Ordenes")'>Historico ordenes </a>
-                        </li>
-                    }
-                </ul>
 
                 <a style="color:black" href='@Url.Action("CerrarSesion", "Home")' class="list-group-item list-group-item-action btn-outline-dark text-center">
                     <i class="bi bi-box-arrow-right text-black" style="font-size:2rem;"></i>

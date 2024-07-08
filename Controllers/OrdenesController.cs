@@ -21,15 +21,7 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
-       public IActionResult Reportes()
-        {
-            var ordenes = _context.Ordenes
-                .Include(o => o.OrdenDetalles) // Incluir detalles de la orden
-                    .ThenInclude(d => d.IdmenuNavigation) // Incluir la relación a IdmenuNavigation si es necesario
-                .ToList();
 
-            return View(ordenes);
-        }
         public async Task<IActionResult> Index(int? restauranteId, string categoria = "")
         {
             IQueryable<Mesa> mesasQuery = _context.Mesas;

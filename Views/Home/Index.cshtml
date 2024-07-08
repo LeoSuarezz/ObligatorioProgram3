@@ -217,32 +217,19 @@
         .tables {
             display: flex;
             flex-wrap: wrap;
-            flex-direction: row;
-            align-content: space-around;
-            justify-content: space-evenly;
-            
+            justify-content: flex-start;
         }
 
         .card {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin: 10px 0;
+            margin: 10px;
             padding: 20px;
+            width: 200px;
             border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            justify-content: space-around;
+            cursor: pointer;
         }
 
-            .card-img {
-                max-width: 800px;
-                margin-right: 20px;
-                border-radius: 10px;
-            }
-
         .card-body {
-            flex: 1;
+            text-align: center;
         }
 
         .card-title {
@@ -250,29 +237,18 @@
             margin-bottom: 10px;
         }
 
-        .card-text {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-
-        .card-price {
-            font-size: 1.2em;
-            color: #535353;
-        }
-
         .menu {
             display: block;
             margin-top: 20px;
+            background-color: rgba(242, 206, 84);
         }
 
         .categorias {
             display: flex;
-            justify-content: space-around;
-            align-content: center;
-            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
-        h2 {
+        h3 {
             display: block;
             width: 10%;
             text-align: center;
@@ -284,17 +260,6 @@
             background: rgb(228,148,20);
             background: linear-gradient(90deg, rgba(228,148,20,1) 0%, rgba(242,206,84,1) 35%, rgba(255,255,255,1) 100%);
         }
-
-        .row {
-            width: fit-content;
-            max-width: 100%;
-            margin: 20px;
-        }
-        .platos{
-            
-            margin:20px;
-        }
-
     </style>
 </head>
 <body>
@@ -315,39 +280,63 @@
             <div class="login-button">
                 <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
             </div>
-            <img src="~/imagenes/logo3.png"  alt="Logo del Restaurante" class="logo" />
+            <img src="~/imagenes/logo3.png" alt="Logo del Restaurante" class="logo" />
         </div>
     </div>
 
 
 
-    <div class="row categorias">
-        @foreach (var categoria in ViewBag.Categorias)
-        {
-            <h2>@categoria</h2>
-            <div class="tables">
-                @foreach (var item in ViewBag.MenuItems)
-                {
-                    if (item.Categoria == categoria)
-                    {
-                        <div class="platos" data-item-id="@item.Id">
-                            <div class="row g-0">
-                                <div class="col-md-8">
-                                    <img src="@item.RutaImagen"  class="card-img" alt="Imagen del plato">
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@item.NombrePlato</h5>
-                                        <p class="card-text">@item.Descripcion</p>
-                                        <p class="card-price">$@item.Precio</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        }
+
+
+    <div  id="menu" class="menuHeader">
+        <img src="~/imagenes/menu.png" />
+    </div>
+
+    <div class="menu">
+        <div class="row">
+            <h3>Entradas</h3>
+        </div>
+
+        <div class="categorias" id="platoEntradas">
+
+            @foreach (var item in ViewBag.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    @item.NombrePlato - @item.Precio
+                    <div class="card-body">
+                        <img src="@item.RutaImagen" style="width: 100px;" />
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="categorias" id="platoPrincipales">
+            <h3>Principales</h3>
+            @foreach (var item in ViewBag.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    @item.NombrePlato - @item.Precio
+                    <div class="card-body">
+                        <img src="@item.RutaImagen" style="width: 100px;" />
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="categorias" id="platoPostres">
+
+            <h3>Postre</h3>
+            @foreach (var item in ViewBag.MenuItems)
+            {
+                <div class="card add-to-order-btn" data-item-id="@item.Id">
+                    @item.NombrePlato - @item.Precio
+                    <div class="card-body">
+                        <img src="@item.RutaImagen" style="width: 100px;" />
+                    </div>
+                </div>
+            }
+        </div>
+
+
     </div>
 
 

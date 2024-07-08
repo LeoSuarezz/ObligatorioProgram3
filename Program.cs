@@ -29,8 +29,11 @@ builder.Services.AddControllersWithViews(options =>
         );
 });
 
+builder.Services.AddHttpClient(); // Añadir esta línea para registrar IHttpClientFactory
+
 // AUTENTICACION DE USUARIO LOGEADO
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+builder.Services.AddScoped<CurrencyService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -54,19 +57,6 @@ builder.Services.AddAuthorization(options =>
             {
                 var permisosUsuario = permisosClaim.Split(',');
                 return permisosUsuario.Any(p => p.Trim() == "ver usuarios"); //verifica si al menos uno de los permisos en la lista coincide con ver usuarios
-            }
-            return false;
-        });
-    });
-    options.AddPolicy("VerReportesPermiso", policy =>
-    {
-        policy.RequireAssertion(context =>
-        {
-            var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; // obtiene el valor del claim Permisos del usuario.
-            if (permisosClaim != null)
-            {
-                var permisosUsuario = permisosClaim.Split(',');
-                return permisosUsuario.Any(p => p.Trim() == "ver reportes"); //verifica si al menos uno de los permisos en la lista coincide con ver usuarios
             }
             return false;
         });

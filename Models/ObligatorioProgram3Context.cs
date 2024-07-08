@@ -76,7 +76,7 @@ public partial class ObligatorioProgram3Context : DbContext
             entity.Property(e => e.DescripcionClima)
                 .HasMaxLength(30)
                 .IsUnicode(false);
-            entity.Property(e => e.Temperatura).HasColumnType("decimal(2, 2)");
+            entity.Property(e => e.Temperatura).HasColumnType("float");
         });
 
         modelBuilder.Entity<Cotizacion>(entity =>
@@ -155,6 +155,9 @@ public partial class ObligatorioProgram3Context : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idreserva).HasColumnName("IDReserva");
             entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(30)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.IdreservaNavigation).WithMany(p => p.Ordenes)
                 .HasForeignKey(d => d.Idreserva)
