@@ -29,8 +29,11 @@ builder.Services.AddControllersWithViews(options =>
         );
 });
 
+builder.Services.AddHttpClient(); // Añadir esta línea para registrar IHttpClientFactory
+
 // AUTENTICACION DE USUARIO LOGEADO
 builder.Services.AddScoped<IUsuarioServicio, UsuarioServicio>();
+builder.Services.AddScoped<CurrencyService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

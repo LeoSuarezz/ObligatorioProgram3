@@ -6,25 +6,55 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using ObligatorioProgram3.Models;
+using System.Net.Http;
 
 namespace ObligatorioProgram3.Controllers
 {
     [Authorize]
     public class ClimasController : Controller
     {
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ObligatorioProgram3Context _context;
 
-        public ClimasController(ObligatorioProgram3Context context)
+        public ClimasController(IHttpClientFactory httpClientFactory, ObligatorioProgram3Context context)
         {
+            _httpClientFactory = httpClientFactory;
             _context = context;
         }
 
-        // GET: Climas
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Climas.ToListAsync());
+            return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ObtenerClima(string ciudad = "Grytviken")
+        {
+            var apiKey = "44dfeaa3f72f2d3f648a622ca963c41d";
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={ciudad}&appid={apiKey}&units=metric";
+
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetStringAsync(url);
+
+            var clima = JObject.Parse(response);
+            var temperatura = clima["main"]["temp"].ToObject<float>();
+            var descripcion = clima["weather"][0]["description"].ToString();
+
+            var climaRegistro = new Clima
+            {
+                Fecha = DateOnly.FromDateTime(DateTime.Now),
+                Temperatura = temperatura,
+                DescripcionClima = descripcion
+            };
+
+            _context.Climas.Add(climaRegistro);
+            await _context.SaveChangesAsync();
+
+            return Json(new { Id = climaRegistro.Id, temperatura, descripcion });
+        }
+    
 
         // GET: Climas/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -1,30 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\",
+  "WorkspaceRootPath": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\iniciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\controllers\\menuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\menuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\models\\reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:models\\reserva.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\models\\mesa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:models\\mesa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\views\\ordenes\\ordendetallepartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\ordenes\\ordendetallepartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\models\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:models\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\controllers\\currencycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\currencycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\models\\cotizacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:models\\cotizacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\angel\\onedrive\\desktop\\prog. iii\\obligatorio\\obligatorioprogram3\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\models\\obligatorioprogram3context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:models\\obligatorioprogram3context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\views\\pagos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\pagos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\views\\pagos\\pagospartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:views\\pagos\\pagospartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\models\\pagoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:models\\pagoviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|c:\\users\\menge\\source\\repos\\obligatorioprogram3\\controllers\\climascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BBB9684-D53E-4B58-9B05-6BB185C8194F}|ObligatorioProgram3.csproj|solutionrelative:controllers\\climascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,8 +66,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -43,79 +79,183 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "InicioController.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\InicioController.cs",
-              "RelativeDocumentMoniker": "Controllers\\InicioController.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\InicioController.cs*",
-              "RelativeToolTip": "Controllers\\InicioController.cs*",
-              "ViewState": "AQIAADUAAAAAAAAAAAAgwEsAAAAAAAAA",
+              "Title": "MenusController.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\MenusController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MenusController.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\MenusController.cs",
+              "RelativeToolTip": "Controllers\\MenusController.cs",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAwwIgAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T23:52:28.146Z",
+              "WhenOpened": "2024-07-08T03:50:06.347Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA8AAAA9AAAA",
+              "Title": "Reserva.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\Reserva.cs",
+              "RelativeDocumentMoniker": "Models\\Reserva.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\Reserva.cs",
+              "RelativeToolTip": "Models\\Reserva.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T23:52:05.285Z",
+              "WhenOpened": "2024-07-08T03:46:16.126Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "wwwroot\\css\\site.css",
-              "ViewState": "AQIAACwBAAAAAAAAAAAowEkBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-07-01T23:47:45.879Z",
+              "Title": "Mesa.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\Mesa.cs",
+              "RelativeDocumentMoniker": "Models\\Mesa.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\Mesa.cs",
+              "RelativeToolTip": "Models\\Mesa.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T03:46:03.893Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABsAAAAjAAAA",
+              "Title": "OrdenDetallePartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Ordenes\\OrdenDetallePartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Ordenes\\OrdenDetallePartial.cshtml",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Ordenes\\OrdenDetallePartial.cshtml",
+              "RelativeToolTip": "Views\\Ordenes\\OrdenDetallePartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-01T23:31:33.857Z",
+              "WhenOpened": "2024-07-08T03:42:09.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Cotizacion.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\Cotizacion.cs",
+              "RelativeDocumentMoniker": "Models\\Cotizacion.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\Cotizacion.cs",
+              "RelativeToolTip": "Models\\Cotizacion.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T23:32:37.632Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-01T23:31:06.097Z",
+              "Title": "CurrencyService.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\CurrencyService.cs",
+              "RelativeDocumentMoniker": "Models\\CurrencyService.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\CurrencyService.cs",
+              "RelativeToolTip": "Models\\CurrencyService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T23:30:32.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CurrencyController.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\CurrencyController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CurrencyController.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\CurrencyController.cs",
+              "RelativeToolTip": "Controllers\\CurrencyController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T23:27:53.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ObligatorioProgram3Context.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\ObligatorioProgram3Context.cs",
+              "RelativeDocumentMoniker": "Models\\ObligatorioProgram3Context.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\ObligatorioProgram3Context.cs",
+              "RelativeToolTip": "Models\\ObligatorioProgram3Context.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAYwE4AAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T21:07:35.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PagoViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\PagoViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\PagoViewModel.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Models\\PagoViewModel.cs",
+              "RelativeToolTip": "Models\\PagoViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T17:39:52.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ClimasController.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\ClimasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClimasController.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\ClimasController.cs",
+              "RelativeToolTip": "Controllers\\ClimasController.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAASwDIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-07T00:26:17.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PagosPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Pagos\\PagosPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pagos\\PagosPartial.cshtml",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Pagos\\PagosPartial.cshtml",
+              "RelativeToolTip": "Views\\Pagos\\PagosPartial.cshtml",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-06T20:44:33.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Pagos\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pagos\\Index.cshtml",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Views\\Pagos\\Index.cshtml",
+              "RelativeToolTip": "Views\\Pagos\\Index.cshtml",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAAAGwAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-06T16:41:16.399Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\angel\\OneDrive\\Desktop\\Prog. III\\Obligatorio\\ObligatorioProgram3\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAJAAAAAAAAAAAAAAAKIAAAA2AAAA",
+              "Title": "PagosController.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\PagosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PagosController.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Controllers\\PagosController.cs",
+              "RelativeToolTip": "Controllers\\PagosController.cs",
+              "ViewState": "AQIAAM0AAAAAAAAAAAAkwOwAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-01T23:30:52.53Z",
+              "WhenOpened": "2024-07-06T16:29:25.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAawGkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-05T23:46:14.32Z",
               "EditorCaption": ""
             }
           ]
@@ -130,11 +270,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Bookmark",

@@ -74,6 +74,12 @@
                             <a style="color:black" href='@Url.Action("Index", "Menus")'>Menu</a>
                         </li>
                     }
+                    @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver pagos"))
+                    {
+                        <li>
+                            <a style="color:black" href='@Url.Action("Index", "Pagos")'>Pagos</a>
+                        </li>
+                    }
                 </ul>
 
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
