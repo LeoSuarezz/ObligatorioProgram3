@@ -54,7 +54,7 @@ namespace ObligatorioProgram3.Controllers
 
             return Json(new { Id = climaRegistro.Id, temperatura, descripcion });
         }
-    
+
 
         // GET: Climas/Details/5
         public async Task<IActionResult> Details(int? id)

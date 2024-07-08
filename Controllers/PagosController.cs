@@ -14,7 +14,7 @@ using ObligatorioProgram3.ViewModels;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "VerPagosPermiso")]
     public class PagosController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -26,6 +26,16 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
             _httpClientFactory = httpClientFactory;
             _currencyService = currencyService;
+        }
+
+        public IActionResult Reportes()
+        {
+            var pagos = _context.Pagos
+                .Include(p => p.IdcotizacionNavigation)  
+                .Include(p => p.IdreservaNavigation)
+                .ToList();
+
+            return View(pagos);
         }
 
         public async Task<IActionResult> Index(int id)
@@ -46,7 +56,7 @@ namespace ObligatorioProgram3.Controllers
 
             // Obtener el clima actual
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=Buenos%20Aires&appid=44dfeaa3f72f2d3f648a622ca963c41d&units=metric");
+            var response = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=Maldonado&appid=44dfeaa3f72f2d3f648a622ca963c41d&units=metric");
             var climaData = JObject.Parse(response);
 
             var temperatura = climaData["main"]["temp"].ToObject<float>();
@@ -95,17 +105,33 @@ namespace ObligatorioProgram3.Controllers
             return View(viewModel);
         }
 
-        public IActionResult PagosPartial(int ordenId, decimal montoConDescuento)
+        public async Task<IActionResult> PagosPartial(int ordenId, decimal montoConDescuento)
         {
             var viewModel = new PagoViewModel
             {
-                Orden = _context.Ordenes.Include(o => o.OrdenDetalles)
-                                         .ThenInclude(d => d.IdmenuNavigation)
-                                         .Include(o => o.IdreservaNavigation)
-                                         .ThenInclude(r => r.IdmesaNavigation)
-                                         .FirstOrDefault(o => o.Id == ordenId),
+                Orden = await _context.Ordenes
+                    .Include(o => o.OrdenDetalles)
+                    .ThenInclude(d => d.IdmenuNavigation)
+                    .Include(o => o.IdreservaNavigation)
+                    .ThenInclude(r => r.IdmesaNavigation)
+                    .FirstOrDefaultAsync(o => o.Id == ordenId),
                 MontoConDescuento = montoConDescuento
             };
+
+            // Obtener la cotización del dólar
+            var client = _httpClientFactory.CreateClient();
+            var currencyResponse = await client.GetStringAsync("http://api.currencylayer.com/live?access_key=68ffa533c801b33066ecdb3209c78b17&currencies=UYU&source=USD");
+            var currencyData = JObject.Parse(currencyResponse);
+
+            if (currencyData["success"].ToObject<bool>() && currencyData["quotes"]?["USDUYU"] != null)
+            {
+                var usdToUyuRate = currencyData["quotes"]["USDUYU"].ToObject<decimal>();
+                viewModel.MontoConDescuentoUSD = Math.Round(montoConDescuento / usdToUyuRate, 2);
+            }
+            else
+            {
+                viewModel.MontoConDescuentoUSD = 0; // O manejar el error de otra manera
+            }
 
             return PartialView("PagosPartial", viewModel);
         }
@@ -127,7 +153,7 @@ namespace ObligatorioProgram3.Controllers
 
                 // Obtener el clima actual y guardar en la base de datos
                 var client = _httpClientFactory.CreateClient();
-                var response = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=Buenos%20Aires&appid=44dfeaa3f72f2d3f648a622ca963c41d&units=metric");
+                var response = await client.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=Maldonado&appid=44dfeaa3f72f2d3f648a622ca963c41d&units=metric");
                 var climaData = JObject.Parse(response);
 
                 var temperatura = climaData["main"]["temp"].ToObject<float>();
@@ -217,10 +243,17 @@ namespace ObligatorioProgram3.Controllers
                 };
 
                 orden.Estado = "Pagada";
+                var mesa = orden.IdreservaNavigation.IdmesaNavigation;
+                if (mesa != null)
+                {
+                    mesa.Estado = "disponible";
+                    _context.Mesas.Update(mesa); // Actualizar el estado de la mesa
+                }
 
                 _context.Pagos.Add(pago);
-                _context.Update(orden);
+                _context.Ordenes.Update(orden); // Actualizar la orden
                 await _context.SaveChangesAsync();
+
 
                 return Json(new { success = true, message = "Pago realizado con éxito", redirectUrl = Url.Action("Index", "Ordenes") });
             }

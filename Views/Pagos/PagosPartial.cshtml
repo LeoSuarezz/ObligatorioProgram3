@@ -22,15 +22,18 @@
             <option value="USD">Dólares</option>
         </select>
     </div>
-    <p><strong>Monto con Descuento:</strong> $@Model.MontoConDescuento</p>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-    <button type="button" id="confirmarPago" class="btn btn-primary">Confirmar Pago</button>
-</div>
+    <div>
+        <p><strong>Monto con Descuento (UYU):</strong> $<span id="montoUYU">@Model.MontoConDescuento.ToString("0.00")</span></p>
+        <p><strong>Monto con Descuento (USD):</strong> $<span id="montoUSD">@Model.MontoConDescuentoUSD.ToString("0.00")</span></p>
+    </div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="confirmarPago" class="btn btn-primary">Confirmar Pago</button>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-}

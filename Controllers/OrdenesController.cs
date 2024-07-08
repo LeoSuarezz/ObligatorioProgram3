@@ -21,6 +21,16 @@ namespace ObligatorioProgram3.Controllers
             _context = context;
         }
 
+       public IActionResult Reportes()
+        {
+            var ordenes = _context.Ordenes
+                .Include(o => o.OrdenDetalles) 
+                    .ThenInclude(d => d.IdmenuNavigation)
+                .ToList();
+
+            return View(ordenes);
+        }
+
 
         public async Task<IActionResult> Index(int? restauranteId, string categoria = "")
         {
@@ -44,6 +54,7 @@ namespace ObligatorioProgram3.Controllers
             ViewBag.Categorias = categorias;
             ViewBag.Restaurantes = await _context.Restaurantes.ToListAsync();
             ViewBag.MenuItems = menuItems;
+
 
             var viewModel = new MesaViewModel
             {
@@ -177,7 +188,49 @@ namespace ObligatorioProgram3.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Ordenes/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var orden = await _context.Ordenes
+                .Include(o => o.OrdenDetalles)
+                .ThenInclude(d => d.IdmenuNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (orden == null)
+            {
+                return NotFound();
+            }
+
+            return View(orden);
+        }
+
+        // POST: Ordenes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var orden = await _context.Ordenes
+                .Include(o => o.OrdenDetalles)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (orden != null)
+            {
+                _context.OrdenDetalles.RemoveRange(orden.OrdenDetalles);
+                _context.Ordenes.Remove(orden);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Reportes));
+        }
+
+        private bool OrdeneExists(int id)
+        {
+            return _context.Ordenes.Any(e => e.Id == id);
+        }
 
     }
 }

@@ -1,33 +1,45 @@
 ﻿@model ObligatorioProgram3.Models.Ordene
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Orden";
 }
 
-<h1>Delete</h1>
+<h2>Ordenes > eliminar orden</></h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Ordene</h4>
-    <hr />
+<div class="p-4">
+    <h4>Detalles de la Orden</h4>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdreservaNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdreservaNavigation.Id)
-        </dd>
+        <dt class="col-2">Id</dt>
+        <dd class="col-2">@Model.Id</dd>
+
+        <dt class="col-2">Total</dt>
+        <dd class="col-2">$@Model.Total</dd>
+
     </dl>
-    
-    <form asp-action="Delete">
+
+    <h4>Detalles de los Ítems</h4>
+    <ul>
+        @foreach (var detalle in Model.OrdenDetalles)
+        {
+            <p> @detalle.Cantidad x @detalle.IdmenuNavigation.NombrePlato </p>
+        }
+    </ul>
+
+    <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Reportes" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+<style>
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+</style>

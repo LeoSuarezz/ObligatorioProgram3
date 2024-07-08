@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ObligatorioProgram3.Models.Ordene>
+ @using System.Security.Claims
+ @using System.Linq;
+@{
+    var claimsIdentity = User.Identity as ClaimsIdentity;
+    var permisosClaim = claimsIdentity?.FindFirst("Permisos");
+    ViewBag.Permisos = permisosClaim?.Value?.Split(',');
+}
+<h2>Ordenes</h2>
+
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Reserva</th>
+                <th>Total</th>
+                <th>Orden detalle</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orden in Model)
+            {
+                <tr>
+                    <td>@orden.Id</td>
+                    <td>@orden.Idreserva</td>
+                    <td>@orden.Total</td>
+                    <td>
+
+                        @foreach (var detalle in orden.OrdenDetalles)
+                        {
+                            <div>@detalle.IdmenuNavigation?.NombrePlato  @Html.Raw(", ")</div>
+
+                        }
+
+                    </td>
+
+                    @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("eliminar registros"))
+                    {
+                        <td>
+                            <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@orden.Id">Eliminar</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Index" class="btn btn-dark">+ nueva orden</a>
+</div>

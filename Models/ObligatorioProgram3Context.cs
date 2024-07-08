@@ -191,7 +191,7 @@ public partial class ObligatorioProgram3Context : DbContext
                 .HasConstraintName("FK_PagosReserva");
         });
 
-       
+
 
         modelBuilder.Entity<Reserva>(entity =>
         {
@@ -251,7 +251,7 @@ public partial class ObligatorioProgram3Context : DbContext
                 .IsUnicode(false);
         });
 
-        
+
         modelBuilder.Entity<Usuario>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC2707E35BEF");

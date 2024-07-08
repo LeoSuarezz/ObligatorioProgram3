@@ -64,8 +64,6 @@
     </div>
 </div>
 
-
-
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -73,14 +71,15 @@
         $(document).ready(function () {
             $('#botonPago').click(function () {
                 var ordenId = @Model.Orden.Id;
+                var montoConDescuento = '@Model.MontoConDescuento.ToString("F2").Replace(",", ".")'; // Aquí se formatea el decimal
 
                 $.ajax({
                     url: '@Url.Action("PagosPartial", "Pagos")',
                     type: 'GET',
                     data: {
                         ordenId: ordenId,
-                        montoConDescuento: @Model.MontoConDescuento
-                            },
+                        montoConDescuento: montoConDescuento
+                    },
                     success: function (data) {
                         $('#metodoPagoModalContent').html(data);
                         $('#metodoPagoModal').modal('show');
@@ -109,9 +108,9 @@
                             $('#metodoPagoModal').modal('hide');
                             $('#confirmacionPago').html(`
                                         <div class="alert alert-success">
-                                                    Pago realizado con éxito. Redireccionando a Órdenes en <span id="countdown">3</span> segundos.
+                                            Pago realizado con éxito. Redireccionando a Órdenes en <span id="countdown">3</span> segundos.
                                         </div>
-                                `);
+                                    `);
                             var countdown = 3;
                             var countdownInterval = setInterval(function () {
                                 countdown--;

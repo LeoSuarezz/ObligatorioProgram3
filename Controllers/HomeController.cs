@@ -27,10 +27,13 @@ namespace ObligatorioProgram3.Controllers
         public async Task<IActionResult> Index()
         {
             var menuItems = await _context.Menus.ToListAsync();
-            // No se necesita más código para manejar el nombre de usuario
+
             var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
             // Verifica los claims aquí para asegurarte de que el usuario tiene el claim "Permisos" con los valores adecuados
+           
+            var categorias = new List<string> { "Entradas","Principal", "Postres" };
 
+            ViewBag.Categorias = categorias;
             ViewBag.MenuItems = menuItems;
             return View();
 

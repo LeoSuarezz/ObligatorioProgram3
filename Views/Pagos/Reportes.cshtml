@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ObligatorioProgram3.Models.Pago>
+ @using System.Security.Claims
+ @using System.Linq;
+@{
+    var claimsIdentity = User.Identity as ClaimsIdentity;
+    var permisosClaim = claimsIdentity?.FindFirst("Permisos");
+    ViewBag.Permisos = permisosClaim?.Value?.Split(',');
+}
+<h2>Pagos</h2>
+
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Metodo</th>
+                <th>Cotizacion</th>
+                <th>Mesa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pago in Model)
+            {
+                <tr>
+                    <td>@pago.Id</td>
+                    <td>@pago.Monto</td>
+                    <td>@pago.FechaPago</td>
+                    <td>@pago.MetodoPago</td>
+                    <td>@pago.IdcotizacionNavigation.Monto</td>
+                    <td>@pago.IdreservaNavigation.IdmesaNavigation.NumeroMesa</td>
+                    @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("eliminar registros"))
+                    {
+                        <td>
+                            <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@pago.Id">Eliminar</a>
+                        </td>
+                    }
+                </tr>
+            }
+
+            
+         </tbody>
+    </table>
+</div>
+

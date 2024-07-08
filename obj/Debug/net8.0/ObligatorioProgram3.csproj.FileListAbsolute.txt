@@ -1281,14 +1281,3 @@ C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacio
 C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\USUARIO\OneDrive\Escritorio\Analista Programador\Semestre 3\Programacion 3\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.JSInterop.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
-C:\Users\menge\source\repos\ObligatorioProgram3\bin\Debug\net8.0\Microsoft.JSInterop.dll
