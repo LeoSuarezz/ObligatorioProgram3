@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\imagenes\\fondoLogin.jpg"
     },
     {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondoMenu.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\fondoMenu.jpg"
+    },
+    {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
       "PackagePath": "staticwebassets\\imagenes\\iconoDB.png"
     },

@@ -58,6 +58,19 @@ builder.Services.AddAuthorization(options =>
             return false;
         });
     });
+    options.AddPolicy("VerReportesPermiso", policy =>
+    {
+        policy.RequireAssertion(context =>
+        {
+            var permisosClaim = context.User.FindFirst(c => c.Type == "Permisos")?.Value; // obtiene el valor del claim Permisos del usuario.
+            if (permisosClaim != null)
+            {
+                var permisosUsuario = permisosClaim.Split(',');
+                return permisosUsuario.Any(p => p.Trim() == "ver reportes"); //verifica si al menos uno de los permisos en la lista coincide con ver usuarios
+            }
+            return false;
+        });
+    });
     options.AddPolicy("VerMenusPermiso", policy =>
     {
         policy.RequireAssertion(context =>
