@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ObligatorioProgram3.Models.Ordene>
+
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+<h2>Ordenes</h2>
+
+<div class="container-fluid">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Reserva</th>
+                <th>Total</th>
+                <th>Orden detalle</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orden in Model)
+            {
+                <tr>
+                    <td>@orden.Id</td>
+                    <td>@orden.Idreserva</td>
+                    <td>@orden.Total</td>
+                    <td>
+                        
+                        @foreach (var detalle in orden.OrdenDetalles)
+                        {
+                            <div>@detalle.IdmenuNavigation?.NombrePlato  @Html.Raw(", ")</div>
+                           
+                        }
+
+                    </td>
+                    <td>
+                        <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@orden.Id">Editar</a>
+                        <a asp-action="Details" class="btn btn-light" asp-route-id="@orden.Id">Detalle</a>
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@orden.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-dark">+ Nueva Orden</a>
+</div>

@@ -30,7 +30,9 @@ namespace ObligatorioProgram3.Controllers
             // No se necesita más código para manejar el nombre de usuario
             var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
             // Verifica los claims aquí para asegurarte de que el usuario tiene el claim "Permisos" con los valores adecuados
+            var categorias = new List<string> { "Entradas","Principal", "Postres" };
 
+            ViewBag.Categorias = categorias;
             ViewBag.MenuItems = menuItems;
             return View();
 
