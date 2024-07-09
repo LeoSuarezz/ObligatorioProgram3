@@ -130,13 +130,24 @@ namespace ObligatorioProgram3.Controllers
                 _context.Add(reserva);
                 await _context.SaveChangesAsync();
 
+                // Cambiar el estado de la mesa a "Ocupada" cuando la reserva se confirma
+                var mesa1 = await _context.Mesas.FindAsync(reserva.Idmesa);
+                if (mesa1 != null)
+                {
+                    mesa1.Estado = "Reservada";
+                    _context.Update(mesa1);
+                    await _context.SaveChangesAsync();
+                }
+
+
                 if (reserva.Estado == "Confirmada")
                 {
                     var orden = new Ordene
                     {
                         Idreserva = reserva.Id,
                         Total = 0,
-                        IdreservaNavigation = reserva
+                        IdreservaNavigation = reserva,
+                        Estado = "Pendiente de pago"
 
                         // Otros campos necesarios
                     };
@@ -347,13 +358,14 @@ namespace ObligatorioProgram3.Controllers
         {
             var reserva = await _context.Reservas
                                 .Include(r => r.IdmesaNavigation)
+                                .Include(r => r.Ordenes)
                                 .FirstOrDefaultAsync(r => r.Id == id);
+
             if (reserva == null)
             {
                 return NotFound();
             }
 
-            
             reserva.Estado = "Confirmada";
             _context.Update(reserva);
 
@@ -364,24 +376,25 @@ namespace ObligatorioProgram3.Controllers
                 _context.Update(mesa);
             }
 
-
-            await _context.SaveChangesAsync();
-
-            // Crear una orden asociada a la reserva confirmada
             var ordenExistente = await _context.Ordenes.FirstOrDefaultAsync(o => o.Idreserva == reserva.Id);
-            if (ordenExistente == null)
+            if (ordenExistente != null)
             {
-                reserva.IdmesaNavigation.Estado = "Ocupada";
-
-                var orden = new Ordene
+                ordenExistente.Estado = "Pendiente de pago";
+                _context.Ordenes.Update(ordenExistente);
+            }
+            else
+            {
+                var nuevaOrden = new Ordene
                 {
                     Idreserva = reserva.Id,
-                    Total = 0, // Inicializar con 0 o calcular el total según tu lógica
-                    IdreservaNavigation = reserva,
+                    Total = 0,
+                    Estado = "Pendiente de pago",
+                    IdreservaNavigation = reserva
                 };
-                _context.Ordenes.Add(orden);
-                await _context.SaveChangesAsync();
+                _context.Ordenes.Add(nuevaOrden);
             }
+
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

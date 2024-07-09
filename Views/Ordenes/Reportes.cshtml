@@ -16,6 +16,7 @@
                 <th>ID Reserva</th>
                 <th>Total</th>
                 <th>Orden detalle</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -25,7 +26,7 @@
                 <tr>
                     <td>@orden.Id</td>
                     <td>@orden.Idreserva</td>
-                    <td>@orden.Total</td>
+                    <td>$@orden.Total</td>
                     <td>
 
                         @foreach (var detalle in orden.OrdenDetalles)
@@ -35,6 +36,7 @@
                         }
 
                     </td>
+                    <td>@orden.Estado</td>
 
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("eliminar registros"))
                     {
