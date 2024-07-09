@@ -34,25 +34,14 @@
             <div class="list-group list-group-flush">
 
                 <!---------------------------------------------------------- SUBMENU DATOS------------------------------------------------------------------->
-                @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver roles") || ((string[])ViewBag.Permisos).Contains("ver permisos") || ((string[])ViewBag.Permisos).Contains("ver restaurantes")
+                @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver restaurantes") || ((string[])ViewBag.Permisos).Contains("ver mesas")
                 || ((string[])ViewBag.Permisos).Contains("ver mesas") || ((string[])ViewBag.Permisos).Contains("ver ordenes") || ((string[])ViewBag.Permisos).Contains("ver menus"))
                 {
                     <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
-                        <i class="bi bi-gear text-black" style="font-size:2rem"></i>
+                        <i class="bi bi-shop text-black" style="font-size:2rem"></i>
                     </a>
                     <ul class="collapse list-unstyled submenu-style" id="submenu1">
-                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver roles"))
-                        {
-                            <li>
-                                <a style="color:black" href='@Url.Action("Index", "Roles")'>Roles</a>
-                            </li>
-                        }
-                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver permisos"))
-                        {
-                            <li>
-                                <a style="color:black" href='@Url.Action("Index", "Permisos")'>Permisos</a>
-                            </li>
-                        }
+                       
                         @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver restaurantes"))
                         {
                             <li>
@@ -83,7 +72,9 @@
                 }
 
                 <!---------------------------------------------------------- SUBMENU PERSONAS------------------------------------------------------------------->
-                @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver usuarios") || ((string[])ViewBag.Permisos).Contains("ver clientes"))
+                @if ((ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver usuarios") || ((string[])ViewBag.Permisos).Contains("ver clientes")) ||
+                ((string[])ViewBag.Permisos).Contains("ver roles") || ((string[])ViewBag.Permisos).Contains("ver permisos"))
+
                 {
                     <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action btn-outline-dark text-center">
                         <i class="bi bi-people text-black" style="font-size:2rem;"></i>
@@ -99,6 +90,18 @@
                         {
                             <li>
                                 <a style="color:black" href='@Url.Action("Index", "Clientes")'>Clientes</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver roles"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Roles")'>Roles</a>
+                            </li>
+                        }
+                        @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver permisos"))
+                        {
+                            <li>
+                                <a style="color:black" href='@Url.Action("Index", "Permisos")'>Permisos</a>
                             </li>
                         }
                     </ul>
@@ -130,13 +133,13 @@
                         @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reportes"))
                         {
                             <li>
-                                <a style="color:black" href='@Url.Action("Reportes", "Ordenes")'>Historico ordenes </a>
+                                <a style="color:black" href='@Url.Action("Reportes", "Ordenes")'>Historico Ordenes </a>
                             </li>
                         }
                         @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("ver reportes"))
                         {
                             <li>
-                                <a style="color:black" href='@Url.Action("Reportes", "Pagos")'>Pagos</a>
+                                <a style="color:black" href='@Url.Action("Reportes", "Pagos")'>Historico Pagos</a>
                             </li>
                         }
                     </ul>

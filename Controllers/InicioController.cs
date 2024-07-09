@@ -71,7 +71,62 @@ namespace ObligatorioProgram3.Controllers
                     properties
                 );
 
-            return RedirectToAction("Index", "Ordenes");
+            var rutaPermisos = "";
+            var accion = "";
+            foreach (var p in permisosUsuario)
+            {
+                switch (p)
+                {
+                    case "ver usuarios":
+                        rutaPermisos = "Usuarios";
+                        accion = "Index";
+                        break;
+                    case "ver pagos":
+                        accion = "Reportes";
+                        rutaPermisos = "Pagos";
+                        break;
+                    case "ver menus":
+                        accion = "Index";
+                        rutaPermisos = "Menus";
+                        break;
+                    case "ver reservas":
+                        accion = "Index";
+                        rutaPermisos = "Reservas";
+                        break;
+                    case "ver restaurantes":
+                        accion = "Index";
+                        rutaPermisos = "Restaurantes";
+                        break;
+                    case "ver mesas":
+                        accion = "Index";
+                        rutaPermisos = "Mesas";
+                        break;
+                    case "ver clientes":
+                        accion = "Index";
+                        rutaPermisos = "Clientes";
+                        break;
+                    case "ver roles":
+                        accion = "Index";
+                        rutaPermisos = "Roles";
+                        break;
+                    case "ver ordenes":
+                        accion = "Reportes";
+                        rutaPermisos = "Ordenes";
+                        break;
+                    case "ver permisos":
+                        accion = "Index";
+                        rutaPermisos = "Permisos";
+                        break;
+                }
+
+            }
+            if(permisosUsuario.Contains("ver ordenes"))
+            {
+                accion= "Index";
+                rutaPermisos = "Ordenes";
+            }
+            return RedirectToAction(accion, rutaPermisos);
+
         }
 
 
