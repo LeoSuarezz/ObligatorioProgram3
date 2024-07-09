@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ObligatorioProgram3.Models;
 
@@ -11,8 +12,10 @@ public partial class Reserva
 
     public int? Idmesa { get; set; }
 
+    [Required(ErrorMessage = "La fecha de reserva es requerida.")]
     public DateOnly FechaReserva { get; set; }
 
+    [Required(ErrorMessage = "El estado de la reserva es requerido.")]
     public string Estado { get; set; } = null!;
 
     public virtual Cliente? IdclienteNavigation { get; set; }

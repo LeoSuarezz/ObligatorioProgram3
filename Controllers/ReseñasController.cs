@@ -10,7 +10,6 @@ using ObligatorioProgram3.Models;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize]
     public class ReseñasController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -23,8 +22,8 @@ namespace ObligatorioProgram3.Controllers
         // GET: Reseña
         public async Task<IActionResult> Index()
         {
-            var obligatorioProgram3Context = _context.Reseñas.Include(r => r.IdclienteNavigation).Include(r => r.IdrestauranteNavigation);
-            return View(await obligatorioProgram3Context.ToListAsync());
+            var reseñas = await _context.Reseñas.ToListAsync();
+            return View(reseñas);
         }
 
         // GET: Reseña/Details/5
@@ -47,29 +46,29 @@ namespace ObligatorioProgram3.Controllers
             return View(reseña);
         }
 
-        // GET: Reseña/Create
         public IActionResult Create()
         {
-            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id");
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id");
             return View();
         }
 
         // POST: Reseña/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Puntaje,Comentario,FechaReseña,Idcliente,Idrestaurante")] Reseña reseña)
+        public async Task<IActionResult> Create([Bind("Puntaje,Comentario")] Reseña reseña)
         {
             if (ModelState.IsValid)
             {
+                DateTime fechaActual = DateTime.Now;
+
+                // Convertir a DateOnly
+                DateOnly fechaDateOnly = new DateOnly(fechaActual.Year, fechaActual.Month, fechaActual.Day);
+
+                // Establecer la fecha actual en la reseña
+                reseña.FechaReseña = fechaDateOnly;
                 _context.Add(reseña);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-            ViewData["Idcliente"] = new SelectList(_context.Clientes, "Id", "Id", reseña.Idcliente);
-            ViewData["Idrestaurante"] = new SelectList(_context.Restaurantes, "Id", "Id", reseña.Idrestaurante);
             return View(reseña);
         }
 
@@ -92,8 +91,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Reseña/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Puntaje,Comentario,FechaReseña,Idcliente,Idrestaurante")] Reseña reseña)
