@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<ObligatorioProgram3.Models.Menu>
+
+@{
     ViewData["Title"] = "Home Page";
     Layout = null;
 }
@@ -122,7 +124,7 @@
                 width: 35px;
                 height: 5px;
                 margin: 6px 0;
-                background-color: white;
+                background-color: black;
                 transition: 0.4s;
             }
 
@@ -257,6 +259,111 @@
                 font-size: 1rem;
                 color: #535353;
             }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+            box-shadow: -19px -20px 0px 5px rgba(242, 206, 84, 1);
+        }
+
+        .asymmetrical-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 50px 0;
+        }
+
+            .asymmetrical-row > div {
+                flex: 1 1 50%; /* Two equal columns */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .asymmetrical-row .text-content {
+                padding: 20px;
+                font-size: 1.5rem; /* Ajusta este valor según sea necesario */
+                order: 1;
+            }
+
+            .asymmetrical-row .img-content {
+                max-width: 100%; /* Set a maximum width for larger screens */
+                order: 2;
+            }
+
+            .asymmetrical-row:nth-child(even) .text-content {
+                order: 2;
+            }
+
+            .asymmetrical-row:nth-child(even) .img-content {
+                order: 1;
+            }
+
+            .asymmetrical-row .img-content img {
+                width: 80%;
+                height: auto;
+                border-radius: 10px;
+            }
+
+        .menu-items, .category-bar, #nosotros {
+            padding-top: 50px; /* Ajusta este valor según la altura de tu sidebar */
+        }
+
+        .nosotros {
+            background-image: url('/imagenes/fondoN');
+        }
+
+        h1 {
+            padding: 30px;
+        }
+
+        .nosotros p {
+            box-shadow: 0px 20px 0px 0px rgba(232,152,23,1);
+        }
+
+
+
+        #reseñas {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            flex-direction: column;
+            align-content: center;
+        }
+
+            #reseñas .card {
+                width: 20rem;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                margin: 10px;
+                box-shadow: 0px 20px 0px 0px rgba(232,152,23,1);
+            }
+
+            #reseñas .card-body {
+                padding: 16px;
+            }
+
+            #reseñas .card-title {
+                font-size: 1.25rem;
+                margin-bottom: 8px;
+            }
+
+            #reseñas .card-text {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .row{
+                margin:40px;
+            }
+            
+            .form-group{
+                margin:10px;
+              
+            }
+
     </style>
 </head>
 <body>
@@ -268,8 +375,9 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="#menu">Menú</a>
-        <a href="@Url.Action("Index", "Resenas")">Reseñas</a>
-        <a href="#">Acerca de Nosotros</a>
+        <a href="#nosotros">Acerca de Nosotros</a>
+
+        <a href="#reseñas">Reseñas</a>
     </div>
 
     <div id="main">
@@ -277,17 +385,12 @@
             <div class="login-button">
                 <a href="@Url.Action("IniciarSesion", "Inicio")">Iniciar Sesión</a>
             </div>
-            <div class="container">
-                <img src="imagenes/AlMalTiempoBuenaCaraLogo.png" alt="Logo" class="logo3">
-            </div>
-            <div class="title">¡Bienvenidos a Al Mal Tiempo Buena Cara!</div>
-            <div class="subtitle">Disfruta de nuestros deliciosos platos y bebidas</div>
-            <div class="button-group">
-                <a href="#menu" class="btn-custom btn-primary-custom">Ver Menú</a>
-                <a href="@Url.Action("AboutUs", "Home")" class="btn-custom btn-secondary-custom">Acerca de Nosotros</a>
-            </div>
+            <img src="~/imagenes/logo3.png" alt="Logo del Restaurante" class="logo" />
         </div>
 
+    </div>
+
+    <div href="#menu" class="row">
         <!-- Categorías -->
         <div class="category-bar">
             @foreach (var categoria in ViewBag.Categorias)
@@ -311,6 +414,111 @@
             }
         </div>
     </div>
+
+    <div id="nosotros" class="nosotros">
+        <div class="asymmetrical-row">
+            <div class="text-content">
+                <img src="~/imagenes/sol.png" width="100px" />
+                <h1>Sobre Nosotros</h1>
+                <p style=" box-shadow: 0px 0px 0px 0px; !important">
+
+                    En Al Mal Tiempo Buena Cara, creemos que la buena comida y un ambiente acogedor pueden
+                    transformar cualquier día gris en una experiencia memorable.
+                    Nuestro restaurante nació de la pasión por la cocina tradicional y el
+                    deseo de crear un lugar donde cada visita se convierta en un festín para los sentidos.
+                </p>
+            </div>
+        </div>
+
+        <div class="asymmetrical-row">
+            <div class="img-content">
+                <img src="~/imagenes/imgRestaurante.webp" class="img-fluid" alt="Imagen del Restaurante" />
+            </div>
+            <div class="text-content">
+                <img src="~/imagenes/sol.png" width="100px" />
+                <h1>Nuestra Historia</h1>
+                <p>
+                    Fundado en 2006, Al Mal Tiempo Buena Cara ha sido el refugio perfecto para aquellos que buscan disfrutar de platos deliciosos, preparados con
+                    ingredientes frescos y de la más alta calidad. Nuestra historia comenzó con una
+                    simple idea: ofrecer un espacio donde la gastronomía y la hospitalidad se unan para brindar momentos inolvidables aunque el clima no acompañe.
+                </p>
+            </div>
+        </div>
+
+        <div class="asymmetrical-row">
+            <div class="text-content">
+                <img src="~/imagenes/sol.png" width="100px" />
+                <h1>Nuestra Filosofía</h1>
+                <p>
+                    Nos enorgullece ofrecer una experiencia culinaria que va más allá de lo ordinario. Nuestro menú está diseñado para deleitar a todos los paladares,
+                    combinando recetas tradicionales con un toque moderno y creativo.
+                    Desde los platos más simples hasta las creaciones más elaboradas, cada bocado está hecho con amor y dedicación.
+                </p>
+            </div>
+            <div class="img-content">
+                <img src="~/imagenes/imgRestaurante2.jpg" class="img-fluid" alt="Imagen del Restaurante" />
+            </div>
+        </div>
+
+        <div class="asymmetrical-row">
+            <div class="img-content">
+                <img src="~/imagenes/imgRestaurante3.jpg" class="img-fluid" alt="Imagen del Restaurante" />
+            </div>
+            <div class="text-content">
+                <img src="~/imagenes/sol.png" width="100px" />
+                <h1>El Equipo</h1>
+                <p>
+                    Nuestro equipo está compuesto por chefs talentosos y un personal comprometido que se esfuerza por hacer que cada visita sea especial.
+                    La pasión por la gastronomía y la atención al detalle son los pilares sobre los que construimos nuestra reputación.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="reseñas">
+        <h1>Reseñas</h1>
+
+        <!-- Mostrar algunas reseñas existentes -->
+        <div class="row">
+           
+            @foreach (var reseña in ((List<Reseña>)ViewBag.Reseñas).OrderByDescending(r => r.Id).Take(3))
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-text">Puntaje</h5>
+                        <div class="rating">
+                            @for (int i = 0; i < reseña.Puntaje; i++)
+                            {
+                                <img src="@(i < reseña.Puntaje ? "/imagenes/sol.png" :"/imagenes/sol.png")" alt="Estrella llena" style="width: 47px;"  />
+                            }
+                        </div>
+                        <p class="card-text">@reseña.Comentario</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Formulario para enviar una nueva reseña -->
+        <div class="row">
+        <h3>Deja tu reseña</h3>
+        <form asp-action="Create" asp-controller="Reseñas" method="post">
+            <div class="form-group">
+                <label for="Puntaje">Puntaje:</label>
+                <input type="number" min="0" max="5" class="form-control" id="Puntaje" name="Puntaje" required>
+            </div>
+            <div class="form-group">
+                <label for="Comentario">Comentario:</label>
+                <textarea class="form-control" id="Comentario" name="Comentario" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-dark">enviar reseña</button>
+            </form>
+        </div>
+    </div>
+
+
 
     <script>
         function toggleMenu(x) {
@@ -338,5 +546,21 @@
             });
         });
     </script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                const offset = 80; // Ajusta este valor según la altura de tu sidebar
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+
