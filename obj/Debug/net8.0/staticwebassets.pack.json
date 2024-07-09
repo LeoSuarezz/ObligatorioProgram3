@@ -33,8 +33,40 @@
       "PackagePath": "staticwebassets\\imagenes\\fondoMenu.jpg"
     },
     {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondoN.png",
+      "PackagePath": "staticwebassets\\imagenes\\fondoN.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\fondoNosotros.png",
+      "PackagePath": "staticwebassets\\imagenes\\fondoNosotros.png"
+    },
+    {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
       "PackagePath": "staticwebassets\\imagenes\\iconoDB.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante.webp",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante.webp"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante2.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante3.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante4.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante5.webp",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante5.webp"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante6.webp",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante6.webp"
     },
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\logo.png",
@@ -55,6 +87,10 @@
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\menu.png",
       "PackagePath": "staticwebassets\\imagenes\\menu.png"
+    },
+    {
+      "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\imagenes\\sol.png",
+      "PackagePath": "staticwebassets\\imagenes\\sol.png"
     },
     {
       "Id": "C:\\Users\\USUARIO\\OneDrive\\Escritorio\\Analista Programador\\Semestre 3\\Programacion 3\\ObligatorioProgram3\\wwwroot\\js\\site.js",
