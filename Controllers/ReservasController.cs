@@ -142,6 +142,7 @@ namespace ObligatorioProgram3.Controllers
 
                 if (reserva.Estado == "Confirmada")
                 {
+                    mesa1.Estado = "Ocupada";
                     var orden = new Ordene
                     {
                         Idreserva = reserva.Id,
@@ -372,7 +373,7 @@ namespace ObligatorioProgram3.Controllers
             var mesa = reserva.IdmesaNavigation;
             if (mesa != null)
             {
-                mesa.Estado = "Reservada";
+                mesa.Estado = "Ocupada";
                 _context.Update(mesa);
             }
 
