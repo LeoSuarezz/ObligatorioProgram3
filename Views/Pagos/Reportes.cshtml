@@ -17,7 +17,7 @@
                 <th>Fecha</th>
                 <th>Metodo</th>
                 <th>Cotizacion</th>
-                <th>Mesa</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -28,8 +28,8 @@
                     <td>@pago.Monto</td>
                     <td>@pago.FechaPago</td>
                     <td>@pago.MetodoPago</td>
-                    <td>@pago.IdcotizacionNavigation.Monto</td>
-                    <td>@pago.IdreservaNavigation.IdmesaNavigation.NumeroMesa</td>
+                    <td>@(pago.IdcotizacionNavigation != null ? pago.IdcotizacionNavigation.Monto.ToString() : "")</td>
+                    <td>@(pago.IdreservaNavigation != null && pago.IdreservaNavigation.IdmesaNavigation != null ? pago.IdreservaNavigation.IdmesaNavigation.NumeroMesa.ToString() : "")</td>
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("eliminar registros"))
                     {
                         <td>

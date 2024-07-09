@@ -11,7 +11,6 @@ using ObligatorioProgram3.ViewModels;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize(Policy = "VerOrdenesPermiso")]
     public class OrdenesController : Controller
     {
         private readonly ObligatorioProgram3Context _context;
@@ -20,8 +19,8 @@ namespace ObligatorioProgram3.Controllers
         {
             _context = context;
         }
-
-       public IActionResult Reportes()
+        [Authorize(Policy = "VerReportesPermiso")]
+        public IActionResult Reportes()
         {
             var ordenes = _context.Ordenes
                 .Include(o => o.OrdenDetalles) 
@@ -31,7 +30,7 @@ namespace ObligatorioProgram3.Controllers
             return View(ordenes);
         }
 
-
+        [Authorize(Policy = "VerOrdenesPermiso")]
         public async Task<IActionResult> Index(int? restauranteId, string categoria = "")
         {
             IQueryable<Mesa> mesasQuery = _context.Mesas;
@@ -67,6 +66,7 @@ namespace ObligatorioProgram3.Controllers
 
         // Acción para obtener detalles de la orden de una mesa
         [HttpGet]
+        [Authorize(Policy = "VerOrdenesPermiso")]
         public async Task<IActionResult> GetOrderDetails(int mesaId)
         {
             var mesa = await _context.Mesas
@@ -106,6 +106,7 @@ namespace ObligatorioProgram3.Controllers
 
         // Acción para agregar un ítem del menú a la orden de una mesa
         [HttpPost]
+        [Authorize(Policy = "VerOrdenesPermiso")]
         public async Task<IActionResult> AddMenuItemToOrder(int ordenId, int menuItemId)
         {
             var orden = await _context.Ordenes.FindAsync(ordenId);
@@ -149,6 +150,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "VerOrdenesPermiso")]
         public async Task<IActionResult> RemoveMenuItemFromOrder(int ordenId, int menuItemId)
         {
             var orden = await _context.Ordenes.FindAsync(ordenId);

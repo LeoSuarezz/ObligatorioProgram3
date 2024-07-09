@@ -14,7 +14,8 @@ using ObligatorioProgram3.ViewModels;
 
 namespace ObligatorioProgram3.Controllers
 {
-    [Authorize(Policy = "VerPagosPermiso")]
+    
+
     public class PagosController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -27,17 +28,18 @@ namespace ObligatorioProgram3.Controllers
             _httpClientFactory = httpClientFactory;
             _currencyService = currencyService;
         }
-
+        [Authorize(Policy = "VerReportesPermiso")]
         public IActionResult Reportes()
         {
             var pagos = _context.Pagos
-                .Include(p => p.IdcotizacionNavigation)  
+                .Include(p => p.IdcotizacionNavigation)
                 .Include(p => p.IdreservaNavigation)
                 .ToList();
 
             return View(pagos);
         }
 
+        [Authorize(Policy = "VerPagosPermiso")]
         public async Task<IActionResult> Index(int id)
         {
             var orden = await _context.Ordenes
@@ -105,6 +107,7 @@ namespace ObligatorioProgram3.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Policy = "VerPagosPermiso")]
         public async Task<IActionResult> PagosPartial(int ordenId, decimal montoConDescuento)
         {
             var viewModel = new PagoViewModel
@@ -136,6 +139,7 @@ namespace ObligatorioProgram3.Controllers
             return PartialView("PagosPartial", viewModel);
         }
 
+        [Authorize(Policy = "VerPagosPermiso")]
         [HttpPost]
         public async Task<IActionResult> Pagar(int id, string metodoPago, string moneda)
         {
@@ -266,7 +270,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
 
-
+        [Authorize(Policy = "VerPagosPermiso")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -286,8 +290,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // POST: Pagoes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "VerPagosPermiso")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Idreserva,Monto,FechaPago,Idcotizacion,MetodoPago,Idclima")] Pago pago)
@@ -324,6 +327,7 @@ namespace ObligatorioProgram3.Controllers
         }
 
         // GET: Pagoes/Delete/5
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -356,7 +360,7 @@ namespace ObligatorioProgram3.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Reportes));
         }
 
         private bool PagoExists(int id)
