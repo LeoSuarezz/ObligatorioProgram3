@@ -40,7 +40,14 @@
     </table>
     <div class="card-footer">
         <p>Total: @Model.Orden.Total</p>
-        <a asp-action="Index" asp-controller="Pagos" asp-route-id="@Model.Orden.Id" class="btn btn-dark">Cobrar</a>
+        @if (Model.Orden.Total > 0)
+        {
+            <a asp-action="Index" asp-controller="Pagos" asp-route-id="@Model.Orden.Id" class="btn btn-dark">Cobrar</a>
+        }
+        else
+        {
+            <a class="btn btn-dark disabled">Cobrar</a>
+        }
     </div>
     
 }

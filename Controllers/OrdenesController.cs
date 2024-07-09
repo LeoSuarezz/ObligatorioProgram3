@@ -81,7 +81,7 @@ namespace ObligatorioProgram3.Controllers
 
             var orden = mesa.Reservas
                 .SelectMany(r => r.Ordenes)
-                .FirstOrDefault();
+                .FirstOrDefault(o => o.Estado != "Pagada");
 
             if (orden == null)
             {

@@ -147,6 +147,8 @@ namespace ObligatorioProgram3.Controllers
             {
                 var orden = await _context.Ordenes
                     .Include(o => o.IdreservaNavigation)
+                    .ThenInclude(r => r.IdmesaNavigation)
+                    .Include(o => o.IdreservaNavigation)
                     .ThenInclude(r => r.IdclienteNavigation)
                     .FirstOrDefaultAsync(o => o.Id == id);
 
@@ -250,7 +252,7 @@ namespace ObligatorioProgram3.Controllers
                 var mesa = orden.IdreservaNavigation.IdmesaNavigation;
                 if (mesa != null)
                 {
-                    mesa.Estado = "disponible";
+                    mesa.Estado = "Disponible";
                     _context.Mesas.Update(mesa); // Actualizar el estado de la mesa
                 }
 
