@@ -25,11 +25,10 @@
             {
                 <tr>
                     <td>@pago.Id</td>
-                    <td>@pago.Monto</td>
+                    <td>@(pago.IdcotizacionNavigation != null ? pago.IdcotizacionNavigation.Moneda.ToString() : "") @pago.Monto</td>
                     <td>@pago.FechaPago</td>
                     <td>@pago.MetodoPago</td>
                     <td>@(pago.IdcotizacionNavigation != null ? pago.IdcotizacionNavigation.Monto.ToString() : "")</td>
-                    <td>@(pago.IdreservaNavigation != null && pago.IdreservaNavigation.IdmesaNavigation != null ? pago.IdreservaNavigation.IdmesaNavigation.NumeroMesa.ToString() : "")</td>
                     @if (ViewBag.Permisos != null && ((string[])ViewBag.Permisos).Contains("eliminar registros"))
                     {
                         <td>
