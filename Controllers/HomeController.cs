@@ -26,18 +26,16 @@ namespace ObligatorioProgram3.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var menuItems = await _context.Menus.Where(m=>m.Categoria!="Bebidas").ToListAsync();
-            var reseñas = await _context.Reseñas.ToListAsync();
+            var menuItems = await _context.Menus.ToListAsync();
+
             var claims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
             // Verifica los claims aquí para asegurarte de que el usuario tiene el claim "Permisos" con los valores adecuados
            
             var categorias = new List<string> { "Entradas","Principal", "Postres" };
-            
-            ViewBag.Reseñas = reseñas;
+
             ViewBag.Categorias = categorias;
             ViewBag.MenuItems = menuItems;
-           
-            return View(menuItems);
+            return View();
 
         }
 
