@@ -123,7 +123,7 @@ namespace ObligatorioProgram3.Controllers
 
             // Obtener la cotización del dólar
             var client = _httpClientFactory.CreateClient();
-            var currencyResponse = await client.GetStringAsync("http://api.currencylayer.com/live?access_key=68ffa533c801b33066ecdb3209c78b17&currencies=UYU&source=USD");
+            var currencyResponse = await client.GetStringAsync("http://api.currencylayer.com/live?access_key=87f5d99e089802378e2385e200681980&currencies=UYU&source=USD");
             var currencyData = JObject.Parse(currencyResponse);
 
             if (currencyData["success"].ToObject<bool>() && currencyData["quotes"]?["USDUYU"] != null)
@@ -212,7 +212,7 @@ namespace ObligatorioProgram3.Controllers
                 // Si la moneda es USD, obtener la cotización del dólar y ajustar el monto
                 if (moneda == "USD")
                 {
-                    var currencyResponse = await client.GetStringAsync($"http://api.currencylayer.com/live?access_key=68ffa533c801b33066ecdb3209c78b17&currencies=UYU&source=USD");
+                    var currencyResponse = await client.GetStringAsync($"http://api.currencylayer.com/live?access_key=87f5d99e089802378e2385e200681980&currencies=UYU&source=USD");
                     var currencyData = JObject.Parse(currencyResponse);
 
                     if (currencyData["success"].ToObject<bool>() && currencyData["quotes"]?["USDUYU"] != null)

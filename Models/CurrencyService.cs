@@ -7,7 +7,7 @@ using ObligatorioProgram3.Models;
 public class CurrencyService
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly string _apiKey = "68ffa533c801b33066ecdb3209c78b17"; // Coloca tu API Key de CurrencyLayer
+    private readonly string _apiKey = "87f5d99e089802378e2385e200681980"; // Coloca tu API Key de CurrencyLayer
     private readonly ObligatorioProgram3Context _context;
 
     public CurrencyService(IHttpClientFactory httpClientFactory, ObligatorioProgram3Context context)
