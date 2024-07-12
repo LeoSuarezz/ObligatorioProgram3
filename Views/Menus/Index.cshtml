@@ -18,7 +18,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>NombrePlato</th>
+                <th>Nombre Plato</th>
                 <th>Descripcion</th>
                 <th>Precio</th>
                 <th>Categoria</th>
@@ -34,7 +34,7 @@
                     <td>@menu.Descripcion</td>
                     <td>@menu.Precio</td>
                     <td>@menu.Categoria</td>
-                    <td><img width="60px;" src="@menu.RutaImagen" /></td>
+                    <td> <img width= "60px;" src="~/imagenes/@menu.RutaImagen" /></td>
                     <td>
                         <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-id="@menu.Id">Editar</a>
                         <a asp-action="Details" class="btn btn-light" asp-route-id="@menu.Id">Detalle</a>

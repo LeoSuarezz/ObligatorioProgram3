@@ -5,6 +5,7 @@
 <head>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
+<div>
 <h2>Ordenes</h2>
 <div class="row">
     <div class="col-md-8">
@@ -25,7 +26,7 @@
                 }
             </select>
         </div>
-        <div class="tables">
+        <div class="tables" id="mesasContainer">
             @foreach (var mesa in Model.Mesas)
             {
                 var cardClass = "";
@@ -77,16 +78,17 @@
             @foreach (var item in Model.MenuItems)
             {
                 <div class="card add-to-order-btn" data-item-id="@item.Id">
-                    <img class="card-img-top" src="@item.RutaImagen" />
+                        <img class="card-img-top" src=~/imagenes/@item.RutaImagen />
+
                     <h5 class="card-title"> @item.NombrePlato</h5>
                     <div class="card-body">
-                        <p class="card-text">@item.Descripcion</p>
                         <p class="font-weight-bold">$@item.Precio</p>
                     </div>
                 </div>
             }
         </div>
     </div>
+</div>
 </div>
 
 @section Scripts {
@@ -168,8 +170,20 @@
 
             $('#restauranteSelect').change(function () {
                 var restauranteId = $(this).val();
-                window.location.href = '@Url.Action("Index", "Ordenes")' + '?restauranteId=' + restauranteId;
+                $.ajax({
+                    url: '@Url.Action("Index", "Ordenes")',
+                    type: 'GET',
+                    data: { restauranteId: restauranteId },
+                    success: function (data) {
+                        $('#mesasContainer').html($(data).find('#mesasContainer').html());
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
             });
+
+            //$('#restauranteSelect').change(filterReservas);
 
             // Cargar la mesa seleccionada desde localStorage al cargar la página
             var mesaSeleccionada = localStorage.getItem('mesaSeleccionada');

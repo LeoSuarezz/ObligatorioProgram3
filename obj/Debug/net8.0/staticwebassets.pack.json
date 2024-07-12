@@ -13,6 +13,106 @@
       "PackagePath": "staticwebassets\\fuentes\\Astrid.otf"
     },
     {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Carpaccio.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Carpaccio.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Carrilleras.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Carrilleras.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Cheesecake.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Cheesecake.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Cordero.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Cordero.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\CremeBrule.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\CremeBrule.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Croquetas.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Croquetas.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\EnsaladaBurrata.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\EnsaladaBurrata.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Filete de Res.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Filete de Res.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\FoieGras.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\FoieGras.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Fondant.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Fondant.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Limonada.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Limonada.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Maracuya.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Maracuya.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Margarita.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Margarita.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Martini.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Martini.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Mocktail.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Mocktail.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\OldFashion.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\OldFashion.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Pato.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Pato.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\RaviolesLangosta.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\RaviolesLangosta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Salmon.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Salmon.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Sol.png",
+      "PackagePath": "staticwebassets\\imagenes\\Sol.png"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\TartaAtun.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\TartaAtun.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\TartaManzana.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\TartaManzana.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Te Helado.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Te Helado.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Tiramisu.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Tiramisu.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\Vieiras.jpeg",
+      "PackagePath": "staticwebassets\\imagenes\\Vieiras.jpeg"
+    },
+    {
       "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\background2.png",
       "PackagePath": "staticwebassets\\imagenes\\background2.png"
     },
@@ -35,6 +135,30 @@
     {
       "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\iconoDB.png",
       "PackagePath": "staticwebassets\\imagenes\\iconoDB.png"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante.webp",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante.webp"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante2.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante3.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante4.jpg",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante5.webp",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante5.webp"
+    },
+    {
+      "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\imgRestaurante6.webp",
+      "PackagePath": "staticwebassets\\imagenes\\imgRestaurante6.webp"
     },
     {
       "Id": "C:\\Users\\menge\\source\\repos\\ObligatorioProgram3\\wwwroot\\imagenes\\logo.png",

@@ -408,11 +408,11 @@
             @foreach (var item in ViewBag.MenuItems)
             {
                 <div class="card" data-category="@item.Categoria">
-                    <img src="@item.RutaImagen" class="card-img-top" alt="@item.NombrePlato">
+                    <img src="~/imagenes/@item.RutaImagen" class="card-img-top" alt="@item.NombrePlato">
                     <div class="card-body">
                         <h5 class="card-title">@item.NombrePlato</h5>
                         <p class="card-text">@item.Descripcion</p>
-                        <p class="card-price">@item.Precio</p>
+                        <p class="card-price">$@item.Precio</p>
                     </div>
                 </div>
             }
